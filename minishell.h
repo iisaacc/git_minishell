@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 14:33:07 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:04:14 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 //int	g_status; variavel global
 
@@ -40,5 +40,6 @@ typedef struct s_mini
 }		t_mini;
 
 void	lexer(char *input);
+
 
 #endif

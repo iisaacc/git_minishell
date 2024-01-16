@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 16:57:44 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:12:45 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split_mod(char const *s, char c)
 int	main(int argc, char **argv)
 {
 	char *input;
-	
+	char **str;
 	argv = 0;
 	
 	if (argc > 1)
@@ -83,10 +83,11 @@ int	main(int argc, char **argv)
 	while((input = readline("Minishell>")))
 	{
 		add_history(input);
-		//lexer(input);
-		ft_split_mod(input, ' ');
+		str = ft_split_mod(input, ' ');
 		printf("%s\n", input);
-		//rl_replace_line(" ", 0);
+		printf("%s\n", str[0]);
+		printf("%s\n", str[1]);
+		printf("%s\n", str[2]);
 	}
 	clear_history();
 }
