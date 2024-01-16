@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:00:49 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 17:02:08 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:41:56 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int words_len(char *input)
 	while (input[i])
 	{
 		while (input[i] != ' ' && input[i] != '\'' && input[i] != '"' && input[i + 1] != '\0')
-			i++;//mientras sea una palavra
+			i++;//mientras sea una palabra
 		while (input[i] == ' ' || input[i] == '\'' || input[i] == '"' || input[i + 1] == '\0')
 			i++;
 		size++;
@@ -45,7 +45,7 @@ void	lexer(char *input)
 {
 	int x;//char[]
 	int i;//char[][]
-	int lw;//fin de palavra
+	int lw;//fin de palabra
 	char **split;
 	char c;
 	int flag;
