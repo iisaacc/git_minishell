@@ -1,13 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 14:10:59 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/16 17:00:02 by isporras         ###   ########.fr       */
+/*   Created: 2023/04/18 17:51:42 by isporras          #+#    #+#             */
+/*   Updated: 2023/11/07 12:17:52 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-teste()
+#include "libft.h"
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(count * size);
+	if (ptr != NULL)
+		ft_memset(ptr, 0, count * size);
+	return (ptr);
+}
