@@ -1,37 +1,49 @@
+#---------------PADRÃO------------
+
 NAME = minishell
-
-LIB = ar rcs
-
-SRC_PARTH = src/
-
-SRCS = 
-
-OBJ_NAME = $(SRCS:.c=.o)
-
-OBJ = $(addprefix $(SRC_PARTH), $(OBJ_NAME))
-
+INCLUDES = libft/include -I/Users/carmarqu/.brew/opt/readline/include
+SRCS_DIR = src/
+OBJS_DIR = obj/
+LIBFT = libft
+LIBFLAG = -lreadline -L/Users/carmarqu/.brew/opt/readline/lib
 CC = gcc
-
-CFLAGS = -Werror -Wall -Wextra
-
-MYHEADERS = minishell.h
-
+CFLAGS = -Wall -Wextra -Werror -I
 RM = rm -f
+AR = ar rcs
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -g
+#---------------SRC------------
 
-all: $(NAME)
+SRC_FILES = main lexer
 
-$(NAME): $(OBJ) $(MYHEADERS)
-	$(CC) $(CFLAGS) -o minishell $(OBJ)
+
+#=============SRC=============#
+
+OBJS_SRC = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+OBJSF = $(OBJS_DIR)
+
+all:$(NAME)
+
+$(NAME):$(OBJSF)	$(OBJS_SRC)
+	make -C $(LIBFT)
+	cp $(LIBFT)/libft.a .
+	mv libft.a $(NAME)
+	$(CC) $(OBJS_SRC) $(LIBFLAG) -o $(NAME) $(LIBFT)/libft.a
+
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJSF):
+	mkdir -p $(OBJS_DIR)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) -r $(OBJS_DIR)
+	make clean -C $(LIBFT)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME2)
+	$(RM) $(LIBFT)/libft.a
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY:re all fclean clean bonus
