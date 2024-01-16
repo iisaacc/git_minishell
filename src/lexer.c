@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:00:49 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 16:52:50 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:02:08 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int words_len(char *input)
 	int i;
 	int size;
 	char c;
-	
+
 	size = 0;
 	i = 0;
 	while (input[i])
 	{
 		while (input[i] != ' ' && input[i] != '\'' && input[i] != '"' && input[i + 1] != '\0')
-			i++;//mientras sea una palavra		
+			i++;//mientras sea una palavra
 		while (input[i] == ' ' || input[i] == '\'' || input[i] == '"' || input[i + 1] == '\0')
 			i++;
 		size++;
@@ -49,7 +49,7 @@ void	lexer(char *input)
 	char **split;
 	char c;
 	int flag;
-	
+
 	//words_len(input);
 	flag = 1;
 	x = 0;
@@ -78,7 +78,7 @@ void	lexer(char *input)
 			split[x] = ft_substr(input, lw + 1, (i - lw) + 1);//hace el split
 			lw = i + 1;
 			x++;
-		}	
+		}
 		i++;
 	}
 	x = 0;
