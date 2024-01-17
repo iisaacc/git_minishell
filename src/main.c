@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 16:48:44 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:07:35 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,26 @@ void ft_print_list(t_lexer *lexer)
 
 int	main(int argc, char **argv)
 {
-	char *input;
 	t_lexer *lexer;
-	
+	char *input = "echo \"hhh $USER\" \"hello      there\" how are \'you \'doing?  |wc -l >outfile";
+	create_nodes(&lexer, ft_lexer(input));
+	ft_print_list(lexer);
+
 	argv = 0;
-	lexer = NULL;
-	if (argc > 1 && argv)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
-	while((input = readline("Minishell>")))
-	{
-		add_history(input);
-		create_nodes(&lexer, ft_lexer(input));
-		//ft_print_split(ft_lexer(input));
-		ft_types(lexer);
-		ft_print_list(lexer);
-	}
-	clear_history();
+	argc = 1;
+	//lexer = NULL;
+	//if (argc > 1 && argv)
+	//{
+	//	printf("Wrong number of arguments\n");
+	//	return (1);
+	//}
+	//while((input = readline("Minishell>")))
+	//{
+	//	add_history(input);
+	//	create_nodes(&lexer, ft_lexer(input));
+	//	//ft_print_split(ft_lexer(input));
+	//	ft_types(lexer);
+	//	ft_print_list(lexer);
+	//}
+	//clear_history();
 }
