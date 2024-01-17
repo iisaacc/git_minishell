@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 14:33:25 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:51:00 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_lexer *create_new(char *input, int x)
 	return (node);
 }
 
-void ast(t_lexer **lexer, char **input)//crea todos los nudos
+void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
 {
 	int x;
 	

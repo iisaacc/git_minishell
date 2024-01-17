@@ -13,7 +13,7 @@ AR = ar rcs
 
 #---------------SRC------------
 
-SRC_FILES = main lexer/lexer_split lexer/lexer lst_init
+SRC_FILES = main lexer/lexer_split lexer/lexer lexer/lst_init
 
 
 #=============SRC=============#
