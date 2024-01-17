@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 14:13:36 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:17:37 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void print_list(t_lexer *lexer)
+void ft_print_list(t_lexer *lexer)
 {
 	int x;
 
 	x = 0;
-	while (lexer->next != NULL)
+	while (lexer != NULL)
 	{
 		printf("%s\n", lexer->word);
 		printf("%d\n", lexer->id);
@@ -29,7 +29,7 @@ void print_list(t_lexer *lexer)
 int	main(int argc, char **argv)
 {
 	char *input;
-	char **split;
+	//char **split;
 	t_lexer *lexer;
 
 	lexer = NULL;
