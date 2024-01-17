@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   lst_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:50:56 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:00:30 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,3 @@ void ast(t_lexer **lexer, char **input)//crea todos los nudos
 		x++;
 	}
 }
-
-/* int main (int argc, char **argv)
-{
-	int x;
-	t_lexer *lexer;
-
-	lexer = NULL;
-	
-	x = 0;
-	ast(&lexer, argv);
-	while (x < argc)
-	{
-		printf("%s\n", lexer->word);
-		printf("%d\n", lexer->id);
-		lexer = lexer->next;
-		x++;	
-	}
-} */
