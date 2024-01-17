@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 14:50:40 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:47:33 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_lexer
 	char *word; //palavra
 	//int tokens; //cantidad de tokens
 	//char **args; //args
-	int type; //1-> func, 2->tokens, 3->string, 4->files
+	int type; //1-> func, 2->flags, 3->string, 4->files 5->token
 	int id; //pos en la lista
 	struct s_lexer *next;//puntero al siguiente nodo
 
@@ -67,5 +67,6 @@ char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);
 void	ft_print_list(t_lexer *lexer);
 void	free_node(t_lexer **node);
+void	ft_types(t_lexer *lexer);
 
 #endif
