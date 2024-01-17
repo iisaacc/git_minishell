@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 15:48:37 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:07:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void ft_print_list(t_lexer *lexer)
 	{
 		printf("%s\n", lexer->word);
 		printf("%d\n", lexer->id);
-		printf("%d\n", lexer->type);
+		//printf("%d\n", lexer->type);
 		lexer = lexer->next;
 		x++;
 	}
@@ -44,12 +44,9 @@ int	main(int argc, char **argv)
 	{
 		add_history(input);
 		create_nodes(&lexer, ft_lexer(input));
-		ft_print_list(lexer);
-		ft_print_split(ft_lexer(input));
+		//ft_print_split(ft_lexer(input));
 		//ast(&lexer, ft_lexer(input));
-		//ft_print_list(lexer);
+		ft_print_list(lexer);
 	}
-	int x;
-	x = 0;
 	clear_history();
 }

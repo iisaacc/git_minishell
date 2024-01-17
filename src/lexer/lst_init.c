@@ -6,11 +6,11 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 14:51:00 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:07:13 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	free_node(t_lexer **node)
 {
@@ -58,7 +58,7 @@ t_lexer *create_new(char *input, int x)
 	
 	node = NULL;
 	node = malloc(sizeof(t_lexer));
-	node->word = ft_substr(input, 0, ft_strlen(input));
+	node->word = input;
 	node->next = NULL;
 	node->type = 0;
 	node->id = x + 1;
