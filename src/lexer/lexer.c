@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 15:43:42 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:12:56 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_get_tokens(char **lexer)
 		j = 0;
 		while (lexer[i][j])
 		{
-			if ((lexer[i][j] == '>' || lexer[i][j] == '<')
+			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
 				&& (ft_strlen(lexer[i]) != 1) && (j == 0 || j == ft_strlen(lexer[i])))
 			{
 				token = ft_substr(lexer[i], j, 1);
@@ -63,8 +63,7 @@ char	**ft_get_tokens(char **lexer)
 					tmp = ft_add_token(lexer, i, token);
 				else
 					tmp = ft_add_token(lexer, i + 1, token);
-				ft_free_2d(lexer);
-				free(token);
+				//ft_free_2d(lexer);
 				lexer = tmp;
 			}
 			j++;
@@ -74,12 +73,33 @@ char	**ft_get_tokens(char **lexer)
 	return (lexer);
 }
 
+void	ft_put_var(char **lexer, int *i, int *j)
+{
+	char	*var;
+	char	*value;
+	int		len;
+
+	len = 0;
+	while (lexer[*i][*j + len] && lexer[*i][*j + len] != ' ')
+		len++;
+	var = ft_substr(lexer[*i], *j + 1, len);
+	value = getenv(var);
+	if (value)
+	{
+		len = 0;
+		while (len < ft_strlen(value))
+		{
+			free(lexer[*i]);
+			lexer[*i] = ft_strdup(value);
+		}
+	}
+	free(var);
+}
+
 void	ft_extend_var(char **lexer)
 {
 	int		i;
 	int		j;
-	char	*var;
-	char	*value;
 
 	i = 0;
 	while (lexer[i])
@@ -88,16 +108,7 @@ void	ft_extend_var(char **lexer)
 		while (lexer[i][j])
 		{
 			if (lexer[i][j] == '$')
-			{
-				var = ft_substr(lexer[i], j + 1, ft_strlen(lexer[i]));
-				value = getenv(var);
-				if (value)
-				{
-					free(lexer[i]);
-					lexer[i] = ft_strdup(value);
-				}
-				free(var);
-			}
+				ft_put_var(lexer, &i, &j);
 			j++;
 		}
 		i++;
