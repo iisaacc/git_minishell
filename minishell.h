@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 17:04:14 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:03:33 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,20 @@
 
 //int	g_status; variavel global
 
+typedef struct s_lexer
+{
+	char *word; //palavra
+	//int tokens; //cantidad de tokens
+	//char **args; //args
+	int type; //1-> func, 2->tokens, 3->string, 4->files
+	int id; //pos en la lista
+	struct s_lexer *next;//puntero al siguiente nodo
+	
+}		t_lexer;
+
 typedef struct s_prompt
 {
-	t_list	*cmds;//lista enlazada con los comandos(hay que crear esa t_list)
+	t_lexer	*cmds;//lista enlazada con los comandos
 	char	**envp;//array ** que guarda cada palavra(frase) del prompt
 	pid_t	pid;//pid del processo principal
 }		t_prompt;
@@ -39,7 +50,19 @@ typedef struct s_mini
 	int		outfile;//fd de salida
 }		t_mini;
 
+/* typedef struct s_simple_cmds
+{
+	char                    **str;
+	//int                     (*builtin)(t_tools *, struct s_simple_cmds *);
+	int                     num_redirections;
+	char                    *hd_file_name;
+	t_lexer                 *redirections;
+	struct s_simple_cmds	*next;
+	struct s_simple_cmds	*prev;
+}	t_simple_cmds;  */
+
 void	lexer(char *input);
+
 
 
 #endif
