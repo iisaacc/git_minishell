@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 14:17:37 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:43:21 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void ft_print_list(t_lexer *lexer)
 
 int	main(int argc, char **argv)
 {
-	char *input;
-	//char **split;
-	t_lexer *lexer;
+	t_lexer	*lexer;
+	char	*input;
 
 	lexer = NULL;
-	if (argc > 1)
+	if (argc > 1 && argv)
 	{
 		printf("Wrong number of arguments\n");
 		return (1);
@@ -41,18 +40,11 @@ int	main(int argc, char **argv)
 	while((input = readline("Minishell>")))
 	{
 		add_history(input);
-		ast(&lexer, ft_lexer(input));
-		ft_print_list(lexer);
+		ft_print_split(ft_lexer(input));
+		//ast(&lexer, ft_lexer(input));
+		//ft_print_list(lexer);
 	}
 	int x;
 	x = 0;
-	ast(&lexer, argv);
-	while (lexer->next != NULL)
-	{
-		printf("%s\n", lexer->word);
-		printf("%d\n", lexer->id);
-		lexer = lexer->next;
-		x++;
-	}
 	clear_history();
 }

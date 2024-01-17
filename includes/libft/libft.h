@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:05:47 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 14:05:24 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:12:42 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 }	t_list;
 
 void	*ft_memset(void *b, int c, size_t len);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 void	ft_bzero(void *s, size_t n);
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
@@ -49,7 +49,7 @@ int		ft_toupper(int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char const *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, int len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int n);
@@ -78,4 +78,5 @@ long	ft_atoi_mod(const char *str);
 void	ft_free_2d(char **str);
 int		ft_to2d(char const *s, int len, char **ans, int lap);
 void	ft_print_split(char **split);
+char	**ft_cpy_2d(char **src);
 #endif

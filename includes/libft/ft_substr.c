@@ -6,19 +6,19 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 10:02:58 by isporras          #+#    #+#             */
-/*   Updated: 2023/04/21 17:45:34 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:12:23 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*str;
 
 	if (!s)
 		return (0);
-	if (ft_strlen(s) < start)
+	if (ft_strlen(s) < (int)start)
 		return (ft_strdup(""));
 	if (ft_strlen(&s[start]) < len)
 		len = ft_strlen(&s[start]);

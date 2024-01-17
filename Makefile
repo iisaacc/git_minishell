@@ -7,7 +7,7 @@ OBJS_DIR = obj/
 LIBFT = includes/libft
 LIBFLAG = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I
+CFLAGS = -g -Wall -Wextra -Werror -I
 RM = rm -f
 AR = ar rcs
 
