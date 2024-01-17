@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:57:18 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:03:47 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ typedef struct s_mini
 	struct s_simple_cmds	*prev;
 }	t_simple_cmds;  */
 
-void	lexer(char *input);
-
+char	**ft_lexer(char *input);
+void	ft_extend_var(char **lexer);
+char	**ft_split_lexer(char const *s, char c);
 
 #endif

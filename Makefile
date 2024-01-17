@@ -13,8 +13,7 @@ AR = ar rcs
 
 #---------------SRC------------
 
-SRC_FILES = main lexer/lexer_split
-
+SRC_FILES = main lexer/lexer_split lexer/lexer
 
 #=============SRC=============#
 
@@ -30,7 +29,8 @@ $(NAME):$(OBJSF)	$(OBJS_SRC)
 	mv libft.a $(NAME)
 	$(CC) $(OBJS_SRC) $(LIBFLAG) -o $(NAME) $(LIBFT)/libft.a
 
-$(OBJS_DIR)%.o : $(SRCS_DIR)$(dir $*)$(notdir $*).c
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJSF):

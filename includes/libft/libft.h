@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:05:47 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 13:55:07 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:05:24 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # define BUFSIZE 1024
 
 typedef struct s_list
