@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:05:47 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/16 17:09:29 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:55:07 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ int		ft_count_lines2d(char **array2);
 long	ft_atoi_mod(const char *str);
 void	ft_free_2d(char **str);
 int		ft_to2d(char const *s, int len, char **ans, int lap);
+void	ft_print_split(char **split);
 #endif

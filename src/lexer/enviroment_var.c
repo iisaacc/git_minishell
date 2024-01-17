@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   enviroment_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:53:27 by isporras         ###   ########.fr       */
+/*   Created: 2024/01/17 11:14:38 by isporras          #+#    #+#             */
+/*   Updated: 2024/01/17 13:51:22 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-
-int	main(int argc, char **argv)
+void	ft_extend_var(char **lexer)
 {
-	char *input;
-	char **split;
-	argv = 0;
+	int		i;
+	int		j;
+	char	*var;
+	char	*value;
 
-	if (argc > 1)
+	i = 0;
+	while (lexer[i])
 	{
-		printf("Wrong number of arguments\n");
-		return (1);
+		j = 0;
+		while (lexer[i][j])
+		{
+			if (lexer[i][j] == '$')
+			{
+				var = ft_substr(lexer[i], j + 1, ft_strlen(lexer[i]) - j);
+				value = getenv(var);
+				if (value)
+				{
+					free(lexer[i]);
+					lexer[i] = ft_strdup(value);
+				}
+				free(var);
+			}
+			j++;
+		}
+		i++;
 	}
-	while((input = readline("Minishell>")))
-	{
-		add_history(input);
-		split = ft_lexer(input);
-		ft_print_split(split);
-	}
-	clear_history();
 }

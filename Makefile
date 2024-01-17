@@ -1,11 +1,11 @@
 #---------------PADRÃO------------
 
 NAME = minishell
-INCLUDES = libft/include -I/Users/carmarqu/.brew/opt/readline/include
+INCLUDES = libft/include -I/Users/$(USER)/.brew/opt/readline/include
 SRCS_DIR = src/
 OBJS_DIR = obj/
-LIBFT = libft
-LIBFLAG = -lreadline -L/Users/carmarqu/.brew/opt/readline/lib
+LIBFT = includes/libft
+LIBFLAG = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I
 RM = rm -f
@@ -13,7 +13,7 @@ AR = ar rcs
 
 #---------------SRC------------
 
-SRC_FILES = main lexer
+SRC_FILES = main lexer/lexer_split
 
 
 #=============SRC=============#
@@ -30,7 +30,7 @@ $(NAME):$(OBJSF)	$(OBJS_SRC)
 	mv libft.a $(NAME)
 	$(CC) $(OBJS_SRC) $(LIBFLAG) -o $(NAME) $(LIBFT)/libft.a
 
-$(OBJS_DIR)%.o : $(SRCS_DIR)%.c 
+$(OBJS_DIR)%.o : $(SRCS_DIR)$(dir $*)$(notdir $*).c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJSF):

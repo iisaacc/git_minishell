@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:53:27 by isporras         ###   ########.fr       */
+/*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
+/*   Updated: 2024/01/17 13:52:58 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-
-
-int	main(int argc, char **argv)
+char	**lexer(char *input)
 {
-	char *input;
-	char **split;
-	argv = 0;
+	char	**lexer;
 
-	if (argc > 1)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
-	while((input = readline("Minishell>")))
-	{
-		add_history(input);
-		split = ft_lexer(input);
-		ft_print_split(split);
-	}
-	clear_history();
+	lexer = ft_split_lexer(input, ' ');
+	ft_extend_var(lexer);
+	return (lexer);
 }

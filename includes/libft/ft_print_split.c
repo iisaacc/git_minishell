@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:53:27 by isporras         ###   ########.fr       */
+/*   Created: 2024/01/17 13:53:49 by isporras          #+#    #+#             */
+/*   Updated: 2024/01/17 13:54:09 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-
-
-int	main(int argc, char **argv)
+void	ft_print_split(char **split)
 {
-	char *input;
-	char **split;
-	argv = 0;
+	int	i;
 
-	if (argc > 1)
+	i = 0;
+	while (split[i])
 	{
-		printf("Wrong number of arguments\n");
-		return (1);
+		printf("%s\n", split[i]);
+		i++;
 	}
-	while((input = readline("Minishell>")))
-	{
-		add_history(input);
-		split = ft_lexer(input);
-		ft_print_split(split);
-	}
-	clear_history();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/16 17:04:14 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:26:07 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+# include "includes/libft/libft.h"
 
 //int	g_status; variavel global
 
@@ -34,12 +34,13 @@ typedef struct s_prompt
 typedef struct s_mini
 {
 	char	**full_cmd;//comando y sus argumentos
-	char	*full_path;//camino del ejecutable si no es un builtin	
+	char	*full_path;//camino del ejecutable si no es un builtin
 	int		infile;//fd de entrada
 	int		outfile;//fd de salida
 }		t_mini;
 
 void	lexer(char *input);
-
+int		ft_count_split(char const *s);
+char	**ft_split_lexer(char const *s, char c);
 
 #endif
