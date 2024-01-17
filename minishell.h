@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:57:18 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:04:50 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ typedef struct s_mini
 	struct s_simple_cmds	*prev;
 }	t_simple_cmds;  */
 
-void	lexer(char *input);
+char	**ft_lexer(char *input);
+void ast(t_lexer **lexer, char **input);
 
 
 #endif

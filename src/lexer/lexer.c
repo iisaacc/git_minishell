@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 13:52:58 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:04:45 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	**lexer(char *input)
+char	**ft_lexer(char *input)
 {
 	char	**lexer;
 
