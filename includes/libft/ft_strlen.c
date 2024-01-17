@@ -6,15 +6,15 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:42:54 by isporras          #+#    #+#             */
-/*   Updated: 2023/11/13 10:58:27 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:05:58 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (0);

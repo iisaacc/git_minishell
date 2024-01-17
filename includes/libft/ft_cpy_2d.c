@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_cpy_2d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 15:46:50 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 15:14:04 by isporras         ###   ########.fr       */
+/*   Created: 2024/01/17 14:23:23 by isporras          #+#    #+#             */
+/*   Updated: 2024/01/17 14:24:04 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+char	**ft_cpy_2d(char **src)
 {
-	int	i;
+	int		i;
+	char	**dst;
 
 	i = 0;
-	while (i < ft_strlen(s))
+	while (src[i])
+		i++;
+	dst = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (src[i])
 	{
-		f(i, &s[i]);
+		dst[i] = ft_strdup(src[i]);
 		i++;
 	}
+	dst[i] = NULL;
+	return (dst);
 }
-//gola

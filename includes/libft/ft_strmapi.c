@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:38:12 by isporras          #+#    #+#             */
-/*   Updated: 2023/04/21 17:45:19 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:13:26 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;
-	size_t	i;
+	int		i;
 
 	str = (char *)malloc(ft_strlen(s) + 1 * sizeof(char));
 	if (!str)

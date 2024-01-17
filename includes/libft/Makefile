@@ -5,7 +5,8 @@ SRCS			= ft_isalnum.c ft_isprint.c ft_memcmp.c ft_strlcat.c ft_strncmp.c ft_spli
 					ft_calloc.c ft_isalpha.c  ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcpy.c \
 					ft_strlen.c ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c ft_strdup.c ft_strjoin.c\
 					ft_strtrim.c ft_itoa.c ft_putstr_fd.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strmapi.c \
-					ft_striteri.c ft_read_fd.c ft_read_stdin.c ft_count_lines.c ft_count_lines2d.c ft_free2d.c ft_print_split.c
+					ft_striteri.c ft_read_fd.c ft_read_stdin.c ft_count_lines.c ft_count_lines2d.c ft_free2d.c ft_print_split.c \
+					ft_cpy_2d.c
 
 OBJS			= $(SRCS:.c=.o)
 
