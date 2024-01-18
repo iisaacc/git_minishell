@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 18:09:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:19:40 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	**ft_add_token(char **src, int y, char *token)
 			dst[x++] = ft_strdup(src[i++]);
 	}
 	dst[x] = NULL;
+	//ft_free_2d(src);
 	return (dst);
 }
 
@@ -62,14 +63,14 @@ char	**ft_get_tokens(char **lexer)
 				if (j == 0)
 					tmp = ft_add_token(lexer, i, token);
 				else
-					tmp = ft_add_token(lexer, i + 1, token);
-				//ft_free_2d(lexer);
+					tmp = ft_add_token(lexer, i + 1, token);	
 				lexer = tmp;
 			}
 			j++;
 		}
 		i++;
 	}
+	//ft_free_2d(tmp);
 	return (lexer);
 }
 
@@ -123,5 +124,6 @@ char	**ft_lexer(char *input)
 	lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(lexer);
 	lexer = ft_get_tokens(lexer);
+	free(input);
 	return (lexer);
 }

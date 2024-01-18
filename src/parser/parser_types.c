@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_types.c                                      :+:      :+:    :+:   */
+/*   parser_types.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:13:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 17:10:46 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:32:15 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@ void	ft_types(t_lexer *lexer)
 			aux->type = 2;
 		else if (aux->word[0] == '|' || aux->word[0] == '<' || aux->word[0] == '>')//es um token
 			ft_subtypes(aux, &flag, &file);
+		else if (file == 1)
+		{
+			aux->type = 5;
+			file--;
+		}
 		else	
 			aux->type = 4;
+		
 		aux = aux->next;
 	}
 }

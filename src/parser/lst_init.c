@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 16:14:36 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:02:40 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	free_node(t_lexer **node)
 {
 	t_lexer	*node_aux;
 
-	if (!node | !*node)
-		return ;
+	//if (!node | !*node)
+	//	return ;
 	while (*node)
 	{
 		node_aux = (*node)->next;
@@ -58,7 +58,8 @@ t_lexer *create_new(char *input, int x)
 	
 	node = NULL;
 	node = malloc(sizeof(t_lexer));
-	node->word = input;
+	node->word = ft_strdup(input);
+	free(input);
 	node->next = NULL;
 	node->type = 0;
 	node->id = x + 1;
