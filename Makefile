@@ -13,7 +13,9 @@ AR = ar rcs
 
 #---------------SRC------------
 
-SRC_FILES = main lexer/lexer_split lexer/lexer parser/lst_init parser/parser_types
+SRC_FILES = main \
+			lexer/lexer_split lexer/lexer lexer/tokens\
+			parser/lst_init parser/parser_types
 
 
 #=============SRC=============#

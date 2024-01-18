@@ -17,10 +17,17 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "includes/libft/libft.h"
+
+# define PIPE 1
+# define GREAT 2
+# define LESS 3
+# define GREATGREAT 4
+# define LESSLESS 5
 
 //int	g_status; variavel global
 
@@ -50,6 +57,16 @@ typedef struct s_mini
 	int		outfile;//fd de salida
 }		t_mini;
 
+typedef struct s_redir
+{
+	int	tmpin;
+	int	tmpout;
+	int	fork;
+	int	fdin;
+	int	fdout;
+	int	fdpipe[2];
+}		t_redir;
+
 char	**ft_lexer(char *input);
 void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
@@ -57,5 +74,6 @@ void	create_nodes(t_lexer **lexer, char **input);
 void	ft_print_list(t_lexer *lexer);
 void	free_node(t_lexer **node);
 void	ft_types(t_lexer *lexer);
+char	**ft_get_tokens(char **lexer);
 
 #endif
