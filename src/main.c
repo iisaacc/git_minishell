@@ -27,15 +27,13 @@ void ft_print_list(t_lexer *lexer)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main()
 {
-	t_lexer *lexer;
-	char *input = "echo \"hhh $USER\" \"hello      there\" how are \'you \'doing?  |wc -l >outfile";
-	create_nodes(&lexer, ft_lexer(input));
-	ft_print_list(lexer);
+	char *input = "echo \"hhh $HOM ffff\" \"hello      there\" $USER how are \'you \'doing?  \"  |wc  \" -l >outfile";
+	ft_print_split(ft_lexer(input));
+	//create_nodes(&lexer, ft_lexer(input));
+	//ft_print_list(lexer);
 
-	argv = 0;
-	argc = 1;
 	//lexer = NULL;
 	//if (argc > 1 && argv)
 	//{

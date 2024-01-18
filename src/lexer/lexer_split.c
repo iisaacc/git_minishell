@@ -64,10 +64,8 @@ int	ft_count_split(char const *s)
 
 void	ft_malloc_quotes(char const *s, int *i, int *j, char **str)
 {
-	int	k;
 	int	len;
 
-	k = 0;
 	len = 0;
 	if (s[*i + len] == '\'')
 	{
@@ -94,10 +92,8 @@ void	ft_malloc_quotes(char const *s, int *i, int *j, char **str)
 
 void	ft_malloc_no_quotes(char const *s, int *i, int *j, char **str)
 {
-	int	k;
 	int	len;
 
-	k = 0;
 	len = 0;
 	while (s[*i + len] != ' ' && s[*i + len] != '\0')
 		len++;

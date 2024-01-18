@@ -55,7 +55,7 @@ char	**ft_get_tokens(char **lexer)
 		j = 0;
 		while (lexer[i][j])
 		{
-			if ((lexer[i][j] == '>' || lexer[i][j] == '<')
+			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
 				&& (ft_strlen(lexer[i]) != 1) && (j == 0 || j == ft_strlen(lexer[i])))
 			{
 				token = ft_substr(lexer[i], j, 1);
@@ -85,14 +85,15 @@ void	ft_put_var(char **lexer, int *i, int *j)
 		len++;
 	var = ft_substr(lexer[*i], *j + 1, len);
 	value = getenv(var);
+	tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
+	ft_strlcpy(tmp, lexer[*i], *j + 1);
 	if (value)
-	{
-		tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
-		ft_strlcpy(tmp, lexer[*i], *j + 1);
 		tmp = ft_strjoin(tmp, value);
-		tmp = ft_strjoin(tmp, &lexer[*i][*j + ft_strlen(var) + 1]);
-		lexer[*i] = tmp;
-	}
+	else
+		tmp = ft_strjoin(tmp, ft_strdup(""));
+	tmp = ft_strjoin(tmp, &lexer[*i][*j + ft_strlen(var) + 1]);
+	free(lexer[*i]);
+	lexer[*i] = tmp;
 	free(var);
 }
 
