@@ -18,7 +18,7 @@ void	ft_subtypes(t_lexer *aux, int *flag, int *file)
 		*flag = 1;
 	if ((aux->word[0] == '>' || aux->word[0] == '<') && aux->word[1] != '<')
 		*file = 1;
-	aux->type = 3;
+	aux->type = STRING;
 	
 } 
 
@@ -35,15 +35,15 @@ void	ft_types(t_lexer *lexer)
 	{
 		if (flag == 1)
 		{
-			aux->type = 1;//es una funcion
+			aux->type = CMND;//es una funcion
 			flag--;
 		}
 		else if (aux->word[0] == '-')//es una flag
-			aux->type = 2;
+			aux->type = FLAG;
 		else if (aux->word[0] == '|' || aux->word[0] == '<' || aux->word[0] == '>')//es um token
 			ft_subtypes(aux, &flag, &file);
 		else	
-			aux->type = 4;
+			aux->type = FILE;
 		aux = aux->next;
 	}
 }

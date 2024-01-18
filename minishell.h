@@ -23,11 +23,11 @@
 # include <readline/history.h>
 # include "includes/libft/libft.h"
 
-# define PIPE 1
-# define GREAT 2
-# define LESS 3
-# define GREATGREAT 4
-# define LESSLESS 5
+# define CMND 1
+# define FLAG 2
+# define STRING 3
+# define FILE 4
+# define TOKEN 5
 
 //int	g_status; variavel global
 
@@ -67,13 +67,14 @@ typedef struct s_redir
 	int	fdpipe[2];
 }		t_redir;
 
-char	**ft_lexer(char *input);
-void	ft_extend_var(char **lexer);
-char	**ft_split_lexer(char const *s, char c);
-void	create_nodes(t_lexer **lexer, char **input);
-void	ft_print_list(t_lexer *lexer);
-void	free_node(t_lexer **node);
-void	ft_types(t_lexer *lexer);
-char	**ft_get_tokens(char **lexer);
+char		**ft_lexer(char *input);
+void		ft_extend_var(char **lexer);
+char		**ft_split_lexer(char const *s, char c);
+void		create_nodes(t_lexer **lexer, char **input);
+void		ft_print_list(t_lexer *lexer);
+void		free_node(t_lexer **node);
+void		ft_types(t_lexer *lexer);
+char		**ft_get_tokens(char **lexer);
+char const	*ft_check_quotes(char const *s);
 
 #endif

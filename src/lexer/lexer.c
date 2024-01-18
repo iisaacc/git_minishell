@@ -12,6 +12,34 @@
 
 #include "../../minishell.h"
 
+char const	*ft_check_quotes(char const *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\'')
+		{
+			i++;
+			while (s[i] != '\'' && s[i] != '\0')
+				i++;
+			if(s[i] == '\0')
+				return (NULL);
+		}
+		else if (s[i] == '\"')
+		{
+			i++;
+			while (s[i] != '\"' && s[i] != '\0')
+				i++;
+			if(s[i] == '\0')
+				return (NULL);
+		}
+		i++;
+	}
+	return (s);
+}
+
 void	ft_put_var(char **lexer, int *i, int *j)
 {
 	char	*var;
