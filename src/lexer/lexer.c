@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 18:09:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:20:55 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ char	**ft_lexer(char *input)
 	lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(lexer);
 	lexer = ft_get_tokens(lexer);
+	free(input);
 	return (lexer);
 }
