@@ -67,14 +67,15 @@ typedef struct s_redir
 	int	fdpipe[2];
 }		t_redir;
 
-char		**ft_lexer(char *input);
+char		**ft_lexer(t_lexer **lexer, char *input);
 void		ft_extend_var(char **lexer);
 char		**ft_split_lexer(char const *s, char c);
 void		create_nodes(t_lexer **lexer, char **input);
-void		ft_print_list(t_lexer *lexer);
+void		ft_print_list(t_lexer **lexer);
 void		free_node(t_lexer **node);
-void		ft_types(t_lexer *lexer);
+void		ft_types(t_lexer **lexer);
 char		**ft_get_tokens(char **lexer);
 char const	*ft_check_quotes(char const *s);
+void	ft_parser(t_lexer **lexer);
 
 #endif

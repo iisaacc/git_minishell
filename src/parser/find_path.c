@@ -31,7 +31,7 @@ char	*ft_find_cmnd_path(char **envp, char *cmnd)
 				fullpath = ft_strjoin(fullpath, cmnd);
 				if (access(fullpath, F_OK) == 0)
 					return (ft_free_2d(path_split), fullpath);
-				ft_bzero(fullpath, ft_strlen(fullpth));
+				ft_bzero(fullpath, ft_strlen(fullpath));
 				i++;
 			}
 		}

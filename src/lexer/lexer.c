@@ -83,13 +83,15 @@ void	ft_extend_var(char **lexer)
 	}
 }
 
-char	**ft_lexer(char *input)
+char	**ft_lexer(t_lexer **lst_lexer, char *input)
 {
-	char	**lexer;
+	char	**str_lexer;
 
-	lexer = ft_split_lexer(input, ' ');
-	ft_extend_var(lexer);
-	lexer = ft_get_tokens(lexer);
-	free(input);
-	return (lexer);
+	str_lexer = ft_split_lexer(input, ' ');
+	ft_extend_var(str_lexer);
+	str_lexer = ft_get_tokens(str_lexer);
+	//free(input);
+	ft_print_split(str_lexer);
+	create_nodes(lst_lexer, str_lexer);
+	return (str_lexer);
 }

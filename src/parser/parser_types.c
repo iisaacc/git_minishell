@@ -18,11 +18,11 @@ void	ft_subtypes(t_lexer *aux, int *flag, int *file)
 		*flag = 1;
 	if ((aux->word[0] == '>' || aux->word[0] == '<') && aux->word[1] != '<')
 		*file = 1;
-	aux->type = STRING;
+	aux->type = TOKEN;
 	
 } 
 
-void	ft_types(t_lexer *lexer)
+void	ft_types(t_lexer **lexer)
 {
 	t_lexer *aux;
 	int flag; //flag para saver quando tem um pipe
@@ -30,7 +30,7 @@ void	ft_types(t_lexer *lexer)
 	
 	file = 0;
 	flag = 1;
-	aux = lexer;
+	aux = *lexer;
 	while (aux)
 	{
 		if (flag == 1)
@@ -44,11 +44,11 @@ void	ft_types(t_lexer *lexer)
 			ft_subtypes(aux, &flag, &file);
 		else if (file == 1)
 		{
-			aux->type = 5;
+			aux->type = FILE;
 			file--;
 		}
 		else	
-			aux->type = FILE;
+			aux->type = STRING;
 		aux = aux->next;
 	}
 }
