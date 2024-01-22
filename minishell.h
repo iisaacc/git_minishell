@@ -42,19 +42,13 @@ typedef struct s_lexer
 
 }		t_lexer;
 
-typedef struct s_prompt
-{
-	t_lexer	*cmds;//lista enlazada con los comandos
-	char	**envp;//array ** que guarda cada palavra(frase) del prompt
-	pid_t	pid;//pid del processo principal
-}		t_prompt;
-
 typedef struct s_mini
 {
-	char	**full_cmd;//comando y sus argumentos
-	char	*full_path;//camino del ejecutable si no es un builtin
-	int		infile;//fd de entrada
-	int		outfile;//fd de salida
+	char			**full_cmd;//comando y sus argumentos
+	char			*full_path;//camino del ejecutable si no es un builtin
+	int				infile;//fd de entrada
+	int				outfile;//fd de salida
+	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
 
 typedef struct s_redir
@@ -76,6 +70,9 @@ void		free_node(t_lexer **node);
 void		ft_types(t_lexer **lexer);
 char		**ft_get_tokens(char **lexer);
 char const	*ft_check_quotes(char const *s);
-void	ft_parser(t_lexer **lexer);
+t_mini		**ft_parser(t_lexer **lexer, t_mini **mini, char **envp);
+char		*ft_find_cmnd_path(char **envp, char *cmnd);
+char		**ft_full_cmnd(t_lexer *lexer);
+t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp);
 
 #endif

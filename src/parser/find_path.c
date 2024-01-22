@@ -15,6 +15,7 @@
 char	*ft_find_cmnd_path(char **envp, char *cmnd)
 {
 	int		i;
+	int		j;
 	char	**path_split;
 	char	*fullpath;
 
@@ -24,20 +25,20 @@ char	*ft_find_cmnd_path(char **envp, char *cmnd)
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			path_split = ft_split(&envp[i][5], ':');
-			i = 0;
-			while (path_split[i])
+			j = 0;
+			while (path_split[j])
 			{
-				fullpath = ft_strjoin(path_split[i], "/");
+				fullpath = ft_strjoin(path_split[j], "/");
 				fullpath = ft_strjoin(fullpath, cmnd);
 				if (access(fullpath, F_OK) == 0)
-					return (ft_free_2d(path_split), fullpath);
+					return (fullpath);
 				ft_bzero(fullpath, ft_strlen(fullpath));
-				i++;
+				j++;
 			}
 		}
 		i++;
 	}
-	free(fullpath);
-	ft_free_2d(path_split);
+	//free(fullpath);
+	//ft_free_2d(path_split);
 	return (NULL);
 }

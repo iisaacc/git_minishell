@@ -12,6 +12,20 @@
 
 #include "../minishell.h"
 
+void	ft_print_mini_lst(t_mini **mini)
+{
+	t_mini	*tmp;
+
+	tmp = *mini;
+	while (tmp)
+	{
+		printf("cmd:\n");
+		ft_print_split(tmp->full_cmd);
+		printf("path: %s\n", tmp->full_path);
+		tmp = tmp->next;
+	}
+}
+
 void ft_print_list(t_lexer **lexer)
 {
 	int		x;
@@ -30,28 +44,46 @@ void ft_print_list(t_lexer **lexer)
 	}
 }
 
-int	main(int argc, char **argv)
-{
-	char	*input;
-	t_lexer	*lexer;
-	//char	*str = "echo hola >> infile que tal irmano | wc -l >>outfile";
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*input;
+// 	t_lexer	*lexer;
+// 	t_mini	*mini;
 
-	lexer= NULL;
-	//ft_lexer(&lexer, str);
-	if (argc > 1 && argv)
-	{
-		printf("Wrong number of arguments\n");
+// 	lexer = NULL;
+// 	mini = NULL;
+// 	if (argc > 1 && argv)
+// 	{
+// 		printf("Wrong number of arguments\n");
+// 		return (1);
+// 	}
+// 	while((input = readline("Minishell>")))
+// 	{
+// 		if (!ft_check_quotes(input))
+// 			return (write(2, "quotes\n", 8), 1);
+// 		add_history(input);
+// 		ft_lexer(&lexer, input);
+// 		ft_parser(&lexer, &mini, envp);
+// 		ft_print_list(&lexer);
+// 		ft_print_mini_lst(&mini);
+// 	}
+// 	clear_history();
+// }
+
+//MAIN DEBUG
+int	main(int argc, char **argv, char **envp)
+{
+	t_lexer	*lexer;
+	t_mini	*mini;
+
+	lexer = NULL;
+	mini = NULL;
+	char	*str = "eeecho -a | ls -l -a que pasa xurra";
+	if (!argv && !argc)
 		return (1);
-	}
-	while((input = readline("Minishell>")))
-	{
-		if (!ft_check_quotes(input))
-			return (write(2, "quotes\n", 8), 1);
-		add_history(input);
-		ft_lexer(&lexer, input);
-		ft_parser(&lexer);
-		//ft_print_split(ft_lexer(input));
-		ft_print_list(&lexer);
-	}
-	clear_history();
+	ft_lexer(&lexer, str);
+	ft_parser(&lexer, &mini, envp);
+	ft_print_list(&lexer);
+	ft_print_mini_lst(&mini);
+	return (0);
 }

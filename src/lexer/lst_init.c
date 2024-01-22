@@ -58,11 +58,13 @@ t_lexer *create_new(char *input, int x)
 	
 	node = NULL;
 	node = malloc(sizeof(t_lexer));
+	if (!node)
+		return (NULL);
 	node->word = ft_strdup(input);
 	free(input);
 	node->next = NULL;
 	node->type = 0;
-	node->id = x + 1;
+	node->id = x;
 	return (node);
 }
 

@@ -64,18 +64,25 @@ void	ft_put_var(char **lexer, int *i, int *j)
 	free(var);
 }
 
+//Extiende la variable global $ siempre que no esté entre comillas simples
 void	ft_extend_var(char **lexer)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	q;
 
+	q = 0;
 	i = 0;
 	while (lexer[i])
 	{
 		j = 0;
 		while (lexer[i][j])
 		{
-			if (lexer[i][j] == '$')
+			if (lexer[i][j] == '\'' && q == 0)
+				q = 1;
+			else if (lexer[i][j] == '\'' && q == 1)
+				q = 0;
+			if (lexer[i][j] == '$' && q == 0)
 				ft_put_var(lexer, &i, &j);
 			j++;
 		}
@@ -91,7 +98,6 @@ char	**ft_lexer(t_lexer **lst_lexer, char *input)
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
 	//free(input);
-	ft_print_split(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	return (str_lexer);
 }
