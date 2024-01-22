@@ -44,46 +44,49 @@ void ft_print_list(t_lexer **lexer)
 	}
 }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char	*input;
-// 	t_lexer	*lexer;
-// 	t_mini	*mini;
-
-// 	lexer = NULL;
-// 	mini = NULL;
-// 	if (argc > 1 && argv)
-// 	{
-// 		printf("Wrong number of arguments\n");
-// 		return (1);
-// 	}
-// 	while((input = readline("Minishell>")))
-// 	{
-// 		if (!ft_check_quotes(input))
-// 			return (write(2, "quotes\n", 8), 1);
-// 		add_history(input);
-// 		ft_lexer(&lexer, input);
-// 		ft_parser(&lexer, &mini, envp);
-// 		ft_print_list(&lexer);
-// 		ft_print_mini_lst(&mini);
-// 	}
-// 	clear_history();
-// }
-
-//MAIN DEBUG
 int	main(int argc, char **argv, char **envp)
 {
+	char	*input;
 	t_lexer	*lexer;
 	t_mini	*mini;
 
 	lexer = NULL;
 	mini = NULL;
-	char	*str = "eeecho -a | ls -l -a que pasa xurra";
-	if (!argv && !argc)
+	if (argc > 1 && argv)
+	{
+		printf("Wrong number of arguments\n");
 		return (1);
-	ft_lexer(&lexer, str);
-	ft_parser(&lexer, &mini, envp);
-	ft_print_list(&lexer);
-	ft_print_mini_lst(&mini);
-	return (0);
+	}
+	while((input = readline("Minishell>")))
+	{
+		if (!ft_check_quotes(input))
+			return (write(2, "quotes\n", 8), 1);
+		add_history(input);
+		ft_lexer(&lexer, input);
+		ft_parser(&lexer, &mini, envp);
+		ft_print_list(&lexer);
+		ft_print_mini_lst(&mini);
+		ft_free_mini_lst(mini);
+		ft_free_lexer_lst(&lexer);
+	}
+	clear_history();
 }
+
+//MAIN DEBUG
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_lexer	*lexer;
+// 	t_mini	*mini;
+
+// 	lexer = NULL;
+// 	mini = NULL;
+// 	char	*str = "holaa ls -l | ls -a -kesadilla";
+// 	if (!argv && !argc)
+// 		return (1);
+// 	ft_lexer(&lexer, str);
+// 	ft_print_list(&lexer);
+// 	ft_parser(&lexer, &mini, envp);
+// 	ft_print_mini_lst(&mini);
+	
+// 	return (0);
+// }

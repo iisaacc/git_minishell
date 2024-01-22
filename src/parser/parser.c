@@ -20,16 +20,16 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 	i = 1;
 	aux = lexer;
-	while (aux && (aux->next)->type == FLAG)
+	while (aux->next && aux->next->type == FLAG)
 	{
-		i++;
 		aux = aux->next;
+			i++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	aux = lexer;
 	full_cmnd[i++] = ft_strdup(aux->word);
-	while (aux && (aux->next)->type == FLAG)
+	while (aux->next && aux->next->type == FLAG)
 	{
 		aux = aux->next;
 		full_cmnd[i++] = ft_strdup(aux->word);

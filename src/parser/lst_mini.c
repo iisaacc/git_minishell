@@ -12,6 +12,20 @@
 
 #include "../../minishell.h"
 
+void	ft_free_mini_lst(t_mini *mini)
+{
+	t_mini	*aux;
+
+	while (mini)
+	{
+		aux = mini->next;
+		ft_free_2d(mini->full_cmd);
+		free(mini->full_path);
+		free(mini);
+		mini = aux;
+	}
+}
+
 t_mini	*ft_mini_new(t_lexer *lexer, char **envp)
 {
 	t_mini	*mini;

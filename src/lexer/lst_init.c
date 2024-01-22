@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	free_node(t_lexer **node)
+void	ft_free_lexer_lst(t_lexer **node)
 {
 	t_lexer	*node_aux;
 
@@ -74,10 +74,11 @@ void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
 	
 	x = 0;
 	if(*lexer)
-		free_node(lexer);
+		ft_free_lexer_lst(lexer);
 	while (input[x])
 	{
 		add_new(lexer, create_new(input[x], x));
 		x++;
 	}
+	free(input);
 }

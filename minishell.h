@@ -74,5 +74,7 @@ t_mini		**ft_parser(t_lexer **lexer, t_mini **mini, char **envp);
 char		*ft_find_cmnd_path(char **envp, char *cmnd);
 char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp);
+void		ft_free_mini_lst(t_mini *mini);
+void		ft_free_lexer_lst(t_lexer **node);
 
 #endif

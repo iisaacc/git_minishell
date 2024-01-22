@@ -28,17 +28,17 @@ char	*ft_find_cmnd_path(char **envp, char *cmnd)
 			j = 0;
 			while (path_split[j])
 			{
-				fullpath = ft_strjoin(path_split[j], "/");
+				fullpath = ft_strdup(path_split[j]);
+				fullpath = ft_strjoin(fullpath, "/");
 				fullpath = ft_strjoin(fullpath, cmnd);
 				if (access(fullpath, F_OK) == 0)
 					return (fullpath);
-				ft_bzero(fullpath, ft_strlen(fullpath));
+				free(fullpath);
 				j++;
 			}
 		}
 		i++;
 	}
-	//free(fullpath);
-	//ft_free_2d(path_split);
+	ft_free_2d(path_split);
 	return (NULL);
 }
