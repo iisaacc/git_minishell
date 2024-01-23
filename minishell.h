@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 16:47:33 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:24:30 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "includes/libft/libft.h"
+# include <errno.h>
 
 # define CMND 1
 # define FLAG 2
 # define STRING 3
 # define FILE 4
-# define TOKEN 5
+# define GREATER 5
+# define LESS 6
+# define PIPE 7
 
 //int	g_status; variavel global
 
@@ -76,5 +79,7 @@ char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp);
 void		ft_free_mini_lst(t_mini *mini);
 void		ft_free_lexer_lst(t_lexer **node);
+void		ft_error(char *error, char *boole, int errint);
+void		ft_set_io(t_mini *m_node, t_lexer **lexer, int lap);
 
 #endif

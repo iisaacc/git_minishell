@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/18 17:29:24 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:57:31 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_print_mini_lst(t_mini **mini)
 		printf("cmd:\n");
 		ft_print_split(tmp->full_cmd);
 		printf("path: %s\n", tmp->full_path);
+		printf("infile fd: %d\n", tmp->infile);
+		printf("outfile fd: %d\n", tmp->outfile);
 		tmp = tmp->next;
 	}
 }
@@ -38,7 +40,7 @@ void ft_print_list(t_lexer **lexer)
 		printf("word: %s\n", tmp->word);
 		printf("id: %d\n", tmp->id);
 		printf("type: %d\n\n", tmp->type);
-		
+
 		tmp = tmp->next;
 		x++;
 	}
@@ -87,6 +89,6 @@ int	main(int argc, char **argv, char **envp)
 // 	ft_print_list(&lexer);
 // 	ft_parser(&lexer, &mini, envp);
 // 	ft_print_mini_lst(&mini);
-	
+
 // 	return (0);
 // }
