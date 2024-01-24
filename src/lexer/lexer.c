@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/18 17:20:55 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:58:20 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**ft_lexer(t_lexer **lst_lexer, char *input)
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
-	//free(input);
 	create_nodes(lst_lexer, str_lexer);
+	free(input);//free del input
 	return (str_lexer);
 }

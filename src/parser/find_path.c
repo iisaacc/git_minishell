@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:38:32 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/24 11:54:48 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:01:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_find_cmnd_path(char **envp, char *cmnd)
 				fullpath = ft_strjoin(fullpath, "/");
 				fullpath = ft_strjoin(fullpath, cmnd);
 				if (access(fullpath, F_OK) == 0)
-					return (fullpath);
+					return (ft_free_2d(path_split), fullpath);//si encuentra hay que hacer un free de path_split
 				free(fullpath);
 				j++;
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/23 15:02:56 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:57:56 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
