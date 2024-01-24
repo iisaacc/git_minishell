@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/18 12:42:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:14:50 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_fork_execve(t_mini *mini)
 	}
 }
 
-void	ft_redirections(t_mini mini)
+void	ft_redirections(t_mini **mini)
 {
 	//guardar in/out
 	t_redir	redir;
@@ -33,14 +33,10 @@ void	ft_redirections(t_mini mini)
 
 	redir.tmpin = dup(0);
 	redir.tmpout = dup(1);
-	if (infile)
-		redir.fdin = open(mini->infile, O_RDONLY);
-	else
-		redir.fdin = dup(redir.tmpin);
 	i = 0;
 	while (i < numsimplecommands)
 	{
-		dup2(redir.fdin, 0);//redirijir input
+		dup2(mini->infile, 0);//redirijir input
 		close(redir.fdin);
 		if (i == numsimplecommands1) // Último comando
 		{

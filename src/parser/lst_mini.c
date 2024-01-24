@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   lst_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:59:30 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/23 16:25:28 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:07:20 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_free_mini_lst(t_mini *mini)
+void	ft_free_mini_lst(t_mini **mini)
 {
 	t_mini	*aux;
 
-	while (mini)
+	while (*mini)
 	{
-		aux = mini->next;
-		ft_free_2d(mini->full_cmd);
-		free(mini->full_path);
-		free(mini);
-		mini = aux;
+		aux = (*mini)->next;
+		ft_free_2d((*mini)->full_cmd);
+		if ((*mini)->full_path != NULL)
+			free((*mini)->full_path);
+		free(*mini);
+		*mini = aux;
 	}
+	*mini = NULL;
 }
 
 t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)

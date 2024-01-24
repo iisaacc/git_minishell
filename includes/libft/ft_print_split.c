@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 13:53:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 13:54:09 by isporras         ###   ########.fr       */
+/*   Created: 2024/01/24 13:59:08 by carmarqu          #+#    #+#             */
+/*   Updated: 2024/01/24 14:08:01 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_print_split(char **split)
 	int	i;
 
 	i = 0;
+	if (!split || !*split)
+		return ;
 	while (split[i])
 	{
 		printf("%s\n", split[i]);

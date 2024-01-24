@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/23 16:24:30 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:06:25 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_mini
 {
 	char			**full_cmd;//comando y sus argumentos
 	char			*full_path;//camino del ejecutable si no es un builtin
+	int				cmd_laps;
+	int				cmd_id;
 	int				infile;//fd de entrada
 	int				outfile;//fd de salida
 	struct s_mini	*next;//puntero al siguiente nodo
@@ -77,7 +79,7 @@ t_mini		**ft_parser(t_lexer **lexer, t_mini **mini, char **envp);
 char		*ft_find_cmnd_path(char **envp, char *cmnd);
 char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp);
-void		ft_free_mini_lst(t_mini *mini);
+void		ft_free_mini_lst(t_mini **mini);
 void		ft_free_lexer_lst(t_lexer **node);
 void		ft_error(char *error, char *boole, int errint);
 void		ft_set_io(t_mini *m_node, t_lexer **lexer, int lap);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:00:49 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/17 13:35:41 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:44:39 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ char	**ft_split_lexer(char const *s, char c)
 		while (s[i] == c)
 			i++;
 		if (s[i] == '\'' || s[i] == '\"')
-			ft_malloc_quotes(s, &i, &j, str);
+			ft_malloc_quotes(s, &i, &j, str);//split con comillas
 		else
-			ft_malloc_no_quotes(s, &i, &j, str);
+			ft_malloc_no_quotes(s, &i, &j, str);//split sin comillas
 		j++;
 	}
 	str[j] = NULL;
