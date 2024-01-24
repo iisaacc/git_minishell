@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_types.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:13:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/23 14:54:17 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:49:38 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,26 @@ void	ft_subtypes(t_lexer *aux, int *flag, int *file)
 		*flag = 1;
 		aux->type = PIPE;
 	}
-	else if ((aux->word[0] == '>' || aux->word[0] == '<') && aux->word[1] != '<')
+	else if (aux->word[0] == '>' || aux->word[0] == '<')
 	{
 		*file = 1;
 		if (aux->word[0] == '>')
-			aux->type = GREATER;
+		{
+			if (aux->word[1] == '>')
+				aux->type = D_GREATER;
+			else
+				aux->type = GREATER;
+		}
 		else if (aux->word[0] == '<')
-			aux->type = LESS;
+		{	
+			if (aux->word[1] == '<')
+			{
+				aux->type = D_LESS; //a lo mejor cuando es un doble less tenemos que hacer otra funcion
+				*file = 0;
+			}
+			else
+				aux->type = LESS;
+		}
 	}
 }
 

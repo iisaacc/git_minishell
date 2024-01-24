@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:14:54 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/18 14:14:54 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:54:38 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**ft_case_single_double(char	**lexer, char *token, int *i, int *j)
 		token = ft_substr(lexer[*i], *j, 1);
 		tmp = ft_add_token(lexer, *i, token, 1, *j);
 	}
-	//ft_free_2d(lexer);
+	ft_free_2d(lexer);
 	return (tmp);
 }
 

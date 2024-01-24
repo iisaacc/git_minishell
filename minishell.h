@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/24 14:06:25 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:10:18 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define GREATER 5
 # define LESS 6
 # define PIPE 7
+# define D_GREATER 8
+# define D_LESS 9
 
 //int	g_status; variavel global
 
