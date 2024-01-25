@@ -35,7 +35,7 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
 	mini = malloc(sizeof(t_mini));
 	mini->full_cmd = ft_full_cmnd(l_node);
 	mini->full_path = ft_find_cmnd_path(envp, l_node->word);
-	ft_error(l_node->word, mini->full_path, ENOENT);
+	ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
 	mini->next = NULL;
