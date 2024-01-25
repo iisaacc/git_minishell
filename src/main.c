@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
+		
 		ft_print_list(&lexer);
 		ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
