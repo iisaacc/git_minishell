@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 16:39:12 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:25:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,40 @@ void	ft_echo(char **cmd, int fd)
 		write(fd, "\n", 1);
 }
 
+void	ft_cd(t_mini *mini)
+{
+	mini->envp[0] = "HOLA";
+	printf("%s\n", mini->envp[0]);
+}
+
+void	ft_env(t_mini *mini, int fd)
+{
+	int x;
+	int i;
+
+	x = 0;
+	while (mini->envp[x])
+	{
+		i = 0;
+		while(mini->envp[x][i])
+		{
+			write(fd, &mini->envp[x][i], 1);
+			i++;	
+		}
+		write(fd, "\n", 1);
+		x++;
+	}
+}
+
 int		ft_builtins(t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {	
-	int len;
-
-	len = ft_strlen(mini->full_cmd[0]);
-	if (!ft_strncmp(mini->full_cmd[0], "echo", len))
+	//aun no hay comprovaciones si falla
+	if (!ft_strncmp(mini->full_cmd[0], "echo", 4))
 		ft_echo(mini->full_cmd, mini->outfile);
+	if (!ft_strncmp(mini->full_cmd[0], "cd", 2))
+		ft_cd(mini);
+	if (!ft_strncmp(mini->full_cmd[0], "env", 3))
+		ft_env(mini, mini->outfile);
 	if (mini->next)
 		ft_builtins(mini->next);
 	return (1);

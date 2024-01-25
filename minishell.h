@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 16:37:55 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:07:30 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_mini
 	int				id;//pos en la lista
 	int				infile;//fd de entrada
 	int				outfile;//fd de salida
+	char			**envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
 
@@ -93,7 +94,7 @@ void		ft_cmnd_error(char *error, char *boole);
 void		ft_file_error(int infd, char *infile);
 
 //----------------------EXECUTER---------------------------
-void		ft_pipes(t_mini **mini);
+void	ft_pipes(t_mini **mini);
 void	ft_fork_execve(t_mini **mini);
 int		ft_builtins(t_mini *mini);
 

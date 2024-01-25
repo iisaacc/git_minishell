@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 16:44:21 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:28:18 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
+		ft_builtins(mini);
 		//ft_pipes(&mini);
 		//ft_fork_execve(&mini);
-		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
 		ft_free_lexer_lst(&lexer);
 	}
