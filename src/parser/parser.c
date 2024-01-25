@@ -62,6 +62,8 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 t_mini	**ft_parser(t_lexer **lexer, t_mini **mini, char **envp)
 {
+	if (!(*lexer))
+		return (NULL);
 	ft_types(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp);
 	return (mini);
