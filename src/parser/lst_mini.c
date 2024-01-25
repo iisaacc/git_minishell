@@ -12,6 +12,21 @@
 
 #include "../../minishell.h"
 
+void	ft_total_cmnds(t_mini **mini, int total_cmnds)
+{
+	int		i;
+	t_mini	*aux;
+	
+	aux = *mini;
+	i = 0;
+	while (i < total_cmnds)
+	{
+		aux->total_cmnds = total_cmnds;
+		aux = aux->next;
+		i++;
+	}
+}
+
 void	ft_free_mini_lst(t_mini **mini)
 {
 	t_mini	*aux;
@@ -38,6 +53,7 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
 	ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
+	mini->id = lap;
 	mini->next = NULL;
 	ft_set_io(mini, lexer, lap);
 	return (mini);
@@ -82,5 +98,6 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp)
 			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap));
 		aux = aux->next;
 	}
+	ft_total_cmnds(mini, lap + 1);
 	return (mini);
 }

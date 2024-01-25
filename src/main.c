@@ -21,6 +21,8 @@ void	ft_print_mini_lst(t_mini **mini)
 	{
 		printf("cmd:\n");
 		ft_print_split(tmp->full_cmd);
+		printf("total cmds: %d\n", tmp->total_cmnds);
+		printf("id: %d\n", tmp->id);
 		printf("path: %s\n", tmp->full_path);
 		printf("infile fd: %d\n", tmp->infile);
 		printf("outfile fd: %d\n", tmp->outfile);
@@ -62,7 +64,8 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
-		
+		//ft_pipes(&mini);
+		//ft_fork_execve(&mini);
 		ft_print_list(&lexer);
 		ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
@@ -72,19 +75,20 @@ int	main(int argc, char **argv, char **envp)
 	clear_history();
 }
 
-/* //MAIN DEBUG
- int	main(int argc, char **argv, char **envp)
- {
- 	t_lexer	*lexer;
- 	t_mini	*mini;
- 	lexer = NULL;
- 	mini = NULL;
- 	char	*str = "echo \">input\"";
- 	if (!argv && !argc)
- 		return (1);
- 	ft_lexer(&lexer, str);
- 	ft_parser(&lexer, &mini, envp);
- 	ft_print_list(&lexer);
- 	ft_print_mini_lst(&mini);
- 	return (0);
- } */
+//MAIN DEBUG
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_lexer	*lexer;
+// 	t_mini	*mini;
+// 	lexer = NULL;
+// 	mini = NULL;
+// 	char	*str = ft_strdup("ls -l");
+// 	if (!argv && !argc)
+// 		return (1);
+// 	ft_lexer(&lexer, str);
+// 	ft_parser(&lexer, &mini, envp);
+// 	//ft_fork_execve(&mini);
+// 	//ft_print_list(&lexer);
+// 	//ft_print_mini_lst(&mini);
+// 	return (0);
+// }
