@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/24 14:52:22 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:44:55 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_print_mini_lst(t_mini **mini)
 		printf("id: %d\n", tmp->id);
 		printf("path: %s\n", tmp->full_path);
 		printf("infile fd: %d\n", tmp->infile);
-		printf("outfile fd: %d\n", tmp->outfile);
+		printf("outfile fd: %d\n\n", tmp->outfile);
 		tmp = tmp->next;
 	}
 }
@@ -70,7 +70,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
 		ft_free_lexer_lst(&lexer);
-		//free(input);
 	}
 	clear_history();
 }
