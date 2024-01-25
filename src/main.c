@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/24 14:52:22 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:21:40 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_print_mini_lst(t_mini **mini)
 	t_mini	*tmp;
 
 	tmp = *mini;
+	printf("hola\n");
 	while (tmp != NULL)
 	{
 		printf("cmd:\n");
@@ -62,11 +63,10 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
-		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
+		ft_print_list(&lexer);//solo printa
+		ft_print_mini_lst(&mini);//solo printa
 		ft_free_mini_lst(&mini);
 		ft_free_lexer_lst(&lexer);
-		//free(input);
 	}
 	clear_history();
 }

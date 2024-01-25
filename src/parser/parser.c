@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/24 15:06:23 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:33:01 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_set_io(t_mini *m_node, t_lexer **lexer, int lap)
 			i++;
 		if (aux->type == LESS && i == lap)
 			m_node->infile = open((aux->next)->word, O_RDONLY);
-		if (aux->type == GREATER && i == lap)
+		if (aux->type == GREATER && i == lap)//añandir D_greater
 			m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		aux = aux->next;
 	}
@@ -55,7 +55,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 	i = 1;
 	aux = lexer;
-	while (aux->next && aux->next->type == FLAG)
+	while (aux->next && aux->next->type == FLAG)//añandir los args al full_cmd 
 	{
 		aux = aux->next;
 			i++;
