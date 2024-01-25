@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 15:35:03 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:44:55 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ void	ft_print_mini_lst(t_mini **mini)
 	t_mini	*tmp;
 
 	tmp = *mini;
-	printf("hola\n");
 	while (tmp != NULL)
 	{
 		printf("cmd:\n");
 		ft_print_split(tmp->full_cmd);
 		printf("path: %s\n", tmp->full_path);
 		printf("infile fd: %d\n", tmp->infile);
-		printf("outfile fd: %d\n", tmp->outfile);
+		printf("outfile fd: %d\n\n", tmp->outfile);
 		tmp = tmp->next;
 	}
 }

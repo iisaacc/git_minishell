@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/24 12:14:50 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:36:05 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_fork_execve(t_mini **mini)
 				perror("dup2:");
 				exit(EXIT_FAILURE);
 			}
-			if(execve(aux->full_path, mini->full_cmd, NULL) == -1)//Ejecuta comandos
+			if(execve(aux->full_path, (*mini)->full_cmd, NULL) == -1)//Ejecuta comandos
 			{
 				perror("execve:");
 				exit(EXIT_FAILURE);
@@ -61,7 +61,7 @@ void	ft_pipes(t_mini **mini)
 	int		fds[2];
 	int		total_commands;
 	int		i;
-	t_mini	*aux
+	t_mini	*aux;
 
 	aux = *mini;
 	if (!aux)

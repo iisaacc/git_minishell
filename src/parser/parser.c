@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/25 15:34:43 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:43:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 	i = 1;
 	aux = lexer;
-	while (aux->next && aux->next->type == FLAG)//añandir los args al full_cmd 
+	while (aux->next && aux->next->type != PIPE)//añandir los args al full_cmd 
 	{
 		aux = aux->next;
-			i++;
+		i++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	aux = lexer;
 	full_cmnd[i++] = ft_strdup(aux->word);
-	while (aux->next && aux->next->type == FLAG)
+	while (aux->next && aux->next->type != PIPE)
 	{
 		aux = aux->next;
 		full_cmnd[i++] = ft_strdup(aux->word);
