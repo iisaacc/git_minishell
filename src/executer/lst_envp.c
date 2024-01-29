@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   lst_envp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 14:11:41 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/29 11:46:27 by carmarqu         ###   ########.fr       */
+/*   Created: 2024/01/29 14:03:51 by carmarqu          #+#    #+#             */
+/*   Updated: 2024/01/29 14:07:31 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../minishell.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	create_envp(t_envp *+envp_list, char **envp)
 {
-	size_t	i;
-
-	i = 0;
-	if (dst == src || !n)
-		return (dst);
-	while (i < n)
-	{
-		*((char *)dst + i) = *((char *)src + i);
-		i++;
-	}
-	return (dst);
+	
 }
-//int main ()
-//{
-//	int b[] = {1,1,1,1,1};
-//	int a[] = {2,2,2,2,2};
-
-//	memcpy(b, a, 2);
-//	printf("%i",b[0]);
-//	return (0);
-//}

@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 17:07:30 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:08:52 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@
 
 //int	g_status; variavel global
 
+typedef struct s_envp //lista para las variables del ambiente
+{
+	char *id; //PATH=
+	char *value; //value
+	struct s_envp *next;
+}	t_envp;
+
 typedef struct s_lexer
 {
 	char *word; //palavra
@@ -57,7 +64,7 @@ typedef struct s_mini
 	int				id;//pos en la lista
 	int				infile;//fd de entrada
 	int				outfile;//fd de salida
-	char			**envp;
+	t_envp			*envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
 
@@ -96,7 +103,9 @@ void		ft_file_error(int infd, char *infile);
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);
 void	ft_fork_execve(t_mini **mini);
-int		ft_builtins(t_mini *mini);
+int		ft_builtins(t_envp **envp_list, t_mini *mini)
+int		find_env(char **envp, char *find);
+
 
 
 #endif

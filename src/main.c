@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 17:28:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:09:22 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	t_lexer	*lexer;
 	t_mini	*mini;
-
+	t_envp	*envp_list;
+	
+	envp_list = NULL;
 	lexer = NULL;
 	mini = NULL;
 	if (argc > 1 && argv)
@@ -64,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
-		ft_builtins(mini);
+		ft_builtins(&envp_list, mini);
 		//ft_pipes(&mini);
 		//ft_fork_execve(&mini);
 		//ft_print_list(&lexer);
@@ -75,20 +77,21 @@ int	main(int argc, char **argv, char **envp)
 	clear_history();
 }
 
-//MAIN DEBUG
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_lexer	*lexer;
-// 	t_mini	*mini;
-// 	lexer = NULL;
-// 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l");
-// 	if (!argv && !argc)
-// 		return (1);
-// 	ft_lexer(&lexer, str);
-// 	ft_parser(&lexer, &mini, envp);
-// 	//ft_fork_execve(&mini);
-// 	//ft_print_list(&lexer);
-// 	//ft_print_mini_lst(&mini);
-// 	return (0);
-// }
+/* //MAIN DEBUG
+int	main(int argc, char **argv, char **envp)
+{
+	t_lexer	*lexer;
+	t_mini	*mini;
+	lexer = NULL;
+	mini = NULL;
+	char	*str = ft_strdup("echo");
+	if (!argv && !argc)
+		return (1);
+	ft_lexer(&lexer, str);
+	ft_parser(&lexer, &mini, envp);
+	ft_builtins(mini);
+	//ft_fork_execve(&mini);
+	//ft_print_list(&lexer);
+	//ft_print_mini_lst(&mini);
+	return (0);
+} */
