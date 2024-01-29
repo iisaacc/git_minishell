@@ -60,7 +60,10 @@ t_envp *envp_new(char *envp)
 	splitted = ft_split(envp, '=');
 	new->id = ft_strdup(splitted[0]);
 	new->id = ft_strjoin(new->id, "=");
-	new->value = ft_strdup(splitted[1]);
+	if (splitted[1] == NULL)
+		new->value = ft_strdup("");
+	else
+		new->value = ft_strdup(splitted[1]);
 	new->next = NULL;
 	ft_free_2d(splitted);
 	return (new);

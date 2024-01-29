@@ -43,7 +43,7 @@ void	ft_free_mini_lst(t_mini **mini)
 	*mini = NULL;
 }
 
-t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
+t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap, t_envp **envp_list)
 {
 	t_mini	*mini;
 
@@ -54,6 +54,7 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
 	mini->id = lap;
+	mini->envp = envp_list;
 	mini->next = NULL;
 	ft_set_io(mini, lexer, lap);
 	return (mini);
@@ -83,7 +84,7 @@ void	mini_add_new(t_mini **mini, t_mini *new)//añande un nodo a la lista
 	aux->next = new;
 }
 
-t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp)
+t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
 	t_lexer	*aux;
 	int		lap;
@@ -95,7 +96,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp)
 		if (aux->type == PIPE)
 			lap++;
 		if (aux->type == CMND)
-			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap));
+			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap, envp_list));
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);

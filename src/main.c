@@ -66,8 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		create_envp(&envp_list, envp);
 		ft_lexer(&lexer, input);
-		ft_parser(&lexer, &mini, envp);
-		ft_builtins(mini);
+		ft_parser(&lexer, &mini, envp, &envp_list);
 		ft_fork_execve(&mini);
 		//ft_print_list(&lexer);
 		//ft_print_mini_lst(&mini);
@@ -83,15 +82,21 @@ int	main(int argc, char **argv, char **envp)
 // {
 // 	t_lexer	*lexer;
 // 	t_mini	*mini;
+// 	t_envp	*envp_list;
+
+// 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l | cat -e > outfile");
+// 	char	*str = ft_strdup("echo $USER");
 // 	if (!argv && !argc)
 // 		return (1);
+// 	create_envp(&envp_list, envp);
 // 	ft_lexer(&lexer, str);
-// 	ft_parser(&lexer, &mini, envp);
+// 	ft_parser(&lexer, &mini, envp, &envp_list);
 // 	ft_fork_execve(&mini);
 // 	//ft_print_list(&lexer);
 // 	//ft_print_mini_lst(&mini);
+// 	ft_free_lexer_lst(&lexer);
+// 	ft_free_envp_list(&envp_list);
 // 	return (0);
 // }

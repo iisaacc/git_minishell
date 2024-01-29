@@ -46,9 +46,12 @@ void	ft_fork_execve(t_mini **mini)
 			dup2(aux->outfile, STDOUT_FILENO);
 			if (aux->next != NULL)
 				close ((aux->next)->infile);
-			execve(aux->full_path, aux->full_cmd, NULL);
-			perror("execve:");
-			exit(EXIT_FAILURE);
+			if (ft_builtins(aux->envp, aux) == 0)
+			{
+				execve(aux->full_path, aux->full_cmd, NULL);
+				perror("execve:");
+				exit(EXIT_FAILURE);
+			}
 		}
 		else if (pid < 0)
 		{
