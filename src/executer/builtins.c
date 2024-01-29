@@ -6,11 +6,24 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 15:59:56 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:44:30 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void ft_print_envp_list(t_envp **envp)
+{
+	t_envp	*tmp;
+
+	tmp = *envp;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->id);
+		printf("value: %s\n", tmp->value);
+		tmp = tmp->next;
+	}
+}
 
 void	change_env(t_envp **envp, char *find, char *new_value)
 {
@@ -19,13 +32,15 @@ void	change_env(t_envp **envp, char *find, char *new_value)
 	aux = *envp;
 	while (aux->next)
 	{
-		if(aux->id == find)
+		if(!ft_strncmp(aux->id, find, ft_strlen(find)))
 		{
+			free(aux->value);
 			aux->value = ft_strdup(new_value);
-			return ;
+			printf("%s\n", aux->value);
 		}
 		aux = aux->next;
 	}
+	ft_print_envp_list(envp);
 }
 
 char *find_env(t_envp **envp, char *find)
@@ -49,12 +64,16 @@ void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el
 	char *oldpwd;
 	char buffer[1024];
 	
-	oldpwd = ft_strdup(find_env(envp, "PWD"));
+	oldpwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	if (chdir(mini->full_cmd[1])) //devuleve 1 se falla
 		return (free(oldpwd));
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
-	change_env(envp, "PWD", pwd);
-	change_env(envp, "OLDPWD", oldpwd);
+	change_env(envp, "PWD=", pwd);
+	change_env(envp, "OLDPWD=", oldpwd);
+	printf("env -> %s\n", find_env(envp, "PWD="));
+	printf("env -> %s\n", find_env(envp, "OLDPWD="));
+	printf("PWD -> %s\n", pwd);
+	printf("OLD -> %s\n", oldpwd);
 	free(pwd);
 	free(oldpwd);
 }
@@ -119,9 +138,9 @@ int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para sa
 		return (0);	
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", ft_strlen(mini->full_cmd[0])))
 		ft_echo(mini->full_cmd, mini->outfile);
-	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
-		ft_cd(mini, envp_list);
 	else if (!ft_strncmp(mini->full_cmd[0], "env", ft_strlen(mini->full_cmd[0])))
 		ft_env(mini->outfile, envp_list);
+	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
+		ft_cd(mini, envp_list);
 	return (1); 
 }
