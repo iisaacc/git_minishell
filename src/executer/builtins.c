@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 16:44:30 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:03:57 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void	ft_echo(char **cmd, int fd)
 		write(fd, " ", 1);
 		x++;
 	}
-	if (!flag || cmd[1] == 0)
+	if (!flag || cmd[2] != 0)//puede haber problemas con las flags
 		write(fd, "\n", 1);
 }
 
 
-void	ft_env(int fd, t_envp **envp_list)
+void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD
 {
 	int i;
 	t_envp *aux;
