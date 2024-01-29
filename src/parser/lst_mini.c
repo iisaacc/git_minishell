@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 13:40:47 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:53:10 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void	ft_free_mini_lst(t_mini **mini)
 		ft_free_2d((*mini)->full_cmd);
 		if ((*mini)->full_path != NULL)
 			free((*mini)->full_path);
-		/* if ((*mini)->envp[find_env((*mini)->envp, "PWD=")])
-		{
-			free((*mini)->envp[find_env((*mini)->envp, "PWD=")]);
-			free((*mini)->envp[find_env((*mini)->envp, "OLDPWD=")]);
-		} */
 		free(*mini);
 		*mini = aux;
 	}
@@ -58,7 +53,6 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
 	ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
-	mini->envp = envp;
 	mini->id = lap;
 	mini->next = NULL;
 	ft_set_io(mini, lexer, lap);

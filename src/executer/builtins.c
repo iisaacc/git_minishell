@@ -6,47 +6,55 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 14:08:36 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:59:56 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	find_env(char **envp, char *find)
+void	change_env(t_envp **envp, char *find, char *new_value)
 {
-	int x;
-	
-	x = 0;
-	while (envp[x])
+	t_envp *aux;
+
+	aux = *envp;
+	while (aux->next)
 	{
-		if (!ft_strncmp(envp[x], find, ft_strlen(find)))
-			return (x);
-		x++;
+		if(aux->id == find)
+		{
+			aux->value = ft_strdup(new_value);
+			return ;
+		}
+		aux = aux->next;
+	}
+}
+
+char *find_env(t_envp **envp, char *find)
+{
+	t_envp *aux;
+		
+	aux = *envp;
+	while (aux ->next)
+	{
+		if (!ft_strncmp(aux->id, find, ft_strlen(find)))
+			return (aux->value);
+		aux = aux->next;
 	}
 	return (0);
 }
 
-void	ft_cd(t_mini *mini)//se llega hasta aqui full_cmd[1] sera el camino
+void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el camino
 {
-	char *opwd;
+
 	char *pwd;
 	char *oldpwd;
 	char buffer[1024];
 	
-	opwd = ft_strdup("OLDPWD=");
- 	pwd = ft_strdup("PWD=");
-	oldpwd = ft_substr(mini->envp[find_env(mini->envp, "PWD=")], 4, ft_strlen(mini->envp[find_env(mini->envp, "PWD=")]) - 4);
-	opwd = ft_strjoin(opwd, oldpwd);
-	mini->envp[find_env(mini->envp, "OLDPWD=")] = ft_strdup(opwd);
+	oldpwd = ft_strdup(find_env(envp, "PWD"));
 	if (chdir(mini->full_cmd[1])) //devuleve 1 se falla
-		return (free(pwd), free(opwd), free(oldpwd));
-	pwd = ft_strjoin(pwd, getcwd(buffer, sizeof(buffer)));
-	mini->envp[find_env(mini->envp, "PWD=")] = ft_strdup(pwd);
-	printf("%s\n", mini->envp[find_env(mini->envp, "PWD=")]);
-	printf("%s\n", mini->envp[find_env(mini->envp, "OLDPWD=")]);
-	printf("PWD -> %s\n", pwd);
-	printf("OLD -> %s\n", opwd);
-	free(opwd);
+		return (free(oldpwd));
+	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
+	change_env(envp, "PWD", pwd);
+	change_env(envp, "OLDPWD", oldpwd);
 	free(pwd);
 	free(oldpwd);
 }
@@ -80,22 +88,28 @@ void	ft_echo(char **cmd, int fd)
 }
 
 
-void	ft_env(t_mini *mini, int fd)
+void	ft_env(int fd, t_envp **envp_list)
 {
-	int x;
 	int i;
+	t_envp *aux;
 
-	x = 0;
-	while (mini->envp[x])
+	aux = *envp_list;
+	while (aux != NULL)
 	{
 		i = 0;
-		while(mini->envp[x][i])
+		while (aux->id[i])
 		{
-			write(fd, &mini->envp[x][i], 1);
-			i++;	
+			write(fd, &aux->id[i], 1);
+			i++;
+		}
+		i = 0;
+		while (aux->value[i])
+		{
+			write(fd, &aux->value[i], 1);
+			i++;
 		}
 		write(fd, "\n", 1);
-		x++;
+		aux = aux->next;
 	}
 }
 
@@ -106,8 +120,8 @@ int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para sa
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", ft_strlen(mini->full_cmd[0])))
 		ft_echo(mini->full_cmd, mini->outfile);
 	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
-		ft_cd(mini);
+		ft_cd(mini, envp_list);
 	else if (!ft_strncmp(mini->full_cmd[0], "env", ft_strlen(mini->full_cmd[0])))
-		ft_env(mini, mini->outfile);
-	return (1);
+		ft_env(mini->outfile, envp_list);
+	return (1); 
 }
