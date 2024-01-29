@@ -65,8 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
 		ft_builtins(mini);
-		//ft_pipes(&mini);
-		//ft_fork_execve(&mini);
+		ft_fork_execve(&mini);
 		//ft_print_list(&lexer);
 		//ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
@@ -82,12 +81,12 @@ int	main(int argc, char **argv, char **envp)
 // 	t_mini	*mini;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l");
+// 	char	*str = ft_strdup("ls -l | cat -e > outfile");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_lexer(&lexer, str);
 // 	ft_parser(&lexer, &mini, envp);
-// 	//ft_fork_execve(&mini);
+// 	ft_fork_execve(&mini);
 // 	//ft_print_list(&lexer);
 // 	//ft_print_mini_lst(&mini);
 // 	return (0);

@@ -51,7 +51,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	i = 0;
 	aux = lexer;
 	full_cmnd[i++] = ft_strdup(aux->word);
-	while (aux->next && aux->next->type != PIPE)
+	while (aux->next && (aux->next->type == FLAG || aux->next->type == STRING))
 	{
 		aux = aux->next;
 		full_cmnd[i++] = ft_strdup(aux->word);

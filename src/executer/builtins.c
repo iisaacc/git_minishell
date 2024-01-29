@@ -69,12 +69,12 @@ int		ft_builtins(t_mini *mini)//hacer como un filtro para saber se es un builtin
 {	
 	//aun no hay comprovaciones si falla
 	if (!ft_strncmp(mini->full_cmd[0], "echo", 4))
-		ft_echo(mini->full_cmd, mini->outfile);
-	if (!ft_strncmp(mini->full_cmd[0], "cd", 2))
-		ft_cd(mini);
-	if (!ft_strncmp(mini->full_cmd[0], "env", 3))
-		ft_env(mini, mini->outfile);
-	if (mini->next)
-		ft_builtins(mini->next);
+		return (0, ft_echo(mini->full_cmd, mini->outfile));
+	else if (!ft_strncmp(mini->full_cmd[0], "cd", 2))
+		return (0, ft_cd(mini));
+	else if (!ft_strncmp(mini->full_cmd[0], "env", 3))
+		return (0, ft_env(mini, mini->outfile));
+	else if (mini->next)
+		return (0, ft_builtins(mini->next));
 	return (1);
 }
