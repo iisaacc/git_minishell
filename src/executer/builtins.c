@@ -6,11 +6,58 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 17:25:32 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:59:56 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	change_env(t_envp **envp, char *find, char *new_value)
+{
+	t_envp *aux;
+
+	aux = *envp;
+	while (aux->next)
+	{
+		if(aux->id == find)
+		{
+			aux->value = ft_strdup(new_value);
+			return ;
+		}
+		aux = aux->next;
+	}
+}
+
+char *find_env(t_envp **envp, char *find)
+{
+	t_envp *aux;
+		
+	aux = *envp;
+	while (aux ->next)
+	{
+		if (!ft_strncmp(aux->id, find, ft_strlen(find)))
+			return (aux->value);
+		aux = aux->next;
+	}
+	return (0);
+}
+
+void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el camino
+{
+
+	char *pwd;
+	char *oldpwd;
+	char buffer[1024];
+	
+	oldpwd = ft_strdup(find_env(envp, "PWD"));
+	if (chdir(mini->full_cmd[1])) //devuleve 1 se falla
+		return (free(oldpwd));
+	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
+	change_env(envp, "PWD", pwd);
+	change_env(envp, "OLDPWD", oldpwd);
+	free(pwd);
+	free(oldpwd);
+}
 
 void	ft_echo(char **cmd, int fd)
 {
@@ -20,7 +67,7 @@ void	ft_echo(char **cmd, int fd)
 
 	x = 1;
 	flag = 0;
-	if (!ft_strncmp(cmd[1], "-n", 2))
+	if (cmd[1] && !ft_strncmp(cmd[1], "-n", 2))
 	{
 		flag = 1;
 		x = 2;
@@ -36,45 +83,45 @@ void	ft_echo(char **cmd, int fd)
 		write(fd, " ", 1);
 		x++;
 	}
-	if (!flag)
+	if (!flag || cmd[1] == 0)
 		write(fd, "\n", 1);
 }
 
-void	ft_cd(t_mini *mini)
-{
-	mini->envp[0] = "HOLA";
-	printf("%s\n", mini->envp[0]);
-}
 
-void	ft_env(t_mini *mini, int fd)
+void	ft_env(int fd, t_envp **envp_list)
 {
-	int x;
 	int i;
+	t_envp *aux;
 
-	x = 0;
-	while (mini->envp[x])
+	aux = *envp_list;
+	while (aux != NULL)
 	{
 		i = 0;
-		while(mini->envp[x][i])
+		while (aux->id[i])
 		{
-			write(fd, &mini->envp[x][i], 1);
-			i++;	
+			write(fd, &aux->id[i], 1);
+			i++;
+		}
+		i = 0;
+		while (aux->value[i])
+		{
+			write(fd, &aux->value[i], 1);
+			i++;
 		}
 		write(fd, "\n", 1);
-		x++;
+		aux = aux->next;
 	}
 }
 
-int		ft_builtins(t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
-{	
-	//aun no hay comprovaciones si falla
-	if (!ft_strncmp(mini->full_cmd[0], "echo", 4))
-		return (0, ft_echo(mini->full_cmd, mini->outfile));
-	else if (!ft_strncmp(mini->full_cmd[0], "cd", 2))
-		return (0, ft_cd(mini));
-	else if (!ft_strncmp(mini->full_cmd[0], "env", 3))
-		return (0, ft_env(mini, mini->outfile));
-	else if (mini->next)
-		return (0, ft_builtins(mini->next));
-	return (1);
+int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
+{
+	if (!mini || !mini->full_cmd)
+		return (0);	
+	else if (!ft_strncmp(mini->full_cmd[0], "echo", ft_strlen(mini->full_cmd[0])))
+		ft_echo(mini->full_cmd, mini->outfile);
+	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
+		ft_cd(mini, envp_list);
+	else if (!ft_strncmp(mini->full_cmd[0], "env", ft_strlen(mini->full_cmd[0])))
+		ft_env(mini->outfile, envp_list);
+	return (1); 
 }

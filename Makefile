@@ -22,7 +22,7 @@ NC = \033[0m
 SRC_FILES = main \
 			lexer/lexer_split lexer/lexer lexer/tokens lexer/lst_init \
 			parser/parser_types parser/parser parser/find_path parser/lst_mini parser/errors \
-			executer/redirections executer/builtins
+			executer/redirections executer/builtins executer/lst_envp
 
 
 #=============SRC=============#

@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/25 17:28:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:34:14 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	t_lexer	*lexer;
 	t_mini	*mini;
-
+	t_envp	*envp_list;
+	
+	envp_list = NULL;
 	lexer = NULL;
 	mini = NULL;
 	if (argc > 1 && argv)
@@ -62,6 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!ft_check_quotes(input))//checkea si hay comillas sin cerrar
 			return (write(2, "quotes\n", 8), 1);
 		add_history(input);
+		create_envp(&envp_list, envp);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp);
 		ft_builtins(mini);
@@ -70,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 		//ft_print_mini_lst(&mini);
 		ft_free_mini_lst(&mini);
 		ft_free_lexer_lst(&lexer);
+		ft_free_envp_list(&envp_list);
 	}
 	clear_history();
 }
