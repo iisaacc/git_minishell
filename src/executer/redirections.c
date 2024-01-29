@@ -20,6 +20,7 @@ void	ft_fork_execve(t_mini **mini)
 	int		i;
 	int		tmpin;
 	int		tmpout;
+	int		fdpipe[2];
 
 	tmpin = dup(STDIN_FILENO);
 	tmpout = dup(STDOUT_FILENO);
@@ -30,14 +31,21 @@ void	ft_fork_execve(t_mini **mini)
 	i = 0;
 	while (i < total_cmnds)
 	{
-		dup2(aux->infile, STDIN_FILENO);
-		close(aux->infile);
-		//if ()
-		dup2(aux->outfile, STDOUT_FILENO);
-		close(aux->outfile);
+		if (total_cmnds > 1 && i < total_cmnds - 1)
+		{
+			pipe(fdpipe);
+			(aux->next)->infile = fdpipe[0];
+			aux->outfile = fdpipe[1];
+		}
 		pid = fork();
 		if (pid == 0)
 		{
+			dup2(aux->infile, STDIN_FILENO);
+			if (aux->infile != 0)//Asegurarse de que no estás cerrando la entrada estándar original
+				close(aux->infile);
+			dup2(aux->outfile, STDOUT_FILENO);
+			if (aux->next != NULL)
+				close ((aux->next)->infile);
 			execve(aux->full_path, aux->full_cmd, NULL);
 			perror("execve:");
 			exit(EXIT_FAILURE);
@@ -48,12 +56,19 @@ void	ft_fork_execve(t_mini **mini)
 			exit(EXIT_FAILURE);
 		}
 		else
+		{
+			if (i < total_cmnds - 1)
+				close(aux->outfile);
+			if (aux->next == NULL)
+				close(aux->infile);
 			waitpid(pid, NULL, 0);
+		}
 		i++;
+		aux = aux->next;
 	}
 	dup2(tmpin, STDIN_FILENO);
-	dup2(tmpout, STDOUT_FILENO);
 	close(tmpin);
+	dup2(tmpout, STDOUT_FILENO);
 	close(tmpout);
 }
 
