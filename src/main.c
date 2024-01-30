@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:04:54 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:08:04 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	main(int argc, char **argv, char **envp)
 }
 
 //MAIN DEBUG
-/* int	main(int argc, char **argv, char **envp)
-{
-	t_lexer	*lexer;
-	t_mini	*mini;
-	t_envp	*envp_list;
+// int	main(int argc, char **argv, char **envp)
+//{
+//	t_lexer	*lexer;
+//	t_mini	*mini;
+//	t_envp	*envp_list;
 
 // 	envp_list = NULL;
 // 	lexer = NULL;

@@ -1,1 +1,10 @@
-       1$
+total 176$
+-rw-r--r--  1 isporras  2023_malaga   1609 Jan 30 12:17 Makefile$
+drwxr-xr-x  3 isporras  2023_malaga    102 Jan 17 13:22 includes$
+-rwxr-xr-x  1 isporras  2023_malaga  77184 Jan 30 15:08 minishell$
+-rw-r--r--  1 isporras  2023_malaga   3785 Jan 30 14:55 minishell.h$
+drwxr-xr-x  8 isporras  2023_malaga    272 Jan 30 15:08 obj$
+-rw-r--r--  1 isporras  2023_malaga      0 Jan 30 15:08 outfile$
+-rw-r--r--  1 isporras  2023_malaga      0 Jan 30 14:38 outfilee$
+drwxr-xr-x  8 isporras  2023_malaga    272 Jan 30 15:04 src$
+-rw-r--r--  1 isporras  2023_malaga    105 Jan 30 10:53 to_do.txt$
