@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 14:37:30 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:25 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,22 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
+		//ft_print_list(&lexer);
 		ft_parser(&lexer, &mini, envp, &envp_list);
-		ft_print_list(&lexer);
 		ft_executer(&mini);
-		ft_print_mini_lst(&mini);
+		printf("aqui\n");
+		//ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();
 }
 
 //MAIN DEBUG
-/* int	main(int argc, char **argv, char **envp)
-{
-	t_lexer	*lexer;
-	t_mini	*mini;
-	t_envp	*envp_list;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_lexer	*lexer;
+// 	t_mini	*mini;
+// 	t_envp	*envp_list;
 
 // 	envp_list = NULL;
 // 	lexer = NULL;

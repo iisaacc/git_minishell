@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 13:27:35 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:00:17 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		ft_perror(char *error);
 void		ft_pipes(t_mini **mini);
 void		ft_executer(t_mini **mini);
 int			ft_builtins(t_envp **envp_list, t_mini *mini);
+void		ft_cd(t_mini *mini, t_envp **envp)
 char		*find_env(t_envp **envp, char *find);
 void		create_envp(t_envp **envp_list, char **envp);
 
