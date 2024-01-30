@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:10:08 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:00:39 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int			ft_check_quotes(char const *s);
 
 //-----------------------PARSER---------------------------
 void		ft_types(t_lexer **lexer);
-t_mini		**ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
+int			ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
 char		*ft_find_cmnd_path(char **envp, char *cmnd);
 char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
-void		ft_set_io(t_mini **mini, t_lexer **lexer);
+int			ft_set_io(t_mini **mini, t_lexer **lexer);
 int			ft_cmnd_error(char *error, char *boole);
 void		ft_file_error(int infd, char *infile);
 void		ft_perror(char *error);
@@ -101,10 +101,17 @@ void		ft_perror(char *error);
 //----------------------EXECUTER---------------------------
 void		ft_pipes(t_mini **mini);
 void		ft_executer(t_mini **mini);
+
+//------------------------BUILTINS---------------------------
 int			ft_builtins(t_envp **envp_list, t_mini *mini);
-void		ft_cd(t_mini *mini, t_envp **envp)
+void		ft_cd(t_mini *mini, t_envp **envp);
 char		*find_env(t_envp **envp, char *find);
 void		create_envp(t_envp **envp_list, char **envp);
+void		ft_export(t_envp **envp_list, char **new_var, t_mini *mini);
+void		add_new_envp(t_envp **lst, t_envp *new);
+t_envp		*envp_new(char *envp);
+char		*out_quotes(char *str);
+
 
 //------------------------FREE---------------------------
 void		ft_free_envp_list(t_envp **envp);

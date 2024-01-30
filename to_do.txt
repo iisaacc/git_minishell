@@ -1,2 +1,3 @@
-cuando pasamos ese output << nos crea un nodo mas pero vacio y el type no funciona
-echo no imprime " ni '
+necesitamos cambiar el parser para que checkear si los comandos son builtins antes de  buscarel path
+los builtins tiene que ejecutarse en el proceso padre
+ft_exports hay problemas que se arreglan cambiando el parser (creo)

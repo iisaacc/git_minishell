@@ -6,19 +6,21 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 15:11:27 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:22:27 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_set_io(t_mini **mini, t_lexer **lexer)
+int	ft_set_io(t_mini **mini, t_lexer **lexer)
 {
 	int		i;
 	int		lap;
+	int		flag;
 	t_lexer	*aux;
 	t_mini	*m_node;
 
+	flag = 0;//no falla
 	m_node = *mini;
 	lap = 0;
 	while (m_node)
@@ -40,10 +42,12 @@ void	ft_set_io(t_mini **mini, t_lexer **lexer)
 			ft_putstr_fd("Error: ", 2);
 			ft_putstr_fd(strerror(errno), 2);
 			ft_putstr_fd("\n", 2);
+			flag = -1;//fallo
 		}
 		m_node = m_node->next;
 		lap++;
 	}
+	return (flag);
 }
 
 void	ft_error(char *error, char *boole, int errint)
@@ -81,10 +85,11 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	return (full_cmnd);
 }
 
-t_mini	**ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
+int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
 	ft_types(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp, envp_list);
-	ft_set_io(mini, lexer);
-	return (mini);
+	if (ft_set_io(mini, lexer) == -1)
+		return (-1);
+	return (0);
 }

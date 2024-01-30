@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:11:53 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:53:05 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,16 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
 			return (EXIT_FAILURE);
-		add_history(input);
+		add_history(input);//si esta vacio no adiciona
 		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
-		//ft_print_list(&lexer);
+		//if (!ft_parser(&lexer, &mini, envp, &envp_list))
+		//ft_executer(&mini);
 		ft_parser(&lexer, &mini, envp, &envp_list);
-		ft_executer(&mini);
-		printf("aqui\n");
+		ft_builtins(&envp_list, mini);
 		//ft_print_mini_lst(&mini);
-		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
-		ft_executer(&mini);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();

@@ -6,14 +6,14 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:02:48 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:00:34 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_echo(char **cmd, int fd)//hay cosas que cambiar
-{
+void	ft_echo(char **cmd, int fd)//no imprime nada si $VAR si no existe
+{//strtrim para tirar as comillas
 	int x;
 	int i;
 	int flag;
@@ -28,20 +28,21 @@ void	ft_echo(char **cmd, int fd)//hay cosas que cambiar
 	while (cmd[x])
 	{
 		i = 0;
+		cmd[x] = out_quotes(cmd[x]);
 		while(cmd[x][i])
 		{
 			write(fd, &cmd[x][i], 1);
 			i++;	
 		}
-		write(fd, " ", 1);
+		if (cmd[x + 1])
+			write(fd, " ", 1);
 		x++;
 	}
-	if (!flag || cmd[2] != 0)//puede haber problemas con las flags
+	if (!flag)
 		write(fd, "\n", 1);
 }
 
-
-void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD
+void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD cuando hace env
 {
 	int i;
 	t_envp *aux;
@@ -69,13 +70,21 @@ void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD
 void	ft_pwd(int fd)
 {
 	char buffer[1024];
-	ft_strdup(getcwd(buffer, sizeof(buffer)));
+	char *pwd;
+	
+	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
+	while (*pwd)
+	{
+		write(fd, &(*pwd), 1);
+		pwd++;
+	}
+	write(fd, "\n", 1);
 }
 
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {
 	if (!mini || !mini->full_cmd)
-		return (0);
+		return (0);//hacer con que las funciones devuelvam -1 si hay error
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", ft_strlen(mini->full_cmd[0])))
 		return (ft_echo(mini->full_cmd, mini->outfile), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "env", ft_strlen(mini->full_cmd[0])))
@@ -83,7 +92,9 @@ int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para sa
 	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
 		return (ft_cd(mini, envp_list), 1);//puede cambiar solo enel processo hijo, y por eso no imprime la diferencia
 	else if (!ft_strncmp(mini->full_cmd[0], "pwd", ft_strlen(mini->full_cmd[0])))
-		return (ft_pwd)
+		return (ft_pwd(mini->outfile), 1);
+	else if (!ft_strncmp(mini->full_cmd[0], "export", ft_strlen(mini->full_cmd[0])))
+		return (ft_export(envp_list, mini->full_cmd, mini), 1);
 	else
 		return (0);
 }
