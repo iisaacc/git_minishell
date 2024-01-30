@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:49:42 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:29:19 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 
 	aux = *mini;
 	i = 0;
-	while (i < total_cmnds)
+	while (i < total_cmnds && aux)
 	{
 		aux->total_cmnds = total_cmnds;
 		aux = aux->next;
@@ -84,5 +84,6 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **en
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);
+	//ft_print_list(lexer);
 	return (mini);
 }
