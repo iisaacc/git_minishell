@@ -6,23 +6,25 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:45:41 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 12:14:27 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:32:05 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_free_mini_lst(t_mini *mini)
+void	ft_free_mini_lst(t_mini **mini)
 {
 	t_mini	*aux;
 
-	while (mini)
+	while (*mini)
 	{
-		aux = mini->next;
-		ft_free_2d(mini->full_cmd);
-		free(mini->full_path);
-		free(mini);
-		mini = aux;
+		aux = (*mini)->next;
+		if ((*mini)->full_cmd)
+			ft_free_2d((*mini)->full_cmd);
+		if ((*mini)->full_path)
+			free((*mini)->full_path);
+		free(*mini);
+		*mini = aux;
 	}
 }
 
@@ -60,6 +62,6 @@ void	ft_free_envp_list(t_envp **envp)
 void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp)
 {
 	ft_free_lexer_lst(lexer);
-	ft_free_mini_lst(*mini);
+	ft_free_mini_lst(mini);
 	ft_free_envp_list(envp);
 }

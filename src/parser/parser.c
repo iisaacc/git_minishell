@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 12:51:13 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:24:14 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	i = 0;
 	aux = lexer;
 	full_cmnd[i++] = ft_strdup(aux->word);
-	while (aux->next && aux->next->type == FLAG)
+	while (aux->next && (aux->next->type == FLAG || aux->next->type == STRING))
 	{
 		aux = aux->next;
 		full_cmnd[i++] = ft_strdup(aux->word);

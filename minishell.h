@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:52:08 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:27:35 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void		create_envp(t_envp **envp_list, char **envp);
 
 //------------------------FREE---------------------------
 void		ft_free_envp_list(t_envp **envp);
-void		ft_free_mini_lsts(t_mini **mini);
+void		ft_free_mini_lst(t_mini **mini);
 void		free_node(t_lexer **node);
 void		ft_free_lexer_lst(t_lexer **node);
 void		ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp);
