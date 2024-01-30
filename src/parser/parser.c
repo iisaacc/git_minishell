@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 13:24:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:33:28 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 	i = 1;
 	aux = lexer;
-	while (aux->next && aux->next->type == FLAG)
+	while (aux->next && (aux->next->type == FLAG || aux->next->type == STRING))
 	{
 		aux = aux->next;
-			i++;
+		i++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (i + 1));
 	i = 0;
