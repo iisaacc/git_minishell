@@ -6,36 +6,45 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 14:45:28 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:11:27 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_set_io(t_mini *m_node, t_lexer **lexer, int lap)
+void	ft_set_io(t_mini **mini, t_lexer **lexer)
 {
-	int	i;
+	int		i;
+	int		lap;
 	t_lexer	*aux;
+	t_mini	*m_node;
 
-	aux = *lexer;
-	i = 0;
-	while (aux)
+	m_node = *mini;
+	lap = 0;
+	while (m_node)
 	{
-		if (aux->type == PIPE)
-			i++;
-		if (aux->type == LESS && i == lap)
-			m_node->infile = open((aux->next)->word, O_RDONLY);
-		if (aux->type == GREATER && i == lap)
-			m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		aux = aux->next;
+		i = 0;
+		aux = *lexer;
+		while (aux)
+		{
+			if (aux->type == PIPE)
+				i++;
+			if (aux->type == LESS && i == lap)
+				m_node->infile = open((aux->next)->word, O_RDONLY);
+			if (aux->type == GREATER && i == lap)
+				m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			aux = aux->next;
+		}
+		if (m_node->infile == -1 || m_node->outfile == -1)
+		{
+			ft_putstr_fd("Error: ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+		}
+		m_node = m_node->next;
+		lap++;
 	}
-	if (m_node->infile == -1 || m_node->outfile == -1)
-	{
-		ft_putstr_fd("Error: ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
-	}
- }
+}
 
 void	ft_error(char *error, char *boole, int errint)
 {
@@ -76,5 +85,6 @@ t_mini	**ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_li
 {
 	ft_types(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp, envp_list);
+	ft_set_io(mini, lexer);
 	return (mini);
 }
