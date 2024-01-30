@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 14:27:51 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:37:30 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp, &envp_list);
+		ft_print_list(&lexer);
 		ft_executer(&mini);
 		ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
@@ -81,18 +82,18 @@ int	main(int argc, char **argv, char **envp)
 	t_mini	*mini;
 	t_envp	*envp_list;
 
-	envp_list = NULL;
-	lexer = NULL;
-	mini = NULL;
-	char	*str = ft_strdup("echo hola | cat -e");
-	if (!argv && !argc)
-		return (1);
-	ft_init_var(envp, &envp_list);
-	ft_lexer(&lexer, str);
-	ft_parser(&lexer, &mini, envp, &envp_list);
-	ft_executer(&mini);
-	ft_print_list(&lexer);
-	ft_print_mini_lst(&mini);
-	ft_free_lsts(&lexer, &mini, &envp_list);
-	return (0);
-} */
+// 	envp_list = NULL;
+// 	lexer = NULL;
+// 	mini = NULL;
+// 	char	*str = ft_strdup("< infile grep anacardo | cat -e > outfile");
+// 	if (!argv && !argc)
+// 		return (1);
+// 	ft_init_var(envp, &envp_list);
+// 	ft_lexer(&lexer, str);
+// 	ft_parser(&lexer, &mini, envp, &envp_list);
+// 	ft_executer(&mini);
+// 	ft_print_list(&lexer);
+// 	ft_print_mini_lst(&mini);
+// 	ft_free_lsts(&lexer, &mini, &envp_list);
+// 	return (0);
+// }
