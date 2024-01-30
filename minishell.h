@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 13:27:35 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:55:12 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_mini		**ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_l
 char		*ft_find_cmnd_path(char **envp, char *cmnd);
 char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
-void		ft_set_io(t_mini *m_node, t_lexer **lexer, int lap);
+void		ft_set_io(t_mini **mini, t_lexer **lexer);
 int			ft_cmnd_error(char *error, char *boole);
 void		ft_file_error(int infd, char *infile);
 void		ft_perror(char *error);

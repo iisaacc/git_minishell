@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 14:33:41 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:27 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	main(int argc, char **argv, char **envp)
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp, &envp_list);
 		ft_print_list(&lexer);
-		ft_executer(&mini);
 		ft_print_mini_lst(&mini);
+		ft_executer(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("< infile grep anacardo | cat -e > outfile");
+// 	char	*str = ft_strdup("< infile grep anacardo| wc -l | cat -e> outfile");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_init_var(envp, &envp_list);

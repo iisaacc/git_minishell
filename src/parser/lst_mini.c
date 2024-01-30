@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:49:42 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:56:03 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 	}
 }
 
-t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap, t_envp **envp_list)
+t_mini	*ft_mini_new(t_lexer *l_node, char **envp, int lap, t_envp **envp_list)
 {
 	t_mini	*mini;
 
@@ -40,7 +40,7 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap, t_en
 	mini->id = lap;
 	mini->envp = envp_list;
 	mini->next = NULL;
-	ft_set_io(mini, lexer, lap);
+	//ft_set_io(mini, lexer, lap);
 	return (mini);
 }
 
@@ -80,7 +80,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **en
 		if (aux->type == PIPE)
 			lap++;
 		if (aux->type == CMND)
-			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap, envp_list));
+			mini_add_new(mini, ft_mini_new(aux, envp, lap, envp_list));
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);
