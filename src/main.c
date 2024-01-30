@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:04:27 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:54 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
-	while (tmp != NULL)
+	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
 		printf("id: %d\n", tmp->id);
@@ -76,11 +76,11 @@ int	main(int argc, char **argv, char **envp)
 }
 
 //MAIN DEBUG
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_lexer	*lexer;
-// 	t_mini	*mini;
-// 	t_envp	*envp_list;
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_lexer	*lexer;
+	t_mini	*mini;
+	t_envp	*envp_list;
 
 // 	envp_list = NULL;
 // 	lexer = NULL;
