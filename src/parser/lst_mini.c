@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 15:53:10 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:17:30 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 {
 	int		i;
 	t_mini	*aux;
-	
+
 	aux = *mini;
 	i = 0;
 	while (i < total_cmnds)
@@ -27,23 +27,7 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 	}
 }
 
-void	ft_free_mini_lst(t_mini **mini)
-{
-	t_mini	*aux;
-
-	while (*mini)
-	{
-		aux = (*mini)->next;
-		ft_free_2d((*mini)->full_cmd);
-		if ((*mini)->full_path != NULL)
-			free((*mini)->full_path);
-		free(*mini);
-		*mini = aux;
-	}
-	*mini = NULL;
-}
-
-t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
+t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap, t_envp **envp_list)
 {
 	t_mini	*mini;
 
@@ -54,6 +38,7 @@ t_mini	*ft_mini_new(t_lexer *l_node, char **envp, t_lexer **lexer, int lap)
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
 	mini->id = lap;
+	mini->envp = envp_list;
 	mini->next = NULL;
 	ft_set_io(mini, lexer, lap);
 	return (mini);
@@ -83,7 +68,7 @@ void	mini_add_new(t_mini **mini, t_mini *new)//añande un nodo a la lista
 	aux->next = new;
 }
 
-t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp)
+t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
 	t_lexer	*aux;
 	int		lap;
@@ -95,7 +80,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp)
 		if (aux->type == PIPE)
 			lap++;
 		if (aux->type == CMND)
-			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap));
+			mini_add_new(mini, ft_mini_new(aux, envp, lexer, lap, envp_list));
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);

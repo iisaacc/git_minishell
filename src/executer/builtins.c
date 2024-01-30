@@ -135,12 +135,13 @@ void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {
 	if (!mini || !mini->full_cmd)
-		return (0);	
+		return (0);
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", ft_strlen(mini->full_cmd[0])))
-		ft_echo(mini->full_cmd, mini->outfile);
+		return (ft_echo(mini->full_cmd, mini->outfile), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "env", ft_strlen(mini->full_cmd[0])))
-		ft_env(mini->outfile, envp_list);
+		return (ft_env(mini->outfile, envp_list), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "cd", ft_strlen(mini->full_cmd[0])))
-		ft_cd(mini, envp_list);
-	return (1); 
+		return (ft_cd(mini, envp_list), 1);
+	else
+		return (0);
 }

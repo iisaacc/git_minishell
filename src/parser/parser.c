@@ -60,11 +60,11 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	return (full_cmnd);
 }
 
-t_mini	**ft_parser(t_lexer **lexer, t_mini **mini, char **envp)
+t_mini	**ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
 	if (!(*lexer))
 		return (NULL);
 	ft_types(lexer);
-	mini = ft_to_mini_lst(lexer, mini, envp);
+	mini = ft_to_mini_lst(lexer, mini, envp, envp_list);
 	return (mini);
 }

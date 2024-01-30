@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/29 17:04:49 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:07:46 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	t_lexer	*lexer;
 	t_mini	*mini;
 	t_envp	*envp_list;
-	
+
 	envp_list = NULL;
 	lexer = NULL;
 	mini = NULL;
@@ -59,21 +59,16 @@ int	main(int argc, char **argv, char **envp)
 		printf("Wrong number of arguments\n");
 		return (1);
 	}
+	ft_init_var(envp, &envp_list);
 	while((input = readline("Minishell>")))//lee la línea
 	{
-		if (!ft_check_quotes(input))//checkea si hay comillas sin cerrar
-			return (write(2, "quotes\n", 8), 1);
+		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
+			return (EXIT_FAILURE);
 		add_history(input);
-		create_envp(&envp_list, envp);
 		ft_lexer(&lexer, input);
-		ft_parser(&lexer, &mini, envp);
-		ft_builtins(&envp, mini);
-		ft_fork_execve(&mini);
-		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
-		ft_free_mini_lst(&mini);
-		ft_free_lexer_lst(&lexer);
-		ft_free_envp_list(&envp_list);
+		ft_parser(&lexer, &mini, envp, &envp_list);
+		ft_executer(&mini);
+		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();
 }
@@ -83,15 +78,21 @@ int	main(int argc, char **argv, char **envp)
 // {
 // 	t_lexer	*lexer;
 // 	t_mini	*mini;
+// 	t_envp	*envp_list;
+
+// 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l | cat -e > outfile");
+// 	char	*str = ft_strdup("echo $USER");
 // 	if (!argv && !argc)
 // 		return (1);
+// 	create_envp(&envp_list, envp);
 // 	ft_lexer(&lexer, str);
-// 	ft_parser(&lexer, &mini, envp);
+// 	ft_parser(&lexer, &mini, envp, &envp_list);
 // 	ft_fork_execve(&mini);
 // 	//ft_print_list(&lexer);
 // 	//ft_print_mini_lst(&mini);
+// 	ft_free_lexer_lst(&lexer);
+// 	ft_free_envp_list(&envp_list);
 // 	return (0);
 // }

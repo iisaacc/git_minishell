@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/24 14:58:20 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:44:03 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char const	*ft_check_quotes(char const *s)
+int	ft_check_quotes(char const *s)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ char const	*ft_check_quotes(char const *s)
 			while (s[i] != '\'' && s[i] != '\0')
 				i++;
 			if(s[i] == '\0')
-				return (NULL);
+				return (write(2, "quotes\n", 8), 1);
 		}
 		else if (s[i] == '\"')
 		{
@@ -33,11 +33,11 @@ char const	*ft_check_quotes(char const *s)
 			while (s[i] != '\"' && s[i] != '\0')
 				i++;
 			if(s[i] == '\0')
-				return (NULL);
+				return (write(2, "dquotes\n", 9), 1);
 		}
 		i++;
 	}
-	return (s);
+	return (0);
 }
 
 void	ft_put_var(char **lexer, int *i, int *j)
