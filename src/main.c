@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:13:05 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:05:12 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int	main(int argc, char **argv, char **envp)
 		printf("Wrong number of arguments\n");
 		return (1);
 	}
-	ft_init_var(envp, &envp_list);
 	while((input = readline("Minishell>")))//lee la línea
 	{
 		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
 			return (EXIT_FAILURE);
 		add_history(input);
+		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
 		ft_parser(&lexer, &mini, envp, &envp_list);
 		ft_executer(&mini);
@@ -83,16 +83,15 @@ int	main(int argc, char **argv, char **envp)
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("echo $USER");
+// 	char	*str = ft_strdup("ls -l | grep -i minishell | wc -l");
 // 	if (!argv && !argc)
 // 		return (1);
-// 	create_envp(&envp_list, envp);
+// 	ft_init_var(envp, &envp_list);
 // 	ft_lexer(&lexer, str);
 // 	ft_parser(&lexer, &mini, envp, &envp_list);
-// 	ft_fork_execve(&mini);
+// 	ft_executer(&mini);
 // 	//ft_print_list(&lexer);
 // 	//ft_print_mini_lst(&mini);
-// 	ft_free_lexer_lst(&lexer);
-// 	ft_free_envp_list(&envp_list);
+// 	ft_free_lsts(&lexer, &mini, &envp_list);
 // 	return (0);
 // }

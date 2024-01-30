@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:09:44 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 11:04:12 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:35:50 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ void	ft_perror(char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_cmnd_error(char *error, char *boole)
+int	ft_cmnd_error(char *error, char *boole)
 {
 	if (!boole)
 	{
 		ft_putstr_fd("-bash: ", 2);
 		ft_putstr_fd(error, 2);
 		ft_putstr_fd(": command not found\n", 2);
+		return (1);
 	}
+	return (0);
 }
 
 void	ft_file_error(int infd, char *infile)

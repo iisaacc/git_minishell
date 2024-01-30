@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:13:26 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:52:08 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,16 @@ char		*ft_find_cmnd_path(char **envp, char *cmnd);
 char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
 void		ft_set_io(t_mini *m_node, t_lexer **lexer, int lap);
-void		ft_cmnd_error(char *error, char *boole);
+int			ft_cmnd_error(char *error, char *boole);
 void		ft_file_error(int infd, char *infile);
 void		ft_perror(char *error);
 
 //----------------------EXECUTER---------------------------
-void	ft_pipes(t_mini **mini);
-void	ft_executer(t_mini **mini);
-int		ft_builtins(t_envp **envp_list, t_mini *mini);
-char	*find_env(t_envp **envp, char *find);
-void	create_envp(t_envp **envp_list, char **envp);
+void		ft_pipes(t_mini **mini);
+void		ft_executer(t_mini **mini);
+int			ft_builtins(t_envp **envp_list, t_mini *mini);
+char		*find_env(t_envp **envp, char *find);
+void		create_envp(t_envp **envp_list, char **envp);
 
 //------------------------FREE---------------------------
 void		ft_free_envp_list(t_envp **envp);
