@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/31 12:08:12 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:05:54 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 			if (aux->type == PIPE)
 				i++;
 			if (aux->type == LESS && i == lap)
+			{
 				m_node->infile = open((aux->next)->word, O_RDONLY);
-			if (aux->type == GREATER && i == lap)
+				flag += ft_file_error(m_node->infile, (aux->next)->word);//Comprueba si ha fallado open
+			}
+			else if (aux->type == GREATER && i == lap)
+			{
 				m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				flag += ft_file_error(m_node->outfile, (aux->next)->word);
+			}
 			aux = aux->next;
-		}
-		if (m_node->infile == -1 || m_node->outfile == -1)
-		{
-			ft_putstr_fd("Error: ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
-			flag = 1;//fallo
 		}
 		m_node = m_node->next;
 		lap++;
@@ -89,7 +88,7 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
 	ft_types(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
-	if (ft_set_io(mini, lexer) == 1)
+	if (ft_set_io(mini, lexer) > 0)
 		return (1);
 	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
 		return (1);

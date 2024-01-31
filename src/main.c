@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 12:14:31 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:08:24 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while((input = readline("Minishell>")))//lee la línea
 	{
-		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
-			return (EXIT_FAILURE);
+		ft_quotes_input(&input);//checkea si hay comillas sin cerrar y en ese caso espera otra entrada
 		add_history(input);//si esta vacio no adiciona
 		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
@@ -85,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l | cat -e | lo | wc -l >outfilee");
+// 	char	*str = ft_strdup("ca\"t\"");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_init_var(envp, &envp_list);
