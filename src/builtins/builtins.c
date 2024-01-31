@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 18:00:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:43:01 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para sa
 	else if (!ft_strncmp(mini->full_cmd[0], "pwd", ft_strlen(mini->full_cmd[0])))
 		return (ft_pwd(mini->outfile), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "export", ft_strlen(mini->full_cmd[0])))
-		return (ft_export(envp_list, mini->full_cmd, mini), 1);
+		return (ft_export(envp_list, &mini->full_cmd[1], mini), 1);
 	else
 		return (0);
 }

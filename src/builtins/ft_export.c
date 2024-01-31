@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 13:50:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:08:16 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@
 	return (0);//si no encuentra
 } */
 
-char	*join_all(char **cmds)
-{
-	char *final;
-
-	int x;
-	x = 2;
-	final = ft_strdup(cmds[1]);
-	while (cmds[x])
-	{
-		final = ft_strjoin(final, cmds[x]);
-		x++;
-	}
-	return (final);
-}
-
 char	*out_quotes(char *str)//Aún no quita las comillas si están en medio del comando
 {
 	int x;
@@ -56,25 +41,21 @@ void	ft_export(t_envp **envp_list, char **new_var, t_mini *mini)
 	char **splitted;
 	char *id;
 	char *value;
-	char *final;
 
-	printf("%s\n", "aqui");
-	ft_print_split(mini->full_cmd);	//eso es un problema, no estan separado por comillas
-	final = ft_strdup(join_all(new_var));
-	printf("%s\n", final);
-	splitted = ft_split(final, '=');
+	int x;
+	
+	x = 0;
+	//ft_print_split(new_var);	//eso es un problema, no estan separado por comillas
+	splitted = ft_split(new_var[x], '=');
 	id = ft_strdup(splitted[0]);
 	id = ft_strjoin(id, "=");
 	value = ft_strdup(splitted[1]);
-	printf("%s\n", id);
-	printf("%s\n", value);
-	printf("%s\n", (*envp_list)->id);
-	mini->id = 0;
-	/* find_env(envp_list, "hola");
 	mini->id = 1;
-	printf("%s\n", id);
 	value = out_quotes(value);
 	if (!find_env(envp_list, id))
-		add_new_envp(envp_list, envp_new(new_var));
-	printf("%s\n", value);  */
+		add_new_envp(envp_list, envp_new(new_var[x]));
+	else
+		change_env(envp_list, id, value);
+	ft_print_envp_list(envp_list);//sigue el problema de las listas solo cambiarem al momento
+	printf("fin\n");
 }
