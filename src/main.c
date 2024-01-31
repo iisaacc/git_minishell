@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 14:06:08 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:21:02 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **envp)
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("ls -l | cat -e | lo | wc -l >outfilee");
+// 	char	*str = ft_strdup("ca\"t\"");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_init_var(envp, &envp_list);

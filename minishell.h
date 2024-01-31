@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 11:54:36 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:00:56 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		create_nodes(t_lexer **lexer, char **input);
 void		ft_print_list(t_lexer **lexer);
 char		**ft_get_tokens(char **lexer);
 int			ft_check_quotes(char const *s);
+void		ft_quotes_input(char **input);
 
 //-----------------------PARSER---------------------------
 void		ft_types(t_lexer **lexer);
@@ -96,7 +97,7 @@ char		**ft_full_cmnd(t_lexer *lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 int			ft_set_io(t_mini **mini, t_lexer **lexer);
 int			ft_cmnd_error(char *error, char *boole);
-void		ft_file_error(int infd, char *infile);
+int			ft_file_error(int infd, char *infile);
 void		ft_perror(char *error);
 
 //----------------------EXECUTER---------------------------
