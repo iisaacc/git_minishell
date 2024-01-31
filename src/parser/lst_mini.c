@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 15:11:31 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:54:15 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 	}
 }
 
-t_mini	*ft_mini_new(t_lexer *l_node, char **envp, int lap, t_envp **envp_list)
+t_mini	*ft_mini_new(int lap, t_envp **envp_list)
 {
 	t_mini	*mini;
 
 	mini = malloc(sizeof(t_mini));
-	mini->full_cmd = ft_full_cmnd(l_node);
-	mini->full_path = ft_find_cmnd_path(envp, l_node->word);
-	ft_cmnd_error(l_node->word, mini->full_path);
+	mini->full_cmd = NULL;//ft_full_cmnd(l_node);
+	mini->full_path = NULL;//ft_find_cmnd_path(envp, l_node->word);
+	//ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
 	mini->id = lap;
@@ -68,7 +68,7 @@ void	mini_add_new(t_mini **mini, t_mini *new)//añande un nodo a la lista
 	aux->next = new;
 }
 
-t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
+t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
 	t_lexer	*aux;
 	int		lap;
@@ -80,7 +80,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **en
 		if (aux->type == PIPE)
 			lap++;
 		if (aux->type == CMND)
-			mini_add_new(mini, ft_mini_new(aux, envp, lap, envp_list));
+			mini_add_new(mini, ft_mini_new(lap, envp_list));
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);

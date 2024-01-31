@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 18:03:15 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:03:30 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	find_equal(char *str)
 {
 	int x;
-	
+
 	x = 0;
 	while (str[x])
 	{
 		if (str[x] == '=')
 			return (++x); //pos de =
 		x++;
-	}	
-	return (0);//si no encuentra 
+	}
+	return (0);//si no encuentra
 }
 
 char	*join_all(char **cmds)
@@ -41,12 +41,12 @@ char	*join_all(char **cmds)
 	return (final);
 }
 
-char	*out_quotes(char *str)
+char	*out_quotes(char *str)//Aún no quita las comillas si están en medio del comando
 {
 	int x;
-	
+
 	x = 1;
-	if(str[0] == '\'' || str[0] == '"')	
+	if(str[0] == '\'' || str[0] == '"')
 		str = ft_substr(str, 1, ft_strlen(str) - 2);
 	return (str);
 }
@@ -57,7 +57,7 @@ void	ft_export(t_envp **envp_list, char **new_var, t_mini *mini)
 	char *id;
 	char *value;
 	char *final;
-	
+
 	ft_print_split(mini->full_cmd);	//eso es un problema, no estan separado por comillas
 	final = ft_strdup(join_all(new_var));
 	printf("%s\n", final);

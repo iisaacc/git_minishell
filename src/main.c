@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 16:53:05 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:14:31 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,10 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);//si esta vacio no adiciona
 		ft_init_var(envp, &envp_list);
 		ft_lexer(&lexer, input);
-		//if (!ft_parser(&lexer, &mini, envp, &envp_list))
-		//ft_executer(&mini);
-		ft_parser(&lexer, &mini, envp, &envp_list);
-		ft_builtins(&envp_list, mini);
-		//ft_print_mini_lst(&mini);
-		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
+		if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
+			ft_executer(&mini);
+		ft_print_list(&lexer);
+		ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();
@@ -88,13 +85,13 @@ int	main(int argc, char **argv, char **envp)
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*str = ft_strdup("< infile grep anacardo| wc -l | cat -e> outfile");
+// 	char	*str = ft_strdup("ls -l | cat -e | lo | wc -l >outfilee");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_init_var(envp, &envp_list);
-// 	ft_lexer(&lexer, str);
-// 	ft_parser(&lexer, &mini, envp, &envp_list);
-// 	ft_executer(&mini);
+//	ft_lexer(&lexer, str);
+//	if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
+//		ft_executer(&mini);
 // 	ft_print_list(&lexer);
 // 	ft_print_mini_lst(&mini);
 // 	ft_free_lsts(&lexer, &mini, &envp_list);

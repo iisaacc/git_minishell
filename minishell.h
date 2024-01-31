@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 18:00:39 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:54:36 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ int			ft_check_quotes(char const *s);
 void		ft_types(t_lexer **lexer);
 int			ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
 char		*ft_find_cmnd_path(char **envp, char *cmnd);
+int			ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp);
 char		**ft_full_cmnd(t_lexer *lexer);
-t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
+t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 int			ft_set_io(t_mini **mini, t_lexer **lexer);
 int			ft_cmnd_error(char *error, char *boole);
 void		ft_file_error(int infd, char *infile);
