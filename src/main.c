@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 12:14:31 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:06:08 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
 			return (EXIT_FAILURE);
-		add_history(input);//si esta vacio no adiciona
-		ft_init_var(envp, &envp_list);
+		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona
+			add_history(input);
 		ft_lexer(&lexer, input);
+		ft_init_var(envp, &envp_list);
 		if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
 			ft_executer(&mini);
 		ft_print_list(&lexer);

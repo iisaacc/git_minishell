@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 17:36:37 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:54:34 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	change_env(envp, "PWD=", pwd);
 	change_env(envp, "OLDPWD=", oldpwd);
-	printf("env -> %s\n", find_env(envp, "PWD="));
+	/* printf("env -> %s\n", find_env(envp, "PWD="));
 	printf("env -> %s\n", find_env(envp, "OLDPWD="));
 	printf("PWD -> %s\n", pwd);
 	printf("OLD -> %s\n", oldpwd);
-	ft_print_envp_list(envp);
+	ft_print_envp_list(envp); */
 	free(pwd);
 	free(oldpwd);
 }

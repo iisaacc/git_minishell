@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 12:03:30 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:50:18 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	find_equal(char *str)
+/* int	find_equal(char *str)
 {
 	int x;
 
@@ -24,7 +24,7 @@ int	find_equal(char *str)
 		x++;
 	}
 	return (0);//si no encuentra
-}
+} */
 
 char	*join_all(char **cmds)
 {
@@ -58,6 +58,7 @@ void	ft_export(t_envp **envp_list, char **new_var, t_mini *mini)
 	char *value;
 	char *final;
 
+	printf("%s\n", "aqui");
 	ft_print_split(mini->full_cmd);	//eso es un problema, no estan separado por comillas
 	final = ft_strdup(join_all(new_var));
 	printf("%s\n", final);
