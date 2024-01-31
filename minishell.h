@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 13:00:56 by isporras         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:16:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void		ft_print_list(t_lexer **lexer);
 char		**ft_get_tokens(char **lexer);
 int			ft_check_quotes(char const *s);
 void		ft_quotes_input(char **input);
+void		ft_remove_quotes(char **str_lexer);
 
 //-----------------------PARSER---------------------------
 void		ft_types(t_lexer **lexer);
