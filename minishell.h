@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/01 13:11:23 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:52:00 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void		add_new_envp(t_envp **lst, t_envp *new);
 t_envp		*envp_new(char *envp);
 char		*out_quotes(char *str);
 void		change_env(t_envp **envp, char *find, char *new_value);
-
+void		ft_unset(t_envp **envp, char **id);
 void		ft_print_envp_list(t_envp *envp);
 //------------------------FREE---------------------------
 void		ft_free_envp_list(t_envp **envp);
