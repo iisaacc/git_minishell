@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:45:41 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/30 13:32:05 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:09:47 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ void	ft_free_envp_list(t_envp **envp)
 	{
 		aux = (*envp)->next;
 		free((*envp)->id);
-		free((*envp)->value);
+		if((*envp)->value)
+			free((*envp)->value);
 		free(*envp);
 		*envp = aux;
 	}
 	*envp = NULL;
 }
 
-void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp)
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini)
 {
 	ft_free_lexer_lst(lexer);
 	ft_free_mini_lst(mini);
-	ft_free_envp_list(envp);
 }

@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 16:01:06 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:11:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,18 @@ int			ft_builtins(t_envp **envp_list, t_mini *mini);
 void		ft_cd(t_mini *mini, t_envp **envp);
 int			find_env(t_envp **envp, char *find);
 void		create_envp(t_envp **envp_list, char **envp);
-void		ft_export(t_envp **envp_list, char **new_var, t_mini *mini);
+void		ft_export(t_envp **envp_list, char **new_var);
 void		add_new_envp(t_envp **lst, t_envp *new);
 t_envp		*envp_new(char *envp);
 char		*out_quotes(char *str);
 void		change_env(t_envp **envp, char *find, char *new_value);
 
-void		ft_print_envp_list(t_envp **envp);
+void		ft_print_envp_list(t_envp *envp);
 //------------------------FREE---------------------------
 void		ft_free_envp_list(t_envp **envp);
 void		ft_free_mini_lst(t_mini **mini);
 void		free_node(t_lexer **node);
 void		ft_free_lexer_lst(t_lexer **node);
-void		ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp);
+void		ft_free_lsts(t_lexer **lexer, t_mini **mini);
 
 #endif

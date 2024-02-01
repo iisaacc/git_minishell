@@ -22,7 +22,7 @@ NC = \033[0m
 SRC_FILES = main \
 			lexer/lexer_split lexer/lexer lexer/tokens lexer/lst_init lexer/ft_quotes\
 			parser/parser_types parser/parser parser/find_path parser/lst_mini parser/errors \
-			executer/execute builtins/builtins builtins/ft_cd builtins/ft_export \
+			executer/execute builtins/builtins builtins/ft_cd builtins/ft_export builtins/ft_unset\
 			clean/ft_free_lst \
 			sys_var/init_var sys_var/lst_envp
 
