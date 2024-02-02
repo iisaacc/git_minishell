@@ -90,6 +90,9 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);
+	ft_set_full_cmnd(mini, lexer);
+	if (ft_builtins(envp_list, *mini) == 1)
+		return (1);
 	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
 		return (1);
 	return (0);

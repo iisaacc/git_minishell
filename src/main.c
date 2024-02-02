@@ -30,7 +30,7 @@ void	ft_print_mini_lst(t_mini **mini)
 	}
 }
 
-void ft_print_list(t_lexer **lexer)
+void	ft_print_list(t_lexer **lexer)
 {
 	t_lexer	*tmp;
 
@@ -50,57 +50,51 @@ int	main(int argc, char **argv, char **envp)
 	t_lexer	*lexer;
 	t_mini	*mini;
 	t_envp	*envp_list;
+	int		last_status;
 
 	envp_list = NULL;
 	lexer = NULL;
 	mini = NULL;
+	last_status = 0;
 	if (argc > 1 && argv)
 	{
 		printf("Wrong number of arguments\n");
 		return (1);
 	}
 	ft_init_var(envp, &envp_list);
-	while((input = readline("Minishell>")))//lee la línea
+	while ((input = readline("Minishell>")))//lee la línea
 	{
-		if (ft_check_quotes(input) == 1)//checkea si hay comillas sin cerrar
-			return (EXIT_FAILURE);
+		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona
 			add_history(input);
-		ft_lexer(&lexer, input);
-		//if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
-		//	ft_executer(&mini);
-		ft_parser(&lexer, &mini, envp, &envp_list);
-		//ft_executer(&mini);
-		ft_builtins(&envp_list, mini);
-		//ft_print_envp_list(envp_list);
-		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
-		ft_free_lsts(&lexer, &mini);
+		ft_lexer(&lexer, input, last_status);//crea la lista de tokens
+		if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
+			last_status = ft_executer(&mini);
+		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
-	ft_free_envp_list(&envp_list);
 	clear_history();
 }
 
-/* //MAIN DEBUG
-int	main(int argc, char **argv, char **envp)
-{
-	t_lexer	*lexer;
-	t_mini	*mini;
-	t_envp	*envp_list;
+//MAIN DEBUG
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_lexer	*lexer;
+// 	t_mini	*mini;
+// 	t_envp	*envp_list;
 
-	envp_list = NULL;
-	lexer = NULL;
-	mini = NULL;
-	char	*str = ft_strdup("export hola= que tal");
-	if (!argv && !argc)
-		return (1);
-	ft_init_var(envp, &envp_list);
-	ft_lexer(&lexer, str);
-	ft_parser(&lexer, &mini, envp, &envp_list);
-	ft_builtins(&envp_list, mini);
-	//ft_print_list(&lexer);
-	//ft_print_mini_lst(&mini);
-	ft_free_lsts(&lexer, &mini);
-	ft_free_envp_list( &envp_list);
-	return (0);
-} */
+// 	envp_list = NULL;
+// 	lexer = NULL;
+// 	mini = NULL;
+// 	char	*input = ft_strdup("cd hola");
+// 	if (!argv && !argc)
+// 		return (1);
+// 	ft_init_var(envp, &envp_list);
+// 	ft_quotes_input(&input);
+// 	ft_lexer(&lexer, input);
+// 	if (ft_parser(&lexer, &mini, envp, &envp_list) == 0) //los builtins se ejecutan en el parser
+// 		ft_executer(&mini, &envp_list);
+// 	//ft_print_list(&lexer);
+// 	//ft_print_mini_lst(&mini);
+// 	ft_free_lsts(&lexer, &mini, &envp_list);
+// 	return (0);
+// }

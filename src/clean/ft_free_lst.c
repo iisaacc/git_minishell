@@ -60,8 +60,9 @@ void	ft_free_envp_list(t_envp **envp)
 	*envp = NULL;
 }
 
-void	ft_free_lsts(t_lexer **lexer, t_mini **mini)
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
 	ft_free_lexer_lst(lexer);
 	ft_free_mini_lst(mini);
+	ft_free_envp_list(envp_list);
 }

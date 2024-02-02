@@ -76,52 +76,53 @@ typedef struct s_exec
 }		t_exec;
 
 //-----------------------SYSTEM--------------------------
-void		ft_init_var(char **envp, t_envp **envp_list);
+void	ft_init_var(char **envp, t_envp **envp_list);
 
 //-----------------------LEXER---------------------------
-char		**ft_lexer(t_lexer **lexer, char *input);
-void		ft_extend_var(char **lexer);
-char		**ft_split_lexer(char const *s, char c);
-void		create_nodes(t_lexer **lexer, char **input);
-void		ft_print_list(t_lexer **lexer);
-char		**ft_get_tokens(char **lexer);
-int			ft_check_quotes(char const *s);
-void		ft_quotes_input(char **input);
-void		ft_remove_quotes(char **str_lexer);
+char	**ft_lexer(t_lexer **lexer, char *input, int last_status);
+void	ft_extend_var(char **lexer, int last_status);
+char	**ft_split_lexer(char const *s, char c);
+void	create_nodes(t_lexer **lexer, char **input);
+void	ft_print_list(t_lexer **lexer);
+char	**ft_get_tokens(char **lexer);
+int		ft_check_quotes(char const *s);
+void	ft_quotes_input(char **input);
+void	ft_remove_quotes(char **str_lexer);
 
 //-----------------------PARSER---------------------------
-void		ft_types(t_lexer **lexer);
-int			ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
-char		*ft_find_cmnd_path(char **envp, char *cmnd);
-int			ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp);
-char		**ft_full_cmnd(t_lexer *lexer);
-t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
-int			ft_set_io(t_mini **mini, t_lexer **lexer);
-int			ft_cmnd_error(char *error, char *boole);
-int			ft_file_error(int infd, char *infile);
-void		ft_perror(char *error);
+void	ft_types(t_lexer **lexer);
+int		ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
+char	*ft_find_cmnd_path(char **envp, char *cmnd);
+int		ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp);
+char	**ft_full_cmnd(t_lexer *lexer);
+int		ft_set_full_cmnd(t_mini **mini, t_lexer **lexer);
+t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
+int		ft_set_io(t_mini **mini, t_lexer **lexer);
+int		ft_cmnd_error(char *error, char *boole);
+int		ft_file_error(int infd, char *infile);
+void	ft_perror(char *error);
 
 //----------------------EXECUTER---------------------------
-void		ft_pipes(t_mini **mini);
-void		ft_executer(t_mini **mini);
+void	ft_pipes(t_mini **mini);
+int		ft_executer(t_mini **mini);
 
 //------------------------BUILTINS---------------------------
-int			ft_builtins(t_envp **envp_list, t_mini *mini);
-void		ft_cd(t_mini *mini, t_envp **envp);
-int			find_env(t_envp **envp, char *find);
-void		create_envp(t_envp **envp_list, char **envp);
-void		ft_export(t_envp **envp_list, char **new_var);
-void		add_new_envp(t_envp **lst, t_envp *new);
-t_envp		*envp_new(char *envp);
-char		*out_quotes(char *str);
-void		change_env(t_envp **envp, char *find, char *new_value);
-void		ft_unset(t_envp **envp, char **id);
-void		ft_print_envp_list(t_envp *envp);
+int		ft_builtins(t_envp **envp_list, t_mini *mini);
+void	ft_cd(t_mini *mini, t_envp **envp);
+int		find_env(t_envp **envp, char *find);
+void	create_envp(t_envp **envp_list, char **envp);
+void	ft_export(t_envp **envp_list, char **new_var);
+void	add_new_envp(t_envp **lst, t_envp *new);
+t_envp	*envp_new(char *envp);
+char	*out_quotes(char *str);
+void	change_env(t_envp **envp, char *find, char *new_value);
+void	ft_unset(t_envp **envp, char **id);
+void	ft_print_envp_list(t_envp *envp);
 //------------------------FREE---------------------------
-void		ft_free_envp_list(t_envp **envp);
-void		ft_free_mini_lst(t_mini **mini);
-void		free_node(t_lexer **node);
-void		ft_free_lexer_lst(t_lexer **node);
-void		ft_free_lsts(t_lexer **lexer, t_mini **mini);
+void	ft_free_envp_list(t_envp **envp);
+void	ft_free_mini_lst(t_mini **mini);
+void	free_node(t_lexer **node);
+void	ft_free_lexer_lst(t_lexer **node);
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 
 #endif
