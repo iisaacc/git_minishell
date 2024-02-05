@@ -78,6 +78,7 @@ void	ft_pwd(int fd)
 		pwd++;
 	}
 	write(fd, "\n", 1);
+	free(pwd);
 }
 
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es

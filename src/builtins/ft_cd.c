@@ -68,8 +68,8 @@ void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	change_env(envp, "PWD=", pwd);
 	change_env(envp, "OLDPWD=", oldpwd);
-	printf("PWD -> %s\n", pwd);
-	printf("OLD -> %s\n", oldpwd);
+	//printf("PWD -> %s\n", pwd);
+	//printf("OLD -> %s\n", oldpwd);
 	//ft_print_envp_list(envp);
 	free(pwd);
 	free(oldpwd);

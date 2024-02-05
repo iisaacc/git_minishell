@@ -48,7 +48,7 @@ void	ft_child_process(t_mini *aux)
 	if (ft_builtins(aux->envp, aux) == 0) //Si no es un builtin, ejecutamos el comando
 	{
 		execve(aux->full_path, aux->full_cmd, NULL);
-		perror("execve:");
+		ft_perror(aux->full_path);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -82,6 +82,8 @@ int	ft_executer(t_mini **mini)
 
 	last_status = 0;
 	exec = malloc(sizeof(t_exec));
+	if (!exec)
+		return (1);
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
 		return (last_status); //error
 	i = 0;
@@ -100,5 +102,6 @@ int	ft_executer(t_mini **mini)
 		exec->aux = exec->aux->next;
 	}
 	ft_close_restore(exec);
+	free(exec);
 	return (last_status);
 }

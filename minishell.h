@@ -77,6 +77,7 @@ typedef struct s_exec
 
 //-----------------------SYSTEM--------------------------
 void	ft_init_var(char **envp, t_envp **envp_list);
+char	*ft_refresh_log();
 
 //-----------------------LEXER---------------------------
 char	**ft_lexer(t_lexer **lexer, char *input, int last_status);
@@ -123,6 +124,6 @@ void	ft_free_envp_list(t_envp **envp);
 void	ft_free_mini_lst(t_mini **mini);
 void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
-void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini, t_envp **envp_list, char *log);
 
 #endif
