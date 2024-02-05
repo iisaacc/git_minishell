@@ -48,7 +48,7 @@ typedef struct s_envp //lista para las variables del ambiente
 typedef struct s_lexer
 {
 	char			*word; //palavra
-	int				type; //1-> func, 2->flags, 3->string, 4->files 5->token
+	int				type; //Defines arriba
 	int				id; //pos en la lista
 	struct s_lexer	*next;//puntero al siguiente nodo
 }		t_lexer;

@@ -62,14 +62,18 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	ft_init_var(envp, &envp_list);
-	while ((input = readline("Minishell>")))//lee la línea
+	while ((input = readline(ft_strjoin_nofree(getenv("USER"), "@minishell>"))))//lee la línea
 	{
 		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona
 			add_history(input);
 		ft_lexer(&lexer, input, last_status);//crea la lista de tokens
-		if (ft_parser(&lexer, &mini, envp, &envp_list) == 0)
+		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+		if (last_status == -1)
 			last_status = ft_executer(&mini);
+		//printf("last status: %d\n", last_status);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, &envp_list);
 	}
 	clear_history();
@@ -81,18 +85,21 @@ int	main(int argc, char **argv, char **envp)
 // 	t_lexer	*lexer;
 // 	t_mini	*mini;
 // 	t_envp	*envp_list;
+// 	int		last_status;
 
 // 	envp_list = NULL;
 // 	lexer = NULL;
 // 	mini = NULL;
-// 	char	*input = ft_strdup("cd hola");
+// 	last_status = 0;
+// 	char	*input = ft_strdup("");
 // 	if (!argv && !argc)
 // 		return (1);
 // 	ft_init_var(envp, &envp_list);
 // 	ft_quotes_input(&input);
-// 	ft_lexer(&lexer, input);
-// 	if (ft_parser(&lexer, &mini, envp, &envp_list) == 0) //los builtins se ejecutan en el parser
-// 		ft_executer(&mini, &envp_list);
+// 	ft_lexer(&lexer, input, last_status);
+// 	last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+// 	if (last_status == -1)
+// 		last_status = ft_executer(&mini);
 // 	//ft_print_list(&lexer);
 // 	//ft_print_mini_lst(&mini);
 // 	ft_free_lsts(&lexer, &mini, &envp_list);

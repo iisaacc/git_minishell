@@ -80,11 +80,11 @@ int	ft_executer(t_mini **mini)
 	int		last_status;
 	int		i;
 
+	last_status = 0;
 	exec = malloc(sizeof(t_exec));
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
-		return (-1); //error
+		return (last_status); //error
 	i = 0;
-	last_status = 0;
 	while (i < exec->total_cmnds)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
