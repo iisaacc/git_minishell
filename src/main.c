@@ -76,7 +76,6 @@ int	main(int argc, char **argv, char **envp)
 		//printf("last status: %d\n", last_status);
 		//ft_print_list(&lexer);
 		//ft_print_mini_lst(&mini);
-		execve("mnt/c/Users/Usuario/Desktop/CODE/42/42CURSUS/Rank02/push_swap/push_swap", ft_split("2 4 1 10 -2", ' '), NULL);
 		ft_free_lsts(&lexer, &mini, &envp_list, log);
 		log = ft_refresh_log();
 	}
