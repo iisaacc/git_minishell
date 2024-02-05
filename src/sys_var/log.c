@@ -19,6 +19,6 @@ char	*ft_refresh_log()
 
 	log = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
 	log = ft_strjoin(log, getcwd(buffer, sizeof(buffer)));
-	log = ft_strjoin(log, " > ");
+	log = ft_strjoin(log, "> ");
 	return (log);
 }

@@ -20,7 +20,7 @@ NC = \033[0m
 #----------------SRC---------------#
 
 SRC_FILES = main \
-			lexer/lexer_split lexer/lexer lexer/tokens lexer/lst_init lexer/ft_quotes\
+			lexer/lexer_split lexer/lexer lexer/tokens lexer/lst_init lexer/ft_quotes lexer/syntax_errors \
 			parser/parser_types parser/parser parser/find_path parser/lst_mini parser/errors \
 			executer/execute builtins/builtins builtins/ft_cd builtins/ft_export builtins/ft_unset\
 			clean/ft_free_lst \

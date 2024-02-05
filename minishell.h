@@ -89,6 +89,7 @@ char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
 void	ft_quotes_input(char **input);
 void	ft_remove_quotes(char **str_lexer);
+char	**ft_check_syntax(char **str_lexer);
 
 //-----------------------PARSER---------------------------
 void	ft_types(t_lexer **lexer);
@@ -102,6 +103,7 @@ int		ft_set_io(t_mini **mini, t_lexer **lexer);
 int		ft_cmnd_error(char *error, char *boole);
 int		ft_file_error(int infd, char *infile);
 void	ft_perror(char *error);
+void	ft_syntax_error(char *error);
 
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);
@@ -119,6 +121,7 @@ char	*out_quotes(char *str);
 void	change_env(t_envp **envp, char *find, char *new_value);
 void	ft_unset(t_envp **envp, char **id);
 void	ft_print_envp_list(t_envp *envp);
+
 //------------------------FREE---------------------------
 void	ft_free_envp_list(t_envp **envp);
 void	ft_free_mini_lst(t_mini **mini);
