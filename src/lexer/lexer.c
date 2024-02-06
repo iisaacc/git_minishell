@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/06 10:39:03 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:39:42 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ char	**ft_lexer(t_lexer **lst_lexer, char *input)
 	ft_remove_quotes(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	free(input);//free del input
-	return (str_lexer);//no hace falta devuelver nada
+	return (str_lexer);
 }
