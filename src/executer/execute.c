@@ -91,6 +91,8 @@ int	ft_executer(t_mini **mini)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
+		if (exec->aux->redir == D_LESS)
+			ft_here_doc(exec->aux, exec->aux->full_cmd[1]);
 		exec->pid = fork();
 		if (exec->pid == 0)
 			ft_child_process(exec->aux);

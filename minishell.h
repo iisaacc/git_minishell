@@ -35,6 +35,7 @@
 # define PIPE 7
 # define D_GREATER 8
 # define D_LESS 9
+# define DELIMITER 10
 
 //int	g_status; variavel global
 
@@ -61,6 +62,8 @@ typedef struct s_mini
 	int				id;//pos en la lista
 	int				infile;//fd de entrada
 	int				outfile;//fd de salida
+	int				redir; //<< o >>
+	char			*delimiter;//eof
 	t_envp			**envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
@@ -108,6 +111,7 @@ void	ft_syntax_error(char *error);
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);
 int		ft_executer(t_mini **mini);
+void	ft_here_doc(t_mini *mini, char *eof);
 
 //------------------------BUILTINS---------------------------
 int		ft_builtins(t_envp **envp_list, t_mini *mini);
