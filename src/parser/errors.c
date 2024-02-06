@@ -22,6 +22,13 @@ void	ft_perror(char *error)
 	exit(EXIT_FAILURE);
 }
 
+void	ft_syntax_error(char *error)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+}
+
 int	ft_cmnd_error(char *error, char *boole)
 {
 	if (!boole)

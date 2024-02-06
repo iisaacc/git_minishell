@@ -59,7 +59,7 @@ void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
 	x = 0;
 	if(*lexer)
 		ft_free_lexer_lst(lexer);
-	while (input[x])
+	while (input && input[x])
 	{
 		add_new(lexer, create_new(input[x], x));
 		x++;

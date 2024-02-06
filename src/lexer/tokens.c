@@ -24,7 +24,7 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 	dst = malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	x = 0;
-	while (src[i])
+	while (src[i] && src[i][0] != '\0')
 	{
 		if (x == y && j == 0)//Valoramos si es la posición del token y si va al principio o final de la palabra
 		{
@@ -80,12 +80,15 @@ char	**ft_get_tokens(char **lexer)
 		while (lexer[i][j])
 		{
 			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
-				&& (j == 0 || j == ft_strlen(lexer[i]) - 2)
+				&& (j == 0 || j == ft_strlen(lexer[i]) - 2) && (ft_strlen(lexer[i]) != 2)
 				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
 				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
 				lexer = ft_case_single_double(lexer, token, &i, &j);
 			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
-				&& (ft_strlen(lexer[i]) != 1) && ((j == 0) || (j == ft_strlen(lexer[i]) - 1)))
+				&& (ft_strlen(lexer[i]) != 1) && ((j == 0) || (j == ft_strlen(lexer[i]) - 1))
+				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
+				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
+				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
 				lexer = ft_case_single_double(lexer, token, &i, &j);
 			j++;
 		}

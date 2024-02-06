@@ -66,19 +66,21 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 	i = 1;
 	aux = lexer;
-	while (aux->next && (aux->next->type == FLAG || aux->next->type == STRING))
+	while (aux->next && aux->next->type != PIPE)
 	{
 		aux = aux->next;
-		i++;
+		if (aux->type == FLAG || aux->type == STRING)
+			i++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	aux = lexer;
 	full_cmnd[i++] = ft_strdup(aux->word);
-	while (aux->next && (aux->next->type == FLAG || aux->next->type == STRING))
+	while (aux->next && aux->next->type != PIPE)
 	{
 		aux = aux->next;
-		full_cmnd[i++] = ft_strdup(aux->word);
+		if (aux->type == FLAG || aux->type == STRING)
+			full_cmnd[i++] = ft_strdup(aux->word);
 	}
 	full_cmnd[i] = NULL;
 	return (full_cmnd);
@@ -90,7 +92,10 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);
+	ft_set_full_cmnd(mini, lexer);
+	if (ft_builtins(envp_list, *mini) == 1)
+		return (0);
 	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
-		return (1);
-	return (0);
+		return (127);
+	return (-1);//En este caso ejecutamos el comando
 }

@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cpy_2d.c                                        :+:      :+:    :+:   */
+/*   log.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 14:23:23 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/17 14:24:04 by isporras         ###   ########.fr       */
+/*   Created: 2024/02/05 12:36:48 by isporras          #+#    #+#             */
+/*   Updated: 2024/02/05 12:36:48 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../minishell.h"
 
-char	**ft_cpy_2d(char **src)
+char	*ft_refresh_log()
 {
-	int		i;
-	char	**dst;
+	char	*log;
+	char	buffer[1024];
 
-	i = 0;
-	while (src[i])
-		i++;
-	dst = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (src[i])
-	{
-		dst[i] = ft_strdup(src[i]);
-		i++;
-	}
-	dst[i] = NULL;
-	return (dst);
+	log = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
+	log = ft_strjoin(log, getcwd(buffer, sizeof(buffer)));
+	log = ft_strjoin(log, "> ");
+	return (log);
 }
