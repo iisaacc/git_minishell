@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/01 14:31:06 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:34:15 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,12 @@ int	main(int argc, char **argv, char **envp)
 				last_status = ft_executer(&mini);
 		}
 		//printf("last status: %d\n", last_status);
-		ft_print_list(&lexer);
+		//ft_print_list(&lexer);
 		//ft_print_mini_lst(&mini);
-		ft_free_lsts(&lexer, &mini, &envp_list, log);
+		ft_free_lsts(&lexer, &mini, log);
 		log = ft_refresh_log();
 	}
+	ft_free_envp_list(&envp_list);//hay que quedar fuera del bucle
 	free(log);
 	free(input);
 	clear_history();
