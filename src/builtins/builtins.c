@@ -6,40 +6,11 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/01 14:51:39 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:40:09 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	ft_echo(char **cmd, int fd)//no imprime nada si $VAR si no existe
-{//strtrim para tirar as comillas
-	int x;
-	int i;
-	int flag;
-
-	x = 1;
-	flag = 0;
-	if (cmd[1] && !ft_strncmp(cmd[1], "-n", 2))
-	{
-		flag = 1;
-		x = 2;
-	}
-	while (cmd[x])
-	{
-		i = 0;
-		while(cmd[x][i])
-		{
-			write(fd, &cmd[x][i], 1);
-			i++;	
-		}
-		if (cmd[x + 1])
-			write(fd, " ", 1);
-		x++;
-	}
-	if (!flag)
-		write(fd, "\n", 1);
-}
 
 void	ft_env(int fd, t_envp **envp_list)//no actualiza PWD y OLDPWD cuando hace env
 {
@@ -81,6 +52,17 @@ void	ft_pwd(int fd)
 	free(pwd);
 }
 
+void	ft_exit(char **cmd)
+{
+	//printf("%s\n", cmd[0]);
+	if (cmd[1])
+		return ;
+	if (cmd[0])
+		exit(ft_atoi(cmd[0]));
+	else
+		exit(0);//esta con 0 pero debe ser la variable global
+}
+
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {
 	if (!mini || !mini->full_cmd)
@@ -97,6 +79,8 @@ int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para sa
 		return (ft_env(mini->outfile, envp_list), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6))
 		return (ft_unset(envp_list, &mini->full_cmd[1]), 1);
+	else if(!ft_strncmp(mini->full_cmd[0], "exit", 4))
+		return (ft_exit(&mini->full_cmd[1]), 1);
 	else
 		return (0);
 }
