@@ -41,6 +41,13 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 				m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				flag += ft_file_error(m_node->outfile, (aux->next)->word);
 			}
+			else if (aux->type == D_GREATER && i == lap)
+			{
+				m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
+				flag += ft_file_error(m_node->outfile, (aux->next)->word);
+			}
+			else if (aux->type == D_LESS && i == lap)
+				m_node->redir = D_LESS;
 			aux = aux->next;
 		}
 		m_node = m_node->next;

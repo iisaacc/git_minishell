@@ -26,6 +26,7 @@ void	ft_free_mini_lst(t_mini **mini)
 		free(*mini);
 		*mini = aux;
 	}
+	*mini = NULL;
 }
 
 void	ft_free_lexer_lst(t_lexer **node)

@@ -37,6 +37,7 @@ t_mini	*ft_mini_new(int lap, t_envp **envp_list)
 	//ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
+	mini->redir = 0;
 	mini->id = lap;
 	mini->envp = envp_list;
 	mini->next = NULL;

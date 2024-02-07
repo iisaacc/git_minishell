@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:36:48 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/05 12:36:48 by isporras         ###   ########.fr       */
+/*   Created: 2024/02/06 14:28:59 by isporras          #+#    #+#             */
+/*   Updated: 2024/02/06 14:28:59 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*ft_refresh_log()
+void	ft_here_doc(t_mini *mini, char *eof)
 {
-	char	*log;
-	char	buffer[1024];
+	char	*line;
+	int		fd[2];
 
-	log = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
-	log = ft_strjoin(log, getcwd(buffer, sizeof(buffer)));
-	log = ft_strjoin(log, "> ");
-	return (log);
+	pipe(fd);
+	while (1)
+	{
+		line = readline("> ");
+		if (!line)
+			break ;
+		if (ft_strncmp(line, eof, ft_strlen(line)) == 0)
+		{
+			free(line);
+			break ;
+		}
+		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
+		mini->infile = fd[0];
+		free(line);
+	}
 }
