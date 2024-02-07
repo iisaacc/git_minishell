@@ -6,16 +6,28 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/06 13:31:23 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:40:36 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+int	export_error(char *str)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("cd: ", 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\'', 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("not a valid identifier\n", 2);
+	return (0);
+}
+
 int	check_errors(char *str)
 {
 	if (str[0] == '=')
-		return (0);
+		return (export_error(str));
 	else if (!ft_strchr(str, '='))
 		return (0);//escribir not a valid identifier
 	return (1);

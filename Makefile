@@ -24,6 +24,7 @@ SRC_FILES = main \
 			parser/parser_types parser/parser parser/find_path parser/lst_mini parser/errors \
 			executer/execute executer/here_doc \
 			builtins/builtins builtins/ft_cd builtins/ft_export builtins/ft_unset builtins/ft_echo \
+			builtins/ft_exit builtins/ft_pwd builtins/ft_exit builtins/ft_env \
 			clean/ft_free_lst \
 			sys_var/init_var sys_var/lst_envp sys_var/log
 

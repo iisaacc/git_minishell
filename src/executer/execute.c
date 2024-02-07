@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/06 11:08:48 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:25:25 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
-	if (ft_builtins(aux->envp, aux) == 0) //eso ya no deberia estar aqui
+	if (ft_builtins(aux->envp, aux) == 0) //eso ya no deberia estar aqui?
 	{
 		execve(aux->full_path, aux->full_cmd, NULL);
 		ft_perror(aux->full_path);

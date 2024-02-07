@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/06 13:29:14 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:23:09 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,19 @@ char	*find_env(t_envp **envp, char *find)
 	return (0);
 }
 
-void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el camino
+int cd_error(char *not_find)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd(not_find, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putchar_fd('\n', 2);
+	//creo que no hace falta exit
+	return (-1);
+}
+
+int	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el camino
 {
 	char *pwd;
 	char *oldpwd;
@@ -71,11 +83,12 @@ void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el
 		dst = ft_strdup(mini->full_cmd[1]);
 	oldpwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	if (chdir(dst)) //devuleve 1 se falla
-		return (free(oldpwd), free(dst));//escribir no such or file directory
+		return (free(oldpwd), free(dst), cd_error(dst));//escribir no such or file directory
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	change_env(envp, "PWD=", pwd);
 	change_env(envp, "OLDPWD=", oldpwd);
 	free(pwd);
 	free(oldpwd);
 	free(dst);
+	return (1);
 }

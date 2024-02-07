@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 11:06:29 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:23:54 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,12 @@ void	ft_here_doc(t_mini *mini, char *eof);
 
 //------------------------BUILTINS---------------------------
 int		ft_builtins(t_envp **envp_list, t_mini *mini);
-void	ft_cd(t_mini *mini, t_envp **envp);
+int		ft_cd(t_mini *mini, t_envp **envp);
 void	ft_echo(char **cmd, int fd);
+void	ft_pwd(int fd);
+void	ft_unset(t_envp **envp, char **id);
+int		ft_env(int fd, t_envp **envp_list, char **cmd);
+//falta ft_exit
 char 	*find_env(t_envp **envp, char *find);
 void	create_envp(t_envp **envp_list, char **envp);
 void	ft_export(t_envp **envp_list, char **new_var);
@@ -124,7 +128,6 @@ void	add_new_envp(t_envp **lst, t_envp *new);
 t_envp	*envp_new(char *envp);
 char	*out_quotes(char *str);
 void	change_env(t_envp **envp, char *find, char *new_value);
-void	ft_unset(t_envp **envp, char **id);
 void	ft_print_envp_list(t_envp *envp);
 
 //------------------------FREE---------------------------
