@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 12:23:54 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:39:09 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,8 @@ void	ft_free_mini_lst(t_mini **mini);
 void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
 void	ft_free_lsts(t_lexer **lexer, t_mini **mini, char *log);
+
+//------------------------SIGNALS---------------------------
+int		singal_init();
 
 #endif

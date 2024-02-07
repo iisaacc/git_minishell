@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:31:41 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 12:33:04 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:23:04 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		env_error(char *wrong)//en el subject pone sin argumento o opciones
 	ft_putstr_fd(wrong, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("No such file or directory\n", 2);
-	return (-1);
+	return (1);
 }
 
 int	ft_env(int fd, t_envp **envp_list, char **cmd)//no actualiza PWD y OLDPWD cuando hace env

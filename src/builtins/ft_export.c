@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 14:02:43 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:23:26 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_errors(char *str)
 	if (str[0] == '=')
 		return (export_error(str));
 	else if (!ft_strchr(str, '='))
-		return (0);//escribir not a valid identifier
+		return (0);
 	return (1);
 	
 }
