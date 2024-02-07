@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/06 12:25:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:29:14 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el
 		dst = ft_strdup(mini->full_cmd[1]);
 	oldpwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	if (chdir(dst)) //devuleve 1 se falla
-		return (free(oldpwd), free(dst));
+		return (free(oldpwd), free(dst));//escribir no such or file directory
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	change_env(envp, "PWD=", pwd);
 	change_env(envp, "OLDPWD=", oldpwd);

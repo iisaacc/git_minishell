@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/06 12:40:09 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:09:28 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,7 @@ void	ft_pwd(int fd)
 
 void	ft_exit(char **cmd)
 {
-	//printf("%s\n", cmd[0]);
-	if (cmd[1])
-		return ;
-	if (cmd[0])
-		exit(ft_atoi(cmd[0]));
-	else
-		exit(0);//esta con 0 pero debe ser la variable global
+	//para esa funcion es necessario tener la variaable last status
 }
 
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es

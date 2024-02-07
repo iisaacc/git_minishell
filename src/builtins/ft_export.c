@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/01 14:39:10 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:31:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_errors(char *str)
 	if (str[0] == '=')
 		return (0);
 	else if (!ft_strchr(str, '='))
-		return (0);
+		return (0);//escribir not a valid identifier
 	return (1);
 	
 }
@@ -32,7 +32,7 @@ void	ft_export(t_envp **envp_list, char **new_var)
 	x = 0;
 	while (new_var[x])
 	{
-		if (check_errors(new_var[x]) && new_var[x])
+		if (check_errors(new_var[x]) && new_var[x])//checkear si el formato es HOLA="hoal"
 		{
 			splitted = ft_split(new_var[x], '=');
 			id = ft_strdup(splitted[0]);
