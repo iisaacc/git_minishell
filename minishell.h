@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:19:16 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:34:43 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <readline/history.h>
 # include "includes/libft/libft.h"
 # include <errno.h>
+#include <string.h>
 
 # define CMND 1
 # define FLAG 2
