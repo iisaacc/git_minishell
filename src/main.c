@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 14:44:45 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:38:28 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_init_var(envp, &envp_list);
 	log = ft_refresh_log();
-	//singal_init();
+	singal_init();
 	while ((input = readline(log)))//lee la línea
 	{
 		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar

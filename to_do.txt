@@ -1,4 +1,2 @@
 dos builtins con pipe no funcionam
-ls>ooutput noo funciona pero deberia
-last exit status ($?)
 signal handling (ctrl+C, ctrl+D, ctrl+\)

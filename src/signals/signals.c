@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:55:30 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 14:44:24 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:57:00 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 void	ft_sigint(int sig)
 {
 	sig = 0;
-	printf("entrou\n");
-	ft_putstr_fd("\n", 2);
+	//rl_replace_line("", 0);
+	ft_putchar_fd('\n', 0);
+	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
 	rl_redisplay();//fuerza atualizacion de la linea
-	rl_on_new_line();//se comunica con las funciones para decir que hay una nueva linea
-	rl_replace_line("", 0);
 }
 
 int singal_init()
