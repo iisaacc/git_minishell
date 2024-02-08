@@ -6,13 +6,13 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 14:46:09 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:19:48 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_put_var(char **lexer, int *i, int *j, int last_status)
+void	ft_put_var(char **lexer, int *i, int *j)
 {
 	char	*var;
 	char	*value;
@@ -40,7 +40,7 @@ void	ft_put_var(char **lexer, int *i, int *j, int last_status)
 }
 
 //Extiende la variable global $ siempre que no esté entre comillas simples
-void	ft_extend_var(char **lexer, int last_status)
+void	ft_extend_var(char **lexer)
 {
 	int	i;
 	int	j;
@@ -58,20 +58,20 @@ void	ft_extend_var(char **lexer, int last_status)
 			else if (lexer[i][j] == '\'' && q == 1)
 				q = 0;
 			if (lexer[i][j] == '$' && q == 0)
-				ft_put_var(lexer, &i, &j, last_status);
+				ft_put_var(lexer, &i, &j);
 			j++;
 		}
 		i++;
 	}
 }
 
-char	**ft_lexer(t_lexer **lst_lexer, char *input, int last_status)
+char	**ft_lexer(t_lexer **lst_lexer, char *input)
 {
 	char	**str_lexer;
 	if (!input)
 		return (NULL);
 	str_lexer = ft_split_lexer(input, ' ');
-	ft_extend_var(str_lexer, last_status);
+	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
 	ft_remove_quotes(str_lexer);
 	str_lexer = ft_check_syntax(str_lexer); //Chequea errores sintacticos como un < o > o << o >> al final de la línea

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:55:30 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:33:57 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:35:27 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

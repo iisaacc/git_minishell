@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:33:13 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:34:43 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,15 @@ typedef struct s_exec
 	int		fdpipe[2];
 }		t_exec;
 
+extern int last_status;
+
 //-----------------------SYSTEM--------------------------
 void	ft_init_var(char **envp, t_envp **envp_list);
 char	*ft_refresh_log();
 
 //-----------------------LEXER---------------------------
-char	**ft_lexer(t_lexer **lexer, char *input, int last_status);
-void	ft_extend_var(char **lexer, int last_status);
+char	**ft_lexer(t_lexer **lexer, char *input);
+void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);
 void	ft_print_list(t_lexer **lexer);
