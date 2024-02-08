@@ -1,0 +1,11 @@
+Makefile
+del
+includes
+input
+minishell
+minishell.h
+obj
+outfile
+output
+src
+to_do.txt

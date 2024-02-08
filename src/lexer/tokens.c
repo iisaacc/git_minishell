@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:14:54 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/24 15:54:38 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:53:24 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,17 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 			dst[x++] = ft_substr(src[i], d, ft_strlen(&src[i][d]));
 			i++;
 		}
-		else if (x == y && j != 0)
+		else if (x == y && j == ft_strlen(src[i]) - d)
 		{
 			dst[x++] = ft_substr(src[i], 0, ft_strlen(src[i]) - d);
 			dst[x++] = token;
+			i++;
+		}
+		else if (x == y)
+		{
+			dst[x++] = ft_substr(src[i], 0, j);
+			dst[x++] = token;
+			dst[x++] = ft_substr(src[i], j + d, ft_strlen(&src[i][j + d]));
 			i++;
 		}
 		else
@@ -66,7 +73,7 @@ char	**ft_case_single_double(char	**lexer, char *token, int *i, int *j)
 	return (tmp);
 }
 
-char	**ft_get_tokens(char **lexer)
+char	**old_ft_get_tokens(char **lexer)
 {
 	int		i;
 	int		j;
@@ -86,6 +93,38 @@ char	**ft_get_tokens(char **lexer)
 				lexer = ft_case_single_double(lexer, token, &i, &j);
 			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
 				&& (ft_strlen(lexer[i]) != 1) && ((j == 0) || (j == ft_strlen(lexer[i]) - 1))
+				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
+				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
+				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
+				lexer = ft_case_single_double(lexer, token, &i, &j);
+			j++;
+		}
+		i++;
+	}
+	return (lexer);
+}
+
+char	**ft_get_tokens(char **lexer)
+{
+	int		i;
+	int		j;
+	char	*token;
+	char	tmp;
+	token = NULL;
+	i = 0;
+	while (lexer[i])
+	{
+		j = 0;
+		while (lexer[i][j])
+		{
+			tmp = lexer[i][j];
+			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
+				&& (ft_strlen(lexer[i]) != 2)
+				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
+				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
+				lexer = ft_case_single_double(lexer, token, &i, &j);
+			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
+				&& (ft_strlen(lexer[i]) != 1)
 				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
 				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
 				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))

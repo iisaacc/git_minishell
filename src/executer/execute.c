@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/07 11:25:25 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:31:32 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,9 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
-	if (ft_builtins(aux->envp, aux) == 0) //eso ya no deberia estar aqui?
-	{
-		execve(aux->full_path, aux->full_cmd, NULL);
-		ft_perror(aux->full_path);
-		exit(EXIT_FAILURE);
-	}
+	execve(aux->full_path, aux->full_cmd, NULL);
+	ft_perror(aux->full_path);
+	exit(EXIT_FAILURE);
 }
 
 int	ft_init_data_exec(t_mini **mini, t_exec **exec)
@@ -91,8 +88,6 @@ int	ft_executer(t_mini **mini)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		if (exec->aux->redir == D_LESS)
-			ft_here_doc(exec->aux, exec->aux->full_cmd[1]);
 		exec->pid = fork();
 		if (exec->pid == 0)
 			ft_child_process(exec->aux);

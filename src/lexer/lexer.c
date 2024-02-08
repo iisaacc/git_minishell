@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/06 10:39:42 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:46:09 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_put_var(char **lexer, int *i, int *j, int last_status)
 	var = ft_substr(lexer[*i], *j + 1, len);
 	if (ft_strncmp(&lexer[*i][*j], "$?", 3) == 0)
 		value = ft_itoa(last_status);
-	else 
+	else
 		value = getenv(var);
 	tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
 	ft_strlcpy(tmp, lexer[*i], *j + 1);

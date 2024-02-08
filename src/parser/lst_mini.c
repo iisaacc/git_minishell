@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 11:54:15 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:32:16 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_mini	*ft_mini_new(int lap, t_envp **envp_list)
 	//ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
-	mini->redir = 0;
 	mini->id = lap;
 	mini->envp = envp_list;
 	mini->next = NULL;
