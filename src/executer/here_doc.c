@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:28:59 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 13:38:05 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:36:26 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	ft_here_doc(t_mini *mini, char *eof)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
-			break ;
 		if (ft_strncmp(line, eof, ft_strlen(line)) == 0)
 		{
 			free(line);
