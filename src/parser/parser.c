@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 14:12:44 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:18:40 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 	ft_types(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
-		return (1);
+		last_status = 1;
 	ft_set_full_cmnd(mini, lexer);
 	if (ft_builtins(envp_list, *mini) == 1)
 		return (0);
 	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
-		return (127);
+		last_status = 127;
 	return (-1);//En este caso ejecutamos el comando
 }
