@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/01/31 13:05:54 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:12:44 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 				flag += ft_file_error(m_node->outfile, (aux->next)->word);
 			}
 			else if (aux->type == D_LESS && i == lap)
-				m_node->redir = D_LESS;
+				ft_here_doc(m_node, (aux->next)->word);
 			aux = aux->next;
 		}
 		m_node = m_node->next;

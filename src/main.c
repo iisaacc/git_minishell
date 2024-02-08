@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 13:38:28 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:59:02 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_print_mini_lst(t_mini **mini)
 		printf("path: %s\n", tmp->full_path);
 		printf("infile fd: %d\n", tmp->infile);
 		printf("outfile fd: %d\n\n", tmp->outfile);
-		printf("redir: %d\n", tmp->redir);
 		tmp = tmp->next;
 	}
 }
@@ -52,73 +51,73 @@ void	final_free(char *input, char *log, t_envp **envp)
 	free(input);
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
-	t_lexer	*lexer;
-	t_mini	*mini;
-	t_envp	*envp_list;
-	char	*log;
-	int		last_status;
+//int	main(int argc, char **argv, char **envp)
+//{
+//	char	*input;
+//	t_lexer	*lexer;
+//	t_mini	*mini;
+//	t_envp	*envp_list;
+//	char	*log;
+//	int		last_status;
 
-	envp_list = NULL;
-	lexer = NULL;
-	mini = NULL;
-	last_status = 0;
-	if (argc > 1 && argv)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
-	ft_init_var(envp, &envp_list);
-	log = ft_refresh_log();
-	singal_init();
-	while ((input = readline(log)))//lee la línea
-	{
-		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
-		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
-			add_history(input);
-		if (ft_lexer(&lexer, input, last_status) != NULL)//crea la lista de tokens
-		{
-			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
-			if (last_status == -1)
-				last_status = ft_executer(&mini);
-		}
-		//printf("last status: %d\n", last_status);
-		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
-		ft_free_lsts(&lexer, &mini, log);
-		log = ft_refresh_log();
-	}
-	final_free(input, log, &envp_list);
-	clear_history();
-}
+//	envp_list = NULL;
+//	lexer = NULL;
+//	mini = NULL;
+//	last_status = 0;
+//	if (argc > 1 && argv)
+//	{
+//		printf("Wrong number of arguments\n");
+//		return (1);
+//	}
+//	ft_init_var(envp, &envp_list);
+//	log = ft_refresh_log();
+//	//singal_init();
+//	while ((input = readline(log)))//lee la línea
+//	{
+//		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
+//		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
+//			add_history(input);
+//		if (ft_lexer(&lexer, input, last_status) != NULL)//crea la lista de tokens
+//		{
+//			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+//			if (last_status == -1)
+//				last_status = ft_executer(&mini);
+//		}
+//		//printf("last status: %d\n", last_status);
+//		ft_print_list(&lexer);
+//		ft_print_mini_lst(&mini);
+//		ft_free_lsts(&lexer, &mini, log);
+//		log = ft_refresh_log();
+//	}
+//	final_free(input, log, &envp_list);
+//	clear_history();
+//}
 
 //MAIN DEBUG
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_lexer	*lexer;
-// 	t_mini	*mini;
-// 	t_envp	*envp_list;
-// 	int		last_status;
+ int	main(int argc, char **argv, char **envp)
+ {
+ 	t_lexer	*lexer;
+ 	t_mini	*mini;
+ 	t_envp	*envp_list;
+ 	int		last_status;
 
-// 	envp_list = NULL;
-// 	lexer = NULL;
-// 	mini = NULL;
-// 	last_status = 0;
-// 	char	*input = ft_strdup("ls >> outfile");
-// 	if (!argv && !argc)
-// 		return (1);
-// 	ft_init_var(envp, &envp_list);
-// 	ft_quotes_input(&input);
-// 	if (ft_lexer(&lexer, input, last_status) != NULL)//crea la lista de tokens
-// 	{
-// 		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
-// 		if (last_status == -1)
-// 			last_status = ft_executer(&mini);
-// 	}
-// 	ft_print_list(&lexer);
-// 	ft_print_mini_lst(&mini);
-// 	ft_free_lsts(&lexer, &mini, &envp_list);
-// 	return (0);
-// }
+ 	envp_list = NULL;
+ 	lexer = NULL;
+ 	mini = NULL;
+ 	last_status = 0;
+ 	char	*input = ft_strdup("ls>>outfile");
+ 	if (!argv && !argc)
+ 		return (1);
+ 	ft_init_var(envp, &envp_list);
+ 	ft_quotes_input(&input);
+ 	if (ft_lexer(&lexer, input, last_status) != NULL)//crea la lista de tokens
+ 	{
+ 		ft_print_list(&lexer);
+ 		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+ 		if (last_status == -1)
+ 			last_status = ft_executer(&mini);
+ 	}
+ 	ft_print_mini_lst(&mini);
+ 	//ft_free_lsts(&lexer, &mini);
+ 	return (0);
+ }

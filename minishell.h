@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:13:48 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:33:13 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ typedef struct s_mini
 	int				id;//pos en la lista
 	int				infile;//fd de entrada
 	int				outfile;//fd de salida
-	int				redir; //<< o >>
-	char			*delimiter;//eof
 	t_envp			**envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
@@ -137,6 +135,8 @@ void	ft_free_mini_lst(t_mini **mini);
 void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
 void	ft_free_lsts(t_lexer **lexer, t_mini **mini, char *log);
+
+void	ft_print_mini_lst(t_mini **mini);
 
 //------------------------SIGNALS---------------------------
 int		singal_init();
