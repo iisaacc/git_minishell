@@ -6,39 +6,33 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:14:52 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/09 09:42:40 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:10:13 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_is_between_quotes(char *str, int i)
+int	ft_between_quotes(char *str, int x)//Devuelve 1 si el elemento buscado está entre comillas simples o dobles
 {
-	int	q;
-	int	dq;
+	char	quote;
+	int		i;
 
-	q = 0;
-	dq = 0;
-	while (i >= 0)
+	quote = 0;
+	i = 0;
+	while (str && str[i])
 	{
-		if (str[i] == '\'' && dq == 0)
-			q++;
-		else if (str[i] == '\"' && q == 0)
-			dq++;
-		i--;
-	}
-	while (str[i])
-	{
-		if (str[i] == '\'' && dq == 0)
-			q++;
-		else if (str[i] == '\"' && q == 0)
-			dq++;
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			quote = str[i++];
+			while (str[i] && str[i] != quote)
+			{
+				if (i++ == x)
+					return (1);
+			}
+		}
 		i++;
 	}
-	if (q % 2 == 0 && dq % 2 == 0)
-		return (0);
-	else
-		return (1);
+	return (0);
 }
 
 char	which_quotes(char *str)
@@ -94,6 +88,7 @@ void	ft_remove_quotes(char **str_lexer)
 			ft_remove_quotes(str_lexer);
 		x++;
 	}
+	ft_print_split(str_lexer);
 }
 
 int	ft_check_open_quotes(char const *s)
