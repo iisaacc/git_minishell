@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 15:19:48 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:30:17 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	**ft_lexer(t_lexer **lst_lexer, char *input)
 	str_lexer = ft_get_tokens(str_lexer);
 	ft_remove_quotes(str_lexer);
 	str_lexer = ft_check_syntax(str_lexer); //Chequea errores sintacticos como un < o > o << o >> al final de la línea
+	ft_print_split(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	free(input);//free del input
 	return (str_lexer);

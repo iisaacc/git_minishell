@@ -3,20 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:14:52 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 15:33:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:42:40 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+int	ft_is_between_quotes(char *str, int i)
+{
+	int	q;
+	int	dq;
+
+	q = 0;
+	dq = 0;
+	while (i >= 0)
+	{
+		if (str[i] == '\'' && dq == 0)
+			q++;
+		else if (str[i] == '\"' && q == 0)
+			dq++;
+		i--;
+	}
+	while (str[i])
+	{
+		if (str[i] == '\'' && dq == 0)
+			q++;
+		else if (str[i] == '\"' && q == 0)
+			dq++;
+		i++;
+	}
+	if (q % 2 == 0 && dq % 2 == 0)
+		return (0);
+	else
+		return (1);
+}
+
 char	which_quotes(char *str)
 {
 	int x;
 	char c;
-	
+
 	x = 0;
 	while (str[x])
 	{
@@ -67,7 +96,7 @@ void	ft_remove_quotes(char **str_lexer)
 	}
 }
 
-int	ft_check_quotes(char const *s)
+int	ft_check_open_quotes(char const *s)
 {
 	int	i;
 
@@ -100,9 +129,9 @@ void	ft_quotes_input(char **input)
 	char	*new_input;
 	char	*prompt;
 
-	while (ft_check_quotes(*input) > 0)
+	while (ft_check_open_quotes(*input) > 0)
 	{
-		if (ft_check_quotes(*input) == 1)
+		if (ft_check_open_quotes(*input) == 1)
 			prompt = "quotes>";
 		else
 			prompt = "dquotes>";
