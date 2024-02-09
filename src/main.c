@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:24:30 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:09:06 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	main(int argc, char **argv, char **envp)
 			add_history(input);
 		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
 		{
-			ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
 			if (last_status == -1)
 				last_status = ft_executer(&mini);
 		}
 		//printf("last status: %d\n", last_status);
-		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, log);
 		log = ft_refresh_log();
 	}
