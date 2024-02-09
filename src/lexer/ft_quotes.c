@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:14:52 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/09 12:10:13 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:57:42 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ char	which_quotes(char *str)
 			c = str[x++];
 			while (str[x])
 			{
-				x++;
-				if (str[x] == c)
+				if (str[x++] == c)
 					return (c);
 			}
 		}
@@ -88,7 +87,6 @@ void	ft_remove_quotes(char **str_lexer)
 			ft_remove_quotes(str_lexer);
 		x++;
 	}
-	ft_print_split(str_lexer);
 }
 
 int	ft_check_open_quotes(char const *s)
