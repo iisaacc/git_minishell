@@ -12,6 +12,29 @@
 
 #include "../../minishell.h"
 
+int	ft_between_quotes(char *str, int x)//Devuelve 1 si el elemento buscado está entre comillas simples o dobles
+{
+	char	quote;
+	int		i;
+
+	quote = 0;
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			quote = str[i++];
+			while (str[i] && str[i] != quote)
+			{
+				if (i++ == x)
+					return (1);
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
 char	which_quotes(char *str)
 {
 	int x;
@@ -65,6 +88,7 @@ void	ft_remove_quotes(char **str_lexer)
 			ft_remove_quotes(str_lexer);
 		x++;
 	}
+	ft_print_split(str_lexer);
 }
 
 int	ft_check_quotes(char const *s)

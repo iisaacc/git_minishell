@@ -15,7 +15,8 @@
 void	ft_sigint(int sig)
 {
 	sig = 0;
-	rl_replace_line("", 0);
+	if (sig == 0)
+		rl_replace_line("", 0);
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
 	rl_redisplay();//fuerza atualizacion de la linea

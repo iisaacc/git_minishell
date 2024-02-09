@@ -93,6 +93,7 @@ char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
 void	ft_quotes_input(char **input);
 void	ft_remove_quotes(char **str_lexer);
+int		ft_between_quotes(char *str, int x);
 char	**ft_check_syntax(char **str_lexer);
 
 //-----------------------PARSER---------------------------

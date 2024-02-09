@@ -74,6 +74,7 @@ char	**ft_lexer(t_lexer **lst_lexer, char *input)
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
 	ft_remove_quotes(str_lexer);
+	ft_print_split(str_lexer);
 	str_lexer = ft_check_syntax(str_lexer); //Chequea errores sintacticos como un < o > o << o >> al final de la línea
 	create_nodes(lst_lexer, str_lexer);
 	free(input);//free del input
