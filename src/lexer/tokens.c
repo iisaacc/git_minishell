@@ -73,43 +73,42 @@ char	**ft_case_single_double(char	**lexer, char *token, int *i, int *j)
 	return (tmp);
 }
 
-char	**old_ft_get_tokens(char **lexer)
-{
-	int		i;
-	int		j;
-	char	*token;
+// char	**old_ft_get_tokens(char **lexer)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*token;
 
-	token = NULL;
-	i = 0;
-	while (lexer[i])
-	{
-		j = 0;
-		while (lexer[i][j])
-		{
-			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
-				&& (j == 0 || j == ft_strlen(lexer[i]) - 2) && (ft_strlen(lexer[i]) != 2)
-				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
-				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
-				lexer = ft_case_single_double(lexer, token, &i, &j);
-			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
-				&& (ft_strlen(lexer[i]) != 1) && ((j == 0) || (j == ft_strlen(lexer[i]) - 1))
-				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
-				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
-				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
-				lexer = ft_case_single_double(lexer, token, &i, &j);
-			j++;
-		}
-		i++;
-	}
-	return (lexer);
-}
+// 	token = NULL;
+// 	i = 0;
+// 	while (lexer[i])
+// 	{
+// 		j = 0;
+// 		while (lexer[i][j])
+// 		{
+// 			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
+// 				&& (j == 0 || j == ft_strlen(lexer[i]) - 2) && (ft_strlen(lexer[i]) != 2)
+// 				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
+// 				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
+// 				lexer = ft_case_single_double(lexer, token, &i, &j);
+// 			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
+// 				&& (ft_strlen(lexer[i]) != 1) && ((j == 0) || (j == ft_strlen(lexer[i]) - 1))
+// 				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
+// 				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
+// 				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
+// 				lexer = ft_case_single_double(lexer, token, &i, &j);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (lexer);
+// }
 
 char	**ft_get_tokens(char **lexer)
 {
 	int		i;
 	int		j;
 	char	*token;
-	char	tmp;
 	token = NULL;
 	i = 0;
 	while (lexer[i])
@@ -117,14 +116,13 @@ char	**ft_get_tokens(char **lexer)
 		j = 0;
 		while (lexer[i][j])
 		{
-			tmp = lexer[i][j];
 			if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
-				&& (ft_strlen(lexer[i]) != 2)
+				&& (ft_strlen(lexer[i]) != 2) && (ft_between_quotes(lexer[i], j) == 0)
 				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
 				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
 				lexer = ft_case_single_double(lexer, token, &i, &j);
 			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')//Valoramos si es un token situado al principio o el final de la palabra
-				&& (ft_strlen(lexer[i]) != 1)
+				&& (ft_strlen(lexer[i]) != 1) && (ft_between_quotes(lexer[i], j) == 0)
 				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
 				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
 				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))

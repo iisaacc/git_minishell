@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 15:19:48 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:08:26 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_put_var(char **lexer, int *i, int *j)
 	while (lexer[*i][*j + 1 + len] && lexer[*i][*j + 1 + len] != ' ' && lexer[*i][*j + 1 + len] != '\"')
 		len++;
 	var = ft_substr(lexer[*i], *j + 1, len);
-	if (ft_strncmp(&lexer[*i][*j], "$?", 3) == 0)
+	if (ft_strncmp(&lexer[*i][*j], "$?", 2) == 0)
 		value = ft_itoa(last_status);
 	else
 		value = getenv(var);
@@ -57,7 +57,8 @@ void	ft_extend_var(char **lexer)
 				q = 1;
 			else if (lexer[i][j] == '\'' && q == 1)
 				q = 0;
-			if (lexer[i][j] == '$' && q == 0)
+			if (lexer[i][j] == '$' && q == 0 && lexer[i][j + 1] != ' ' && lexer[i][j + 1] != '\0'
+				&& ft_strncmp(lexer[i], "\"$\"", 3) != 0)
 				ft_put_var(lexer, &i, &j);
 			j++;
 		}

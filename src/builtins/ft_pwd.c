@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:31:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 11:31:29 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:27:35 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ void	ft_pwd(int fd)
 {
 	char buffer[1024];
 	char *pwd;
-	
+	int i;
+
+	i = 0;
 	pwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
-	while (*pwd)
+	while (pwd[i])
 	{
-		write(fd, &(*pwd), 1);
-		pwd++;
+		write(fd, &pwd[i], 1);
+		i++;
 	}
 	write(fd, "\n", 1);
 	free(pwd);
