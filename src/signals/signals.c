@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:55:30 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:35:27 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:19:25 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_sigint(int sig)
 {
 	sig = 0;
-	rl_replace_line("", 0);
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
+	rl_replace_line(" , 0);
 	rl_redisplay();//fuerza atualizacion de la linea
 }
 

@@ -6,11 +6,13 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:40:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:10:08 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int last_status;
 
 void	ft_print_mini_lst(t_mini **mini)
 {
@@ -51,8 +53,6 @@ void	final_free(char *input, char *log, t_envp **envp)
 	free(input);
 }
 
-int last_status;
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
@@ -85,8 +85,8 @@ int	main(int argc, char **argv, char **envp)
 				last_status = ft_executer(&mini);
 		}
 		//printf("last status: %d\n", last_status);
-		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
 		ft_free_lsts(&lexer, &mini, log);
 		log = ft_refresh_log();
 	}
