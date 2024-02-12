@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:29:47 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/06 12:30:01 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:49:19 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void 	echo_flag (char **cmd, int *flag, int *x)
 	
 }
 
-void	ft_echo(char **cmd, int fd)//no imprime nada si $VAR si no existe
-{//strtrim para tirar as comillas
+void	ft_echo(char **cmd, int fd)
+{
 	int x;
 	int i;
 	int flag;
