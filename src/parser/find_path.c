@@ -77,7 +77,7 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 				aux_mini->full_path = ft_strdup(aux_lexer->word);
 			else
 				aux_mini->full_path = ft_find_cmnd_path(envp, aux_lexer->word);
-			if (ft_cmnd_error(aux_lexer->word, aux_mini->full_path) == 1)
+			if (ft_cmnd_error(aux_lexer->word, aux_mini->full_path) == 1 && ft_is_builtin(aux_lexer->word) == 0)
 				return (1);
 			aux_mini = aux_mini->next;
 		}

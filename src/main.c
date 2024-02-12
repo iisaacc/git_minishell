@@ -80,7 +80,7 @@ void	final_free(char *input, char *log, t_envp **envp)
 			add_history(input);
 		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
 		{
-			ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
 			if (last_status == -1)
 				last_status = ft_executer(&mini);
 		}

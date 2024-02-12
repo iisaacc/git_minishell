@@ -12,6 +12,26 @@
 
 #include "../../minishell.h"
 
+int		ft_is_builtin(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", 5))
+		return (1);
+	else if (!ft_strncmp(cmd, "cd", 3))
+		return (1);
+	else if (!ft_strncmp(cmd, "pwd", 4))
+		return (1);
+	else if (!ft_strncmp(cmd, "export", 7))
+		return (1);
+	else if (!ft_strncmp(cmd, "env", 4))
+		return (1);
+	else if (!ft_strncmp(cmd, "unset", 6))
+		return (1);
+	else if (!ft_strncmp(cmd, "exit", 4))
+		return (1);
+	else
+		return (0);
+}	
+
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {
 	if (!mini || !mini->full_cmd)

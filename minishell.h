@@ -92,12 +92,12 @@ void	ft_print_list(t_lexer **lexer);
 char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
 void	ft_quotes_input(char **input);
-void	ft_remove_quotes(char **str_lexer);
+void	ft_remove_quotes(t_lexer **lexer);
 int		ft_between_quotes(char *str, int x);
 char	**ft_check_syntax(char **str_lexer);
+void	ft_types(t_lexer **lexer);
 
 //-----------------------PARSER---------------------------
-void	ft_types(t_lexer **lexer);
 int		ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
 char	*ft_find_cmnd_path(char **envp, char *cmnd);
 int		ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp);
@@ -131,6 +131,7 @@ t_envp	*envp_new(char *envp);
 char	*out_quotes(char *str);
 void	change_env(t_envp **envp, char *find, char *new_value);
 void	ft_print_envp_list(t_envp *envp);
+int		ft_is_builtin(char *cmd);
 
 //------------------------FREE---------------------------
 void	ft_free_envp_list(t_envp **envp);

@@ -19,8 +19,8 @@ void	ft_sigint(int sig)
 		rl_replace_line("", 0);
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
-	rl_replace_line(" , 0);
-	rl_redisplay();//fuerza atualizacion de la linea
+	rl_replace_line(" ", 0);
+	rl_redisplay(); //fuerza atualizacion de la linea
 }
 
 int singal_init()

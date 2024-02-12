@@ -45,9 +45,13 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
-	execve(aux->full_path, aux->full_cmd, NULL);
-	ft_perror(aux->full_path);
-	exit(EXIT_FAILURE);
+	if (ft_is_builtin(aux->full_cmd[0]) == 1)
+		ft_builtins(aux->envp, aux);
+	else if (execve(aux->full_path, aux->full_cmd, NULL) == -1)
+	{
+		ft_perror(aux->full_path);
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	ft_init_data_exec(t_mini **mini, t_exec **exec)
