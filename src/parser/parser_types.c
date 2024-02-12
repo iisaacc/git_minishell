@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_types.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:13:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 13:30:37 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:15:17 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_types(t_lexer **lexer)
 	{
 		if (aux->type != DELIMITER)
 		{
-			if (aux->word[0] == '|' || aux->word[0] == '<' || aux->word[0] == '>')//es um token
+			if ((aux->word[0] == '|' || aux->word[0] == '<' || aux->word[0] == '>') && (ft_strlen(aux->word) <= 2))//es um token
 				ft_subtypes(aux, &flag, &file);
 			else if (file == 1)
 			{

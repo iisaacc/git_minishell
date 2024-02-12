@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:59 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 14:23:26 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:40:53 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,29 @@ int	export_error(char *str)
 	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("not a valid identifier\n", 2);
+	last_status = 1;
 	return (0);
 }
 
 int	check_errors(char *str)
 {
-	if (str[0] == '=')
+	int i;
+
+	i = 0;
+	if (str[0] == '=' || str[0] == '0' || ft_atoi(str))
 		return (export_error(str));
+	else if (ft_strchr(str, '-')) 
+	{
+		while (str && str[i] != '=')
+		{
+			if (str[i] == '-')
+				return (export_error(str));
+			i++;
+		}
+	}
 	else if (!ft_strchr(str, '='))
 		return (0);
 	return (1);
-	
 }
 
 void	ft_export(t_envp **envp_list, char **new_var)

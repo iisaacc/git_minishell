@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/07 14:22:55 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:06:34 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int cd_error(char *not_find)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putchar_fd('\n', 2);
+	last_status = 1;
 	return (1);
 }
 

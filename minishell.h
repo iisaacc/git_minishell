@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:34:43 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:49:52 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_echo(char **cmd, int fd);
 void	ft_pwd(int fd);
 void	ft_unset(t_envp **envp, char **id);
 int		ft_env(int fd, t_envp **envp_list, char **cmd);
-//falta ft_exit
+void	ft_exit(char **cmd);
 char 	*find_env(t_envp **envp, char *find);
 void	create_envp(t_envp **envp_list, char **envp);
 void	ft_export(t_envp **envp_list, char **new_var);

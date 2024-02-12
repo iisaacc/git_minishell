@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_debug.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:46:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 14:10:07 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:17:54 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("echo \"$\"");
+ 	char	*input = ft_strdup("echo \"exit_code ->$? user ->$USER home -> $HOME\"");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
