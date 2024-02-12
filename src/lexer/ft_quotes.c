@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:14:52 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/31 15:33:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:57:42 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	which_quotes(char *str)
 {
 	int x;
 	char c;
-	
+
 	x = 0;
 	while (str[x])
 	{
@@ -48,8 +48,7 @@ char	which_quotes(char *str)
 			c = str[x++];
 			while (str[x])
 			{
-				x++;
-				if (str[x] == c)
+				if (str[x++] == c)
 					return (c);
 			}
 		}
@@ -88,10 +87,9 @@ void	ft_remove_quotes(char **str_lexer)
 			ft_remove_quotes(str_lexer);
 		x++;
 	}
-	ft_print_split(str_lexer);
 }
 
-int	ft_check_quotes(char const *s)
+int	ft_check_open_quotes(char const *s)
 {
 	int	i;
 
@@ -124,9 +122,9 @@ void	ft_quotes_input(char **input)
 	char	*new_input;
 	char	*prompt;
 
-	while (ft_check_quotes(*input) > 0)
+	while (ft_check_open_quotes(*input) > 0)
 	{
-		if (ft_check_quotes(*input) == 1)
+		if (ft_check_open_quotes(*input) == 1)
 			prompt = "quotes>";
 		else
 			prompt = "dquotes>";
