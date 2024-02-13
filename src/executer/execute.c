@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 13:34:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:36:31 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->infile, STDIN_FILENO);//Cambiamos el standar input por el fd de entrada deseado
 	if (aux->infile != 0)//Asegurarse de que no estás cerrando la entrada estándar original
 		close(aux->infile);
+	printf("aqui\n");
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
@@ -84,17 +85,20 @@ int	ft_executer(t_mini **mini)
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
 		return (last_status); //error
 	i = 0;
-	while (i < exec->total_cmnds)
+	while (i < exec->total_cmnds && exec->aux)
 	{
-		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
-			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		exec->pid = fork();
-		if (exec->pid == 0)
-			ft_child_process(exec->aux);
-		else if (exec->pid < 0)
-			ft_perror("fork");
-		else
-			last_status = ft_close_wait(exec, i);
+		if (!is_a_bltin(exec->aux))
+		{
+			if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
+				ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
+			exec->pid = fork();
+			if (exec->pid == 0)
+				ft_child_process(exec->aux);
+			else if (exec->pid < 0)
+				ft_perror("fork");
+			else
+				last_status = ft_close_wait(exec, i);
+		}
 		i++;
 		exec->aux = exec->aux->next;
 	}
