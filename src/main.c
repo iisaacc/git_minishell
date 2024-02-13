@@ -89,7 +89,8 @@ void	final_free(char *input, char *log, t_envp **envp)
 		ft_free_lsts(&lexer, &mini, log);
 		log = ft_refresh_log();
 	}
-	final_free(input, log, &envp_list);
+	//final_free(input, log, &envp_list);
 	clear_history();
+}
 }
 

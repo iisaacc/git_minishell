@@ -44,7 +44,6 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->infile, STDIN_FILENO);//Cambiamos el standar input por el fd de entrada deseado
 	if (aux->infile != 0)//Asegurarse de que no estás cerrando la entrada estándar original
 		close(aux->infile);
-	printf("aqui\n");
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);

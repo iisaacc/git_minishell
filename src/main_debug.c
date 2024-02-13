@@ -65,7 +65,7 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("./src");
+ 	char	*input = ft_strdup("hola");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
