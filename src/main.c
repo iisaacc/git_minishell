@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/13 12:25:38 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:58 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,17 @@ void	final_free(char *input, char *log, t_envp **envp)
 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
 		{
 			add_history(input);
-			ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
-			if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
-			{
-				ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
-				ft_executer(&mini);
-			}
-			//printf("last status: %d\n", last_status);
-			//ft_print_list(&lexer);
-			//ft_print_mini_lst(&mini);
-			ft_free_lsts(&lexer, &mini, log);
-			log = ft_refresh_log();
-		}	
+		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
+		{
+			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+			if (last_status == -1)
+				last_status = ft_executer(&mini);
+		}
+		//printf("last status: %d\n", last_status);
+		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
+		ft_free_lsts(&lexer, &mini, log);
+		log = ft_refresh_log();
 	}
 	final_free(input, log, &envp_list);
 	clear_history();

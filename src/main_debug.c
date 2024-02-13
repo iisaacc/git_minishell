@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:46:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/13 12:28:22 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:44 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int last_status;
  	ft_quotes_input(&input);
  	if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
  	{
- 		//ft_print_list(&lexer);
- 		ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
- 		ft_executer(&mini);
+ 		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+ 		ft_print_list(&lexer);
+		ft_print_mini_lst(&mini);
+ 		if (last_status == -1)
+ 			last_status = ft_executer(&mini);
  	}
  	//ft_print_mini_lst(&mini);
  	//ft_free_lsts(&lexer, &mini);

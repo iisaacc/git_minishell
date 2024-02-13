@@ -71,7 +71,7 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 	aux_lexer = *lexer;
 	while (aux_lexer)
 	{
-		if (aux_lexer->type == CMND)
+		if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 0)
 		{
 			if (ft_strchr(aux_lexer->word, '/') != NULL)
 				aux_mini->full_path = ft_strdup(aux_lexer->word);
@@ -81,6 +81,8 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 				return (1);
 			aux_mini = aux_mini->next;
 		}
+		else if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 1)
+			aux_mini = aux_mini->next;
 		aux_lexer = aux_lexer->next;
 	}
 	return (0);

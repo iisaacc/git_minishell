@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/13 12:06:36 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:24 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ void	ft_print_list(t_lexer **lexer);//borrar
 char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
 void	ft_quotes_input(char **input);
-void	ft_remove_quotes(char **str_lexer);
+void	ft_remove_quotes(t_lexer **lexer);
 int		ft_between_quotes(char *str, int x);
 char	**ft_check_syntax(char **str_lexer);
+void	ft_types(t_lexer **lexer);
 
 //-----------------------PARSER---------------------------
-void	ft_types(t_lexer **lexer);
 int		ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list);
 char	*ft_find_cmnd_path(char **envp, char *cmnd);
 int		ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp);
