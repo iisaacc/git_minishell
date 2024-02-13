@@ -14,6 +14,7 @@
 
 void	ft_sigint(int sig)
 {
+	(void)sig;//Evita el warning de -Werror pero no hace realmente nada
 	sig = 0;
 
 	ft_putchar_fd('\n', 1);

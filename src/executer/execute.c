@@ -46,7 +46,10 @@ void	ft_child_process(t_mini *aux)
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
 	if (ft_is_builtin(aux->full_cmd[0]) == 1)
+	{
 		ft_builtins(aux->envp, aux);
+		exit(EXIT_SUCCESS);
+	}
 	else if (execve(aux->full_path, aux->full_cmd, NULL) == -1)
 	{
 		ft_perror(aux->full_path);

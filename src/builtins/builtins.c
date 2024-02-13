@@ -14,7 +14,9 @@
 
 int		ft_is_builtin(char *cmd)
 {
-	if (!ft_strncmp(cmd, "echo", 5))
+	if (!cmd)
+		return (0);
+	else if (!ft_strncmp(cmd, "echo", 5))
 		return (1);
 	else if (!ft_strncmp(cmd, "cd", 3))
 		return (1);
@@ -57,8 +59,8 @@ int		is_a_bltin(t_mini *mini)
 int		ft_builtins(t_envp **envp_list, t_mini *mini)//hacer como un filtro para saber se es un builtin y cual es
 {
 	//printf("id %dpassou\n", mini->id);
-	if(is_a_bltin(mini->next))
-		return (ft_builtins(envp_list, mini->next));
+	//if(is_a_bltin(mini->next))
+		//return (ft_builtins(envp_list, mini->next));
 	if (!mini || !mini->full_cmd)
 		return (0);//hacer con que las funciones devuelvam -1 si hay error
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", 5))
