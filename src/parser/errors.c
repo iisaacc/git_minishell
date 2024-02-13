@@ -12,13 +12,14 @@
 
 #include "../../minishell.h"
 
-void	ft_perror_mod(char *error, char *mod)
+void	ft_perror_mod(char *error, char *mod, int exit)
 {
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(mod, 2);
 	ft_putstr_fd("\n", 2);
+	last_status = exit;
 }
 
 void	ft_perror(char *error)

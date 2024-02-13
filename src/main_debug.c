@@ -65,7 +65,7 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("hola");
+ 	char	*input = ft_strdup("ech <123 <infile hi >outfile1| >outfile");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
@@ -74,10 +74,10 @@ int last_status;
  	{
  		if (ft_parser(&lexer, &mini, envp, &envp_list) == -1)
 				last_status = ft_executer(&mini);
- 		ft_print_list(&lexer);
-		ft_print_mini_lst(&mini);
+ 		//ft_print_list(&lexer);
+		//ft_print_mini_lst(&mini);
  	}
- 	ft_print_mini_lst(&mini);
+ 	//ft_print_mini_lst(&mini);
 	printf("last status: %d\n", last_status);
  	//ft_free_lsts(&lexer, &mini);
  	return (0);

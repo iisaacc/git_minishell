@@ -36,6 +36,54 @@ void	add_new(t_lexer **lst, t_lexer *new)//añande un nodo a la lista
 	aux->next = new;
 }
 
+void	ft_refresh_id(t_lexer **lexer)//refresca los id de los nodos
+{
+	t_lexer	*aux;
+	int		lap;
+
+	lap = 0;
+	aux = *lexer;
+	while (aux)
+	{
+		aux->id = lap;
+		lap++;
+		aux = aux->next;
+	}
+}
+
+void	ft_delete_node(t_lexer **lexer, int x)//borra un nodo
+{
+	t_lexer	*aux;
+	t_lexer	*prev;
+	int		i;
+
+	i = 0;
+	aux = *lexer;
+	prev = NULL;
+	while (aux)
+	{
+		if (x == aux->id)
+		{
+			if (prev)
+			{
+				prev->next = aux->next;
+				aux = prev->next;
+			}
+			else
+				*lexer = aux->next;
+			free(aux->word);
+			free(aux);
+			return;
+		}
+		else
+		{
+			prev = aux;
+			aux = aux->next;
+			i++;
+		}
+	}
+}
+
 t_lexer *create_new(char *input, int x)
 {
 	t_lexer *node;
@@ -60,7 +108,8 @@ void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
 		ft_free_lexer_lst(lexer);
 	while (input && input[x])
 	{
-		add_new(lexer, create_new(input[x], x));
+		if (input[x][0] != '\0')
+			add_new(lexer, create_new(input[x], x));
 		x++;
 	}
 	//ft_free_2d(input);//Da invalid free en algunos casos "cat <minishell.h|ls" no se por qué

@@ -94,6 +94,5 @@ char	** ft_lexer(t_lexer **lst_lexer, char *input)
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
 	ft_remove_quotes(lst_lexer);
-	free(input);//free del input
 	return (str_lexer);
 }

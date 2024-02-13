@@ -90,6 +90,7 @@ char	**ft_lexer(t_lexer **lexer, char *input);
 void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);
+void	ft_delete_node(t_lexer **lexer, int x);
 void	ft_print_list(t_lexer **lexer);//borrar
 char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
@@ -109,9 +110,10 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 int		ft_set_io(t_mini **mini, t_lexer **lexer);
 int		ft_cmnd_error(char *error, char *boole);
 int		ft_file_error(int infd, char *infile);
-void	ft_perror_mod(char *error, char *mod);
+void	ft_perror_mod(char *error, char *mod, int exit);
 void	ft_perror(char *error);
 void	ft_syntax_error(char *error);
+void	ft_delete_pipe(t_lexer **lexer, int pipe);
 
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);

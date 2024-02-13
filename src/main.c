@@ -46,11 +46,10 @@ void	ft_print_list(t_lexer **lexer)
 	}
 }
 
-void	final_free(char *input, char *log, t_envp **envp)
+void	final_free (char *log, t_envp **envp)
 {
 	ft_free_envp_list(envp);//hay que quedar fuera del bucle
 	free(log);
-	free(input);
 }
 
  int	main(int argc, char **argv, char **envp)
@@ -75,8 +74,8 @@ void	final_free(char *input, char *log, t_envp **envp)
 	singal_init();
 	while ((input = readline(log)))//lee la línea
 	{
+		ft_quotes_input(&input);
 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
-		{
 			add_history(input);
 		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
 		{
@@ -91,6 +90,5 @@ void	final_free(char *input, char *log, t_envp **envp)
 	}
 	//final_free(input, log, &envp_list);
 	clear_history();
-}
 }
 

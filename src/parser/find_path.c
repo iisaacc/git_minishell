@@ -18,11 +18,7 @@ int	ft_check_is_dir(char *path)
 	if (stat(path, &s) == 0)
 	{
 		if (S_ISDIR(s.st_mode))
-		{
-			ft_perror_mod(path, "Is a directory");
-			last_status = 126;
-			return (1);
-		}
+			return (ft_perror_mod(path, "Is a directory", 126), 1);
 		return (0);
 	}
 	else
