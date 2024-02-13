@@ -1,4 +1,4 @@
-dos builtins con pipe no funcionam (no pipe)
 signal handling (ctrl+C, ctrl+D, ctrl+\)
 cat <"./test_files/infile_big" 
 broken pipe
+Hay que hacer cd en el proceso padre

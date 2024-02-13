@@ -45,7 +45,6 @@ t_lexer *create_new(char *input, int x)
 	if (!node)
 		return (NULL);
 	node->word = ft_strdup(input);
-	free(input);
 	node->next = NULL;
 	node->type = 0;
 	node->id = x;
@@ -64,5 +63,5 @@ void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
 		add_new(lexer, create_new(input[x], x));
 		x++;
 	}
-	free(input);
+	//ft_free_2d(input);//Da invalid free en algunos casos "cat <minishell.h|ls" no se por qué
 }

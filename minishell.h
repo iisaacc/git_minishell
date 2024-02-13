@@ -15,6 +15,8 @@
 
 # include <pthread.h>
 # include <signal.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,7 +27,7 @@
 # include <readline/history.h>
 # include "includes/libft/libft.h"
 # include <errno.h>
-#include <string.h>
+# include <string.h>
 
 # define CMND 1
 # define FLAG 2
@@ -107,6 +109,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 int		ft_set_io(t_mini **mini, t_lexer **lexer);
 int		ft_cmnd_error(char *error, char *boole);
 int		ft_file_error(int infd, char *infile);
+void	ft_perror_mod(char *error, char *mod);
 void	ft_perror(char *error);
 void	ft_syntax_error(char *error);
 
@@ -132,6 +135,7 @@ char	*out_quotes(char *str);
 void	change_env(t_envp **envp, char *find, char *new_value);
 void	ft_print_envp_list(t_envp *envp);
 int		ft_is_builtin(char *cmd);
+int		ft_is_cd(char *cmd);
 
 //------------------------FREE---------------------------
 void	ft_free_envp_list(t_envp **envp);

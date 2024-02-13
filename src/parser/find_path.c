@@ -12,6 +12,27 @@
 
 #include "../../minishell.h"
 
+int	ft_check_is_dir(char *path)
+{
+	struct stat s;
+	if (stat(path, &s) == 0)
+	{
+		if (S_ISDIR(s.st_mode))
+		{
+			ft_perror_mod(path, "Is a directory");
+			last_status = 126;
+			return (1);
+		}
+		return (0);
+	}
+	else
+	{
+		ft_perror(path);
+		last_status = 127;
+		return (1);
+	}
+}
+
 char	*ft_find_cmnd_path(char **envp, char *cmnd)
 {
 	int		i;
@@ -74,11 +95,15 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 		if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 0)
 		{
 			if (ft_strchr(aux_lexer->word, '/') != NULL)
+			{
 				aux_mini->full_path = ft_strdup(aux_lexer->word);
+				if (ft_check_is_dir(aux_mini->full_path) == 1)
+					return (1);
+			}
 			else
 				aux_mini->full_path = ft_find_cmnd_path(envp, aux_lexer->word);
-			if (ft_cmnd_error(aux_lexer->word, aux_mini->full_path) == 1)
-				return (1);
+			if (!aux_mini->full_path)
+				return (ft_cmnd_error(aux_lexer->word, aux_mini->full_path));
 			aux_mini = aux_mini->next;
 		}
 		else if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 1)

@@ -103,6 +103,6 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 		return (1);
 	ft_set_full_cmnd(mini, lexer);
 	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
-		return (127);
+		return (1);
 	return (-1);//En este caso ejecutamos el comando
 }

@@ -65,20 +65,20 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("echo \"exit_code ->$? user ->$USER home -> $HOME\"");
+ 	char	*input = ft_strdup("./src");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
  	ft_quotes_input(&input);
  	if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
  	{
- 		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
+ 		if (ft_parser(&lexer, &mini, envp, &envp_list) == -1)
+				last_status = ft_executer(&mini);
  		ft_print_list(&lexer);
 		ft_print_mini_lst(&mini);
- 		if (last_status == -1)
- 			last_status = ft_executer(&mini);
  	}
- 	//ft_print_mini_lst(&mini);
+ 	ft_print_mini_lst(&mini);
+	printf("last status: %d\n", last_status);
  	//ft_free_lsts(&lexer, &mini);
  	return (0);
  }

@@ -25,6 +25,7 @@ int	ft_close_wait(t_exec *exec, int i)
 		return (WEXITSTATUS(status));
 	else
 		return (1);//Si no terminó normalmente, devolvemos 1
+	return (0);
 }
 
 void	ft_set_next_pipe(t_exec *exec)
@@ -32,7 +33,8 @@ void	ft_set_next_pipe(t_exec *exec)
 	if (exec->total_cmnds > 1)
 	{
 		pipe(exec->fdpipe);
-		(exec->aux->next)->infile = exec->fdpipe[0];
+		if ((exec->aux->next)->infile == 0)
+			(exec->aux->next)->infile = exec->fdpipe[0];
 		exec->aux->outfile = exec->fdpipe[1];
 	}
 }
@@ -95,13 +97,18 @@ int	ft_executer(t_mini **mini)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		exec->pid = fork();
-		if (exec->pid == 0)
-			ft_child_process(exec->aux);
-		else if (exec->pid < 0)
-			ft_perror("fork");
+		if (ft_is_cd(exec->aux->full_cmd[0]) == 0)//cd se ejecuta en el proceso padre
+		{
+			exec->pid = fork();
+			if (exec->pid == 0)
+				ft_child_process(exec->aux);
+			else if (exec->pid < 0)
+				ft_perror("fork");
+			else
+				last_status = ft_close_wait(exec, i);
+		}
 		else
-			last_status = ft_close_wait(exec, i);
+			last_status = ft_cd(exec->aux, exec->aux->envp);
 		i++;
 		exec->aux = exec->aux->next;
 	}
