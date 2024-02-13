@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 13:34:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:36:31 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->infile, STDIN_FILENO);//Cambiamos el standar input por el fd de entrada deseado
 	if (aux->infile != 0)//Asegurarse de que no estás cerrando la entrada estándar original
 		close(aux->infile);
+	printf("aqui\n");
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);

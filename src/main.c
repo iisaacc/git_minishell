@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/12 13:18:29 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:58 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	final_free(char *input, char *log, t_envp **envp)
 	singal_init();
 	while ((input = readline(log)))//lee la línea
 	{
-		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
+		{
 			add_history(input);
 		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
 		{

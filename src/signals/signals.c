@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:55:30 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/12 11:25:13 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:23:39 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_sigint(int sig)
 	(void)sig;//Evita el warning de -Werror pero no hace realmente nada
 	sig = 0;
 
+	rl_replace_line("" , 0);
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
-	rl_replace_line("" , 0);
 	rl_redisplay();//fuerza atualizacion de la linea
 }
 

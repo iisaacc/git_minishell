@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:38:32 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/08 14:13:32 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:35:34 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

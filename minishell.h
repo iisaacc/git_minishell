@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/12 14:49:52 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:24 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**ft_lexer(t_lexer **lexer, char *input);
 void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);
-void	ft_print_list(t_lexer **lexer);
+void	ft_print_list(t_lexer **lexer);//borrar
 char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
 void	ft_quotes_input(char **input);
@@ -144,7 +144,7 @@ void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
 void	ft_free_lsts(t_lexer **lexer, t_mini **mini, char *log);
 
-void	ft_print_mini_lst(t_mini **mini);
+void	ft_print_mini_lst(t_mini **mini);//borrar
 
 //------------------------SIGNALS---------------------------
 int		singal_init();
