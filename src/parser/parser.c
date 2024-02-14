@@ -23,6 +23,8 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 	flag = 0;//no falla
 	m_node = *mini;
 	lex_id = 0;
+	if (!*lexer)
+		return (1);
 	while (m_node)
 	{
 		pipe = 0;
@@ -99,6 +101,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
+	ft_check_bad_input(lexer);//Chequea si hay un redireccionamiento de entrada "<" erróneo, para no intentar ejecutar ese comando ni nada que este dentro de ese pipe
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);

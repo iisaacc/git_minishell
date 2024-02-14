@@ -49,6 +49,8 @@ typedef struct s_envp //lista para las variables del ambiente
 	struct s_envp	*next;
 }	t_envp;
 
+
+
 typedef struct s_lexer
 {
 	char			*word; //palavra
@@ -68,6 +70,14 @@ typedef struct s_mini
 	t_envp			**envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
+
+typedef struct main
+{
+	char	*input;
+ 	t_lexer	*lexer;
+ 	t_mini	*mini;
+ 	t_envp	*envp_list;
+} t_main;
 
 typedef struct s_exec
 {
@@ -114,6 +124,7 @@ void	ft_perror_mod(char *error, char *mod, int exit);
 void	ft_perror(char *error);
 void	ft_syntax_error(char *error);
 void	ft_delete_pipe(t_lexer **lexer, int pipe);
+void	ft_check_bad_input(t_lexer **lexer);
 
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);
@@ -144,8 +155,7 @@ void	ft_free_envp_list(t_envp **envp);
 void	ft_free_mini_lst(t_mini **mini);
 void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
-void	ft_free_lsts(t_lexer **lexer, t_mini **mini, char *log);
-
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void	ft_print_mini_lst(t_mini **mini);//borrar
 
 //------------------------SIGNALS---------------------------

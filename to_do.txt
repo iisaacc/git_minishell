@@ -1,4 +1,5 @@
 signal handling (ctrl+C, ctrl+D, ctrl+\)
 cat <"./test_files/infile_big" 
 broken pipe
+Hacer que un "|" al principio del input sea un syntax error
 //En caso de que no se abra el archivo de entrada no queremos que se tome en cuenta nada relacionado CON ESE PIPE
