@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/13 12:41:24 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:16:56 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "includes/libft/libft.h"
 # include <errno.h>
 # include <string.h>
+# include <sys/ioctl.h>
 
 # define CMND 1
 # define FLAG 2
@@ -39,6 +40,11 @@
 # define D_GREATER 8
 # define D_LESS 9
 # define DELIMITER 10
+
+# define HEREDOC 99
+# define HEREDOC_END 100
+# define DELIMITER 10
+
 
 //int	g_status; variavel global
 

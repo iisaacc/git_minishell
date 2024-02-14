@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/12 15:06:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:46:36 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int	ft_cd(t_mini *mini, t_envp **envp)//se llega hasta aqui full_cmd[1] sera el 
 
 	if (!mini->full_cmd[1] || !ft_strncmp(mini->full_cmd[1], " ", ft_strlen(mini->full_cmd[1])))
 		dst = ft_strdup(find_env(envp, "HOME"));//cuando son muchos espacios falla
-	else if (ft_count_lines2d(mini->full_cmd) > 2)
-		return (ft_perror_mod("cd", "too many arguments", 1), 1);
 	else if (!ft_strncmp(mini->full_cmd[1], "-", ft_strlen(mini->full_cmd[1])))
 		dst = ft_strdup(find_env(envp, "OLDPWD"));
 	else
