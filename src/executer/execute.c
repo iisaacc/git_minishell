@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/13 12:36:31 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:50:04 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_child_process(t_mini *aux)
 	if (ft_is_builtin(aux->full_cmd[0]) == 1)
 	{
 		ft_builtins(aux->envp, aux);
-		exit(EXIT_SUCCESS);
+		exit(last_status);
 	}
 	else if (execve(aux->full_path, aux->full_cmd, NULL) == -1)
 	{
