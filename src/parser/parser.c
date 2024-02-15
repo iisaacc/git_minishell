@@ -101,7 +101,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 
 int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
 {
-	ft_check_bad_input(lexer);//Chequea si hay un redireccionamiento de entrada "<" erróneo, para no intentar ejecutar ese comando ni nada que este dentro de ese pipe
+	ft_check_bad_input(lexer);//Chequea si hay un redireccionamiento de entrada "<" o salida ">" erróneo, para no intentar ejecutar ese comando ni nada que este dentro de ese pipe
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);

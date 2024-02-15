@@ -37,6 +37,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);

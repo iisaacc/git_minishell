@@ -94,12 +94,13 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 			{
 				aux_mini->full_path = ft_strdup(aux_lexer->word);
 				if (ft_check_is_dir(aux_mini->full_path) == 1)
-					return (1);
+					aux_mini->full_path = NULL;
+				return (0);
 			}
 			else
 				aux_mini->full_path = ft_find_cmnd_path(envp, aux_lexer->word);
 			if (!aux_mini->full_path)
-				return (ft_cmnd_error(aux_lexer->word, aux_mini->full_path));
+				ft_cmnd_error(aux_lexer->word, aux_mini->full_path);
 			aux_mini = aux_mini->next;
 		}
 		else if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 1)

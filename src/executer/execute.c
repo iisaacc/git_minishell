@@ -35,7 +35,8 @@ void	ft_set_next_pipe(t_exec *exec)
 		pipe(exec->fdpipe);
 		if (exec->aux->next && (exec->aux->next)->infile == 0)
 			(exec->aux->next)->infile = exec->fdpipe[0];
-		exec->aux->outfile = exec->fdpipe[1];
+		if (exec->aux->outfile == 1)
+			exec->aux->outfile = exec->fdpipe[1];
 	}
 }
 
@@ -83,10 +84,8 @@ void	ft_close_restore(t_exec *exec)
 int	ft_executer(t_mini **mini)
 {
 	t_exec	*exec;
-	int		last_status;
 	int		i;
 
-	last_status = 0;
 	exec = malloc(sizeof(t_exec));
 	if (!exec)
 		return (1);
@@ -97,7 +96,8 @@ int	ft_executer(t_mini **mini)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		if (exec->aux->full_cmd && ft_is_cd(exec->aux->full_cmd[0]) == 0)//cd se ejecuta en el proceso padre
+		if ((exec->aux->full_cmd && ft_is_cd(exec->aux->full_cmd[0]) == 0 && ft_is_builtin(exec->aux->full_cmd[0]) == 1)//cd se ejecuta en el proceso padre
+			|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
 		{
 			exec->pid = fork();
 			if (exec->pid == 0)

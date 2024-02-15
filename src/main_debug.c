@@ -35,6 +35,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
@@ -65,7 +66,7 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("ls | >outfile01");
+ 	char	*input = ft_strdup("< inputt echo hi | echo bye");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);

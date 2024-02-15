@@ -87,6 +87,7 @@ char	** ft_lexer(t_lexer **lst_lexer, char *input)
 	char	**str_lexer;
 	if (!input)
 		return (NULL);
+	ft_check_end_pipe(&input);
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
