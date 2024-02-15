@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/15 15:44:33 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:03:53 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	m.lexer = NULL;
 	m.mini = NULL;
 	last_status = 0;
+	
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
 	ft_init_var(envp, &m.envp_list);
@@ -70,14 +71,12 @@ int	main(int argc, char **argv, char **envp)
 		ft_quotes_input(&m.input);
 		if (ft_strncmp(m.input, "\0", 1) != 0)//si esta vacio no adiciona al historial
 			add_history(m.input);
-		if (ft_lexer(&m.lexer, m.input) != NULL)//crea la lista de tokens
-		{
+		ft_lexer(&m.lexer, m.input);//crea la lista de tokens
 			if (ft_parser(&m.lexer, &m.mini, envp, &m.envp_list) == -1)
 				last_status = ft_executer(&m.mini);
-		}
 		ft_free_lsts(&m.lexer, &m.mini);
 	}
-	free(log);
-	final_free(input, &envp_list);
+	free(m.input);
+	//final_free(input, &envp_list);
 	clear_history();
 }

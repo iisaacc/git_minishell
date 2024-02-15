@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:32:01 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/12 15:04:33 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:07:09 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_exit(char **cmd)
 	{
 		if (ft_atoi(cmd[0]))
 			exit(ft_atoi(cmd[0]));
-		else 
+		else
 		{
 			ft_putstr_fd("bash: exit: ", 2);
 			ft_putstr_fd(cmd[0], 2);
@@ -34,6 +34,6 @@ void	ft_exit(char **cmd)
 			exit(255);
 		}
 	}
-	else 
+	else
 		exit(last_status);
 }
