@@ -35,6 +35,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
@@ -65,17 +66,19 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("ech <123 <infile hi >outfile1| >outfile");
+ 	char	*input = ft_strdup("< inputt echo hi | echo bye");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
  	ft_quotes_input(&input);
  	if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
  	{
+ 		ft_print_list(&lexer);
  		if (ft_parser(&lexer, &mini, envp, &envp_list) == -1)
-				last_status = ft_executer(&mini);
- 		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
+		{
+			ft_print_mini_lst(&mini);
+			last_status = ft_executer(&mini);
+		}
  	}
  	//ft_print_mini_lst(&mini);
 	printf("last status: %d\n", last_status);

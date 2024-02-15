@@ -34,13 +34,11 @@ t_mini	*ft_mini_new(int lap, t_envp **envp_list)
 	mini = malloc(sizeof(t_mini));
 	mini->full_cmd = NULL;//ft_full_cmnd(l_node);
 	mini->full_path = NULL;//ft_find_cmnd_path(envp, l_node->word);
-	//ft_cmnd_error(l_node->word, mini->full_path);
 	mini->infile = STDIN_FILENO;
 	mini->outfile = STDOUT_FILENO;
 	mini->id = lap;
 	mini->envp = envp_list;
 	mini->next = NULL;
-	//ft_set_io(mini, lexer, lap);
 	return (mini);
 }
 
@@ -72,18 +70,25 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
 	t_lexer	*aux;
 	int		lap;
+	int		b;
 
+	b = 0;
 	lap = 0;
 	aux = *lexer;
 	while (aux)
 	{
 		if (aux->type == PIPE)
+		{
 			lap++;
-		if (aux->type == CMND)
+			b = 0;
+		}
+		if ((aux->type == CMND || aux->type == GREATER) && b == 0)
+		{
 			mini_add_new(mini, ft_mini_new(lap, envp_list));
+			b = 1;
+		}
 		aux = aux->next;
 	}
 	ft_total_cmnds(mini, lap + 1);
-	//ft_print_list(lexer);
 	return (mini);
 }

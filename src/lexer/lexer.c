@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/15 15:35:35 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:45:14 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	ft_lexer(t_lexer **lst_lexer, char *input)
 {
 	char	**str_lexer;
 	if (!input)
-		return ;
+		return (NULL);
+	ft_check_end_pipe(&input);
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);

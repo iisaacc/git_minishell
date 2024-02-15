@@ -60,6 +60,8 @@ typedef struct s_envp //lista para las variables del ambiente
 	struct s_envp	*next;
 }	t_envp;
 
+
+
 typedef struct s_lexer
 {
 	char			*word; //palavra
@@ -79,6 +81,14 @@ typedef struct s_mini
 	t_envp			**envp;
 	struct s_mini	*next;//puntero al siguiente nodo
 }		t_mini;
+
+typedef struct main
+{
+	char	*input;
+ 	t_lexer	*lexer;
+ 	t_mini	*mini;
+ 	t_envp	*envp_list;
+} t_main;
 
 typedef struct s_exec
 {
@@ -101,7 +111,7 @@ void	ft_lexer(t_lexer **lexer, char *input);
 void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);
-void	ft_delete_node(t_lexer **lexer, int x);
+t_lexer	*ft_delete_node(t_lexer **lexer, int x);
 void	ft_print_list(t_lexer **lexer);//borrar
 char	**ft_get_tokens(char **lexer);
 int		ft_check_quotes(char const *s);
@@ -109,6 +119,7 @@ void	ft_quotes_input(char **input);
 void	ft_remove_quotes(t_lexer **lexer);
 int		ft_between_quotes(char *str, int x);
 char	**ft_check_syntax(char **str_lexer);
+void	ft_check_end_pipe(char **input);
 void	ft_types(t_lexer **lexer);
 
 //-----------------------PARSER---------------------------
@@ -124,7 +135,8 @@ int		ft_file_error(int infd, char *infile);
 void	ft_perror_mod(char *error, char *mod, int exit);
 void	ft_perror(char *error);
 void	ft_syntax_error(char *error);
-void	ft_delete_pipe(t_lexer **lexer, int pipe);
+t_lexer	*ft_delete_pipe(t_lexer **lexer, int pipe);
+void	ft_check_bad_input(t_lexer **lexer);
 
 //----------------------EXECUTER---------------------------
 void	ft_pipes(t_mini **mini);
@@ -155,8 +167,7 @@ void	ft_free_envp_list(t_envp **envp);
 void	ft_free_mini_lst(t_mini **mini);
 void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
-void	ft_free_lsts(t_lexer **lexer, t_mini **mini, char *log);
-
+void	ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void	ft_print_mini_lst(t_mini **mini);//borrar
 
 //------------------------SIGNALS---------------------------

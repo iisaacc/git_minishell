@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/15 15:39:11 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:44:33 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
@@ -52,42 +53,29 @@ void	final_free (char *log, t_envp **envp)
 	free(log);
 }
 
- int	main(int argc, char **argv, char **envp)
- {
- 	char	*input;
- 	t_lexer	*lexer;
- 	t_mini	*mini;
- 	t_envp	*envp_list;
- 	char	*log;
+int	main(int argc, char **argv, char **envp)
+{
+	t_main	m;
 
-	envp_list = NULL;
-	lexer = NULL;
-	mini = NULL;
+	m.envp_list = NULL;
+	m.lexer = NULL;
+	m.mini = NULL;
+	last_status = 0;
 	if (argc > 1 && argv)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
-	ft_init_var(envp, &envp_list);
-	log = ft_refresh_log();
+		return (printf("Wrong number of arguments\n"), 1);
+	ft_init_var(envp, &m.envp_list);
 	singal_init();
-	while ((input = readline(log)))//lee la línea
+	while ((m.input = readline(ft_refresh_log())))//lee la línea
 	{
-		ft_quotes_input(&input);
-		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
-			add_history(input);
-		ft_lexer(&lexer, input);//crea la lista de tokens
-		if (ft_parser(&lexer, &mini, envp, &envp_list) == -1)
-		{	
-			last_status = IN_CMD;
-			last_status = ft_executer(&mini);
+		ft_quotes_input(&m.input);
+		if (ft_strncmp(m.input, "\0", 1) != 0)//si esta vacio no adiciona al historial
+			add_history(m.input);
+		if (ft_lexer(&m.lexer, m.input) != NULL)//crea la lista de tokens
+		{
+			if (ft_parser(&m.lexer, &m.mini, envp, &m.envp_list) == -1)
+				last_status = ft_executer(&m.mini);
 		}
-		
-		//printf("last status: %d\n", last_status);
-		//ft_print_list(&lexer);
-		//ft_print_mini_lst(&mini);
-		ft_free_lsts(&lexer, &mini, log);
-		log = ft_refresh_log();
+		ft_free_lsts(&m.lexer, &m.mini);
 	}
 	free(log);
 	final_free(input, &envp_list);

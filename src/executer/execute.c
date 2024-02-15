@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/15 14:33:58 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:44:58 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	ft_set_next_pipe(t_exec *exec)
 	if (exec->total_cmnds > 1)
 	{
 		pipe(exec->fdpipe);
-		if ((exec->aux->next)->infile == 0)
+		if (exec->aux->next && (exec->aux->next)->infile == 0)
 			(exec->aux->next)->infile = exec->fdpipe[0];
-		exec->aux->outfile = exec->fdpipe[1];
+		if (exec->aux->outfile == 1)
+			exec->aux->outfile = exec->fdpipe[1];
 	}
 }
 
@@ -83,7 +84,6 @@ void	ft_close_restore(t_exec *exec)
 int	ft_executer(t_mini **mini)
 {
 	t_exec	*exec;
-	int		last_status;
 	int		i;
 
 	last_status = IN_CMD;
@@ -93,11 +93,12 @@ int	ft_executer(t_mini **mini)
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
 		return (last_status); //error
 	i = 0;
-	while (i < exec->total_cmnds)
+	while (exec->aux && i < exec->total_cmnds)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		if (ft_is_cd(exec->aux->full_cmd[0]) == 0)//cd se ejecuta en el proceso padre
+		if ((exec->aux->full_cmd && ft_is_cd(exec->aux->full_cmd[0]) == 0 && ft_is_builtin(exec->aux->full_cmd[0]) == 1)//cd se ejecuta en el proceso padre
+			|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
 		{
 			exec->pid = fork();
 			if (exec->pid == 0)
@@ -107,7 +108,7 @@ int	ft_executer(t_mini **mini)
 			else
 				last_status = ft_close_wait(exec, i);
 		}
-		else
+		else if (exec->aux->full_cmd && ft_is_cd(exec->aux->full_cmd[0]) != 0)
 			last_status = ft_cd(exec->aux, exec->aux->envp);
 		i++;
 		exec->aux = exec->aux->next;
