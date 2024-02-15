@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/14 13:16:56 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:35:45 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,15 @@
 # define D_LESS 9
 # define DELIMITER 10
 
-# define HEREDOC 99
-# define HEREDOC_END 100
-# define DELIMITER 10
-
+typedef enum e_status
+{
+	INIT, //cuando no esta executando comandos
+	HEREDOC, //dentro de un heredoc
+	HEREDOC_END, //al salir de un heredoc
+	EXIT_CMD, //caundo tiene que salir del comando
+	IN_CMD,//en ejecucion
+	CTRL_C,
+}	t_status;
 
 //int	g_status; variavel global
 
@@ -92,7 +97,7 @@ void	ft_init_var(char **envp, t_envp **envp_list);
 char	*ft_refresh_log();
 
 //-----------------------LEXER---------------------------
-char	**ft_lexer(t_lexer **lexer, char *input);
+void	ft_lexer(t_lexer **lexer, char *input);
 void	ft_extend_var(char **lexer);
 char	**ft_split_lexer(char const *s, char c);
 void	create_nodes(t_lexer **lexer, char **input);

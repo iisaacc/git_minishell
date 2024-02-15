@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/12 14:15:51 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:35:35 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	ft_extend_var(char **lexer)
 	}
 }
 
-char	** ft_lexer(t_lexer **lst_lexer, char *input)
+void	ft_lexer(t_lexer **lst_lexer, char *input)
 {
 	char	**str_lexer;
 	if (!input)
-		return (NULL);
+		return ;
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
@@ -94,5 +94,6 @@ char	** ft_lexer(t_lexer **lst_lexer, char *input)
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
 	ft_remove_quotes(lst_lexer);
-	return (str_lexer);
+	free(input);
+	ft_free_2d(str_lexer);
 }
