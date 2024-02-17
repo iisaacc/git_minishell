@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/15 15:35:45 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:24:15 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void	ft_check_bad_input(t_lexer **lexer);
 void	ft_pipes(t_mini **mini);
 int		ft_executer(t_mini **mini);
 void	ft_here_doc(t_mini *mini, char *eof);
+int		ft_bt_parent(t_mini *mini, t_envp **envp);
+int		ft_is_parent(char *cmd);
 
 //------------------------BUILTINS---------------------------
 int		ft_builtins(t_envp **envp_list, t_mini *mini);
@@ -169,6 +171,7 @@ void	free_node(t_lexer **node);
 void	ft_free_lexer_lst(t_lexer **node);
 void	ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void	ft_print_mini_lst(t_mini **mini);//borrar
+void	final_free (char *input, t_envp **envp);
 
 //------------------------SIGNALS---------------------------
 int		singal_init();

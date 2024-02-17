@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:45:41 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/06 10:44:59 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:07:25 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ void	ft_free_lsts(t_lexer **lexer, t_mini **mini)
 {
 	ft_free_lexer_lst(lexer);
 	ft_free_mini_lst(mini);
+}
+
+void	final_free (char *input, t_envp **envp)
+{
+	ft_free_envp_list(envp);//hay que quedar fuera del bucle
+	free(input);
 }
