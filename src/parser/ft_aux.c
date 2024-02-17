@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:05 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/13 16:55:05 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 16:53:10 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_refresh_id(t_lexer **lexer)//refresca los id de los nodos
+void	ft_refresh_id(t_lexer **lexer)
 {
 	t_lexer	*aux;
 	int		lap;
@@ -27,7 +27,7 @@ void	ft_refresh_id(t_lexer **lexer)//refresca los id de los nodos
 	}
 }
 
-t_lexer	*ft_delete_node(t_lexer **lexer, int x)//borra un nodo
+t_lexer	*ft_delete_node(t_lexer **lexer, int x)
 {
 	t_lexer	*aux;
 	t_lexer	*prev;
@@ -66,7 +66,7 @@ t_lexer	*ft_delete_node(t_lexer **lexer, int x)//borra un nodo
 void	ft_check_bad_input(t_lexer **lexer)
 {
 	t_lexer	*aux;
-	int pipe;
+	int		pipe;
 
 	pipe = 0;
 	aux = *lexer;
@@ -77,7 +77,8 @@ void	ft_check_bad_input(t_lexer **lexer)
 		if (aux->type == LESS || aux->type == GREATER)
 		{
 			if ((aux->type == LESS && open((aux->next)->word, O_RDONLY) == -1)
-				|| (aux->type == GREATER && open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644) == -1))
+				|| (aux->type == GREATER && open((aux->next)->word, O_WRONLY
+						| O_CREAT | O_TRUNC, 0644) == -1))
 			{
 				ft_file_error(-1, (aux->next)->word);
 				aux = ft_delete_pipe(lexer, pipe);
@@ -115,7 +116,7 @@ t_lexer	*ft_delete_pipe(t_lexer **lexer, int pipe)
 			return (aux);
 		}
 		if (aux)
-		aux = aux->next;
+			aux = aux->next;
 		i++;
 	}
 	return (NULL);

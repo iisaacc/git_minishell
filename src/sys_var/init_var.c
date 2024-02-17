@@ -6,13 +6,13 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:39:26 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 15:05:06 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:27:41 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_set_term_var()
+void	ft_set_term_var(void)
 {
 	setenv("TERM", "xterm", 0);
 }

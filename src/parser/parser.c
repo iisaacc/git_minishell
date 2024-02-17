@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/13 11:59:53 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:17:31 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 	t_lexer	*aux;
 	t_mini	*m_node;
 
-	flag = 0;//no falla
+	flag = 0;
 	m_node = *mini;
 	lex_id = 0;
 	if (!*lexer)
@@ -36,8 +36,7 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 			if (aux->type == LESS && pipe == lex_id && flag == 0)
 			{
 				m_node->infile = open((aux->next)->word, O_RDONLY);
-				flag += ft_file_error(m_node->infile, (aux->next)->word);//Comprueba si ha fallado open
-				//En caso de que no se abra el archivo de entrada no queremos que se tome en cuenta nada relacionado CON ESE PIPE
+				flag += ft_file_error(m_node->infile, (aux->next)->word);
 			}
 			else if (aux->type == GREATER && pipe == lex_id)
 			{
@@ -99,14 +98,14 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	return (full_cmnd);
 }
 
-int	ft_parser(t_lexer **lexer, t_mini **mini, char **envp, t_envp **envp_list)
+int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
-	ft_check_bad_input(lexer);//Chequea si hay un redireccionamiento de entrada "<" o salida ">" erróneo, para no intentar ejecutar ese comando ni nada que este dentro de ese pipe
+	ft_check_bad_input(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);
 	ft_set_full_cmnd(mini, lexer);
-	if (ft_set_path_cmnd(mini, lexer, envp) == 1)
+	if (ft_set_path_cmnd(mini, lexer, envp_list) == 1)
 		return (1);
-	return (-1);//En este caso ejecutamos el comando
+	return (-1);
 }

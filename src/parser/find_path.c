@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:38:32 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/13 11:35:34 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:19:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_check_is_dir(char *path)
 {
-	struct stat s;
+	struct stat	s;
+
 	if (stat(path, &s) == 0)
 	{
 		if (S_ISDIR(s.st_mode))
@@ -29,32 +30,23 @@ int	ft_check_is_dir(char *path)
 	}
 }
 
-char	*ft_find_cmnd_path(char **envp, char *cmnd)
+char	*ft_find_cmnd_path(t_envp **envp, char *cmnd)
 {
-	int		i;
 	int		j;
 	char	**path_split;
 	char	*fullpath;
 
-	i = 0;
-	while (envp[i])
+	j = 0;
+	path_split = ft_split(find_env(envp, "PATH="), ':');
+	while (path_split[j])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			path_split = ft_split(&envp[i][5], ':');
-			j = 0;
-			while (path_split[j])
-			{
-				fullpath = ft_strdup(path_split[j]);
-				fullpath = ft_strjoin(fullpath, "/");
-				fullpath = ft_strjoin(fullpath, cmnd);
-				if (access(fullpath, F_OK) == 0)
-					return (ft_free_2d(path_split), fullpath);//si encuentra hay que hacer un free de path_split
-				free(fullpath);
-				j++;
-			}
-		}
-		i++;
+		fullpath = ft_strdup(path_split[j]);
+		fullpath = ft_strjoin(fullpath, "/");
+		fullpath = ft_strjoin(fullpath, cmnd);
+		if (access(fullpath, F_OK) == 0)
+			return (ft_free_2d(path_split), fullpath);
+		free(fullpath);
+		j++;
 	}
 	ft_free_2d(path_split);
 	return (NULL);
@@ -79,7 +71,7 @@ int	ft_set_full_cmnd(t_mini **mini, t_lexer **lexer)
 	return (0);
 }
 
-int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
+int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp)
 {
 	t_mini	*aux_mini;
 	t_lexer	*aux_lexer;
@@ -103,8 +95,6 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, char **envp)
 				ft_cmnd_error(aux_lexer->word, aux_mini->full_path);
 			aux_mini = aux_mini->next;
 		}
-		else if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 1)
-			aux_mini = aux_mini->next;
 		aux_lexer = aux_lexer->next;
 	}
 	return (0);

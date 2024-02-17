@@ -6,13 +6,13 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 15:09:17 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:42:06 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int last_status;
+int	last_status;//tiene que empezar con g (g_status)
 
 void	ft_print_mini_lst(t_mini **mini)
 {
@@ -51,26 +51,27 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_main	m;
 	char	*log;
+
 	m.envp_list = NULL;
 	m.lexer = NULL;
 	m.mini = NULL;
-	last_status = 0;
-	
+
 	log = NULL;
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
 	ft_init_var(envp, &m.envp_list);
-	while ((m.input = readline(ft_refresh_log(log))))//lee la línea
+	while ((1))
 	{
+		if (!(m.input = readline(ft_refresh_log(log))))
+			break;
 		ft_quotes_input(&m.input);
-		if (ft_strncmp(m.input, "\0", 1) != 0)//si esta vacio no adiciona al historial
+		if (ft_strncmp(m.input, "\0", 1) != 0)
 			add_history(m.input);
-		ft_lexer(&m.lexer, m.input);//crea la lista de tokens
-			if (ft_parser(&m.lexer, &m.mini, envp, &m.envp_list) == -1)
-				last_status = ft_executer(&m.mini);
+		ft_lexer(&m.lexer, m.input);
+		if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == -1)
+			last_status = ft_executer(&m.mini);
 		ft_free_lsts(&m.lexer, &m.mini);
 		free(log);
 	}
 	final_free(m.input, &m.envp_list);
-	clear_history();
 }

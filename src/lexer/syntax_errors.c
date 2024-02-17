@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:39:40 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/05 17:39:40 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:45:35 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	**ft_check_syntax(char **str_lexer)
 	i = 0;
 	while (str_lexer[i])
 	{
-		if (((ft_strncmp(str_lexer[i], "<", 2) == 0) || (ft_strncmp(str_lexer[i], ">", 2) == 0) 
-			|| (ft_strncmp(str_lexer[i], "<<", 3) == 0) || (ft_strncmp(str_lexer[i], ">>", 3) == 0))
+		if (((ft_strncmp(str_lexer[i], "<", 2) == 0)
+				|| (ft_strncmp(str_lexer[i], ">", 2) == 0)
+				|| (ft_strncmp(str_lexer[i], "<<", 3) == 0)
+				|| (ft_strncmp(str_lexer[i], ">>", 3) == 0))
 			&& (i == len - 1))
 		{
 			ft_syntax_error("syntax error near unexpected token `newline'");

@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/15 15:47:21 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:26:43 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,14 @@ void	ft_extend_var(char **lexer)
 void	ft_lexer(t_lexer **lst_lexer, char *input)
 {
 	char	**str_lexer;
+	
 	if (!input)
 		return ;
 	ft_check_end_pipe(&input);
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
-	str_lexer = ft_check_syntax(str_lexer); //Chequea errores sintacticos como un < o > o << o >> al final de la línea
+	str_lexer = ft_check_syntax(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
 	ft_remove_quotes(lst_lexer);

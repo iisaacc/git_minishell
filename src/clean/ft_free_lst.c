@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:45:41 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 15:07:25 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:38:13 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_free_lexer_lst(t_lexer **node)
 {
 	t_lexer	*node_aux;
 
-	//if (!node | !*node)
-	//	return ;
 	while (*node)
 	{
 		node_aux = (*node)->next;
@@ -47,13 +45,13 @@ void	ft_free_lexer_lst(t_lexer **node)
 
 void	ft_free_envp_list(t_envp **envp)
 {
-	t_envp *aux;
+	t_envp	*aux;
 
 	while (*envp)
 	{
 		aux = (*envp)->next;
 		free((*envp)->id);
-		if((*envp)->value)
+		if ((*envp)->value)
 			free((*envp)->value);
 		free(*envp);
 		*envp = aux;
@@ -67,8 +65,9 @@ void	ft_free_lsts(t_lexer **lexer, t_mini **mini)
 	ft_free_mini_lst(mini);
 }
 
-void	final_free (char *input, t_envp **envp)
+void	final_free(char *input, t_envp **envp)
 {
-	ft_free_envp_list(envp);//hay que quedar fuera del bucle
+	ft_free_envp_list(envp);
 	free(input);
+	clear_history();
 }
