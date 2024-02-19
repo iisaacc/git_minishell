@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 16:24:37 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:48:14 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_close_wait(t_exec *exec, int i)
+void	ft_close_wait(t_exec *exec, int i)
 {
 	int	status;
 
@@ -21,11 +21,12 @@ int	ft_close_wait(t_exec *exec, int i)
 	if (exec->aux->next == NULL)
 		close(exec->aux->infile);
 	waitpid(exec->pid, &status, 0);
-	if (WIFEXITED(status))//Comprueba si el proceso hijo terminó normalmente
-		return (WEXITSTATUS(status));
+	if (exec->aux->broken == 1)
+		return ;
+	else if (WIFEXITED(status))//Comprueba si el proceso hijo terminó normalmente
+		last_status = WEXITSTATUS(status);
 	else
-		return (1);//Si no terminó normalmente, devolvemos 1
-	return (0);
+		last_status = 1;//Si no terminó normalmente, devolvemos 1
 }
 
 void	ft_set_next_pipe(t_exec *exec)
@@ -55,8 +56,9 @@ void	ft_child_process(t_mini *aux)
 	}
 	else if (execve(aux->full_path, aux->full_cmd, NULL) == -1)
 	{
-		ft_perror(aux->full_path);
-		exit(EXIT_FAILURE);
+		ft_perror_mod(aux->full_path, strerror(errno), 1);
+		ft_check_permission(aux->full_path);//Comprobamos si el comando es un archivo ejecutable
+		exit(last_status);
 	}
 }
 
@@ -94,8 +96,8 @@ int	ft_executer(t_mini **mini)
 	i = 0;
 	if (exec->total_cmnds == 1 && ft_is_builtin(exec->aux->full_cmd[0]))
 		ft_builtins(exec->aux->envp, exec->aux);
-	else 
-	{	
+	else
+	{
 		while (exec->aux && i < exec->total_cmnds)
 		{
 			if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
@@ -104,12 +106,12 @@ int	ft_executer(t_mini **mini)
 				|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
 			{
 				exec->pid = fork();
-				if (exec->pid == 0)
+				if (exec->pid == 0 && exec->aux->broken == 0)
 					ft_child_process(exec->aux);
 				else if (exec->pid < 0)
 					ft_perror("fork");
 				else
-					last_status = ft_close_wait(exec, i);
+					ft_close_wait(exec, i);
 			}
 			else if (exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) != 0)
 				ft_bt_parent(exec->aux, exec->aux->envp);

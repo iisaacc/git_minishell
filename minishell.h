@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 15:39:14 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:40:26 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_lexer
 	char *word;           //palavra
 	int type;             //Defines arriba
 	int id;               //pos en la lista
-	int broken;
+	int broken;			  //si el pipe esta roto (no se puede abrir un archivo por ejemplo)
 	struct s_lexer *next; //puntero al siguiente nodo
 }			t_lexer;
 
@@ -77,6 +77,7 @@ typedef struct s_mini
 	int id;          //pos en la lista
 	int infile;      //fd de entrada
 	int outfile;     //fd de salida
+	int broken;      //si el pipe esta roto (no se puede abrir un archivo por ejemplo)
 	t_envp	**envp;
 	struct s_mini *next; //puntero al siguiente nodo
 }			t_mini;
@@ -138,6 +139,7 @@ void		ft_perror(char *error);
 void		ft_syntax_error(char *error);
 t_lexer		*ft_delete_pipe(t_lexer **lexer, int pipe);
 void		ft_check_bad_input(t_lexer **lexer);
+void		ft_check_permission(char *path);
 
 //----------------------EXECUTER---------------------------
 void		ft_pipes(t_mini **mini);

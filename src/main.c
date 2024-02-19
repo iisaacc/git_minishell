@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 16:37:43 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:22:40 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	ft_print_list(t_lexer **lexer)
 	{
 		printf("word: %s\n", tmp->word);
 		printf("id: %d\n", tmp->id);
-		printf("type: %d\n\n", tmp->type);
+		printf("type: %d\n", tmp->type);
+		printf("broken: %d\n\n", tmp->broken);
 		tmp = tmp->next;
 	}
 }
@@ -60,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	m.lexer = NULL;
 	m.mini = NULL;
 	m.log = NULL;
+	last_status = 0;
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
 	//atexit(ft_leaks);
@@ -74,9 +76,9 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(m.input, "\0", 1) != 0)
 			add_history(m.input);
 		ft_lexer(&m.lexer, m.input);
-		//ft_print_list(&m.lexer);
 		if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == -1)
-			ft_executer(&m.mini);
+			last_status = ft_executer(&m.mini);
+		//ft_print_list(&m.lexer);
 		//ft_print_mini_lst(&m.mini);
 		ft_free_lsts(&m.lexer, &m.mini);
 		free(m.log);

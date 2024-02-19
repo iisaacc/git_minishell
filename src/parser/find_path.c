@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:38:32 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 17:19:32 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:57:23 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	ft_check_permission(char *path)
+{
+	if (access(path, X_OK) != 0)
+		last_status = 126;
+}
 
 int	ft_check_is_dir(char *path)
 {

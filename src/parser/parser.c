@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 16:00:23 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:38:03 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 		{
 			if (aux->type == PIPE)
 				pipe++;
-			if (aux->type == LESS && pipe == lex_id && flag == 0)
+			if (aux->type == LESS && pipe == lex_id && flag == 0 && aux->broken == 0)
 			{
 				m_node->infile = open((aux->next)->word, O_RDONLY);
 				flag += ft_file_error(m_node->infile, (aux->next)->word);
 			}
-			else if (aux->type == GREATER && pipe == lex_id)
+			else if (aux->type == GREATER && pipe == lex_id && aux->broken == 0)
 			{
 				if (aux->next)
 				{
@@ -46,7 +46,7 @@ int	ft_set_io(t_mini **mini, t_lexer **lexer)
 					flag += ft_file_error(m_node->outfile, (aux->next)->word);
 				}
 			}
-			else if (aux->type == D_GREATER && pipe == lex_id)
+			else if (aux->type == D_GREATER && pipe == lex_id && aux->broken == 0)
 			{
 				m_node->outfile = open((aux->next)->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 				flag += ft_file_error(m_node->outfile, (aux->next)->word);

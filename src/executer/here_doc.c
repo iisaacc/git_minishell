@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:28:59 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 15:17:37 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:36:27 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_here_doc(t_mini *mini, char *eof)
 		line = readline("> ");
 		if (line[0] != '\0' && line[0] != '\n')
 		{
-			printf("line = %s\n", line);
-			printf("limiter = %s\n", eof);
-			printf("devolveu %i\n",ft_strncmp(line, eof, ft_strlen(eof)));
+			//printf("line = %s\n", line);
+			//printf("limiter = %s\n", eof);
+			//printf("devolveu %i\n",ft_strncmp(line, eof, ft_strlen(eof)));
 			if (ft_strncmp(line, eof, ft_strlen(eof)) == 0 && line[0] != '\n' && line)
 			{
 				free(line);

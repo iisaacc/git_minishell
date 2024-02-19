@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:13:15 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 17:16:45 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:59:42 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_total_cmnds(t_mini **mini, int total_cmnds)
 	}
 }
 
-t_mini	*ft_mini_new(int lap, t_envp **envp_list)
+t_mini	*ft_mini_new(int lap, t_envp **envp_list, int broken)
 {
 	t_mini	*mini;
 
@@ -38,6 +38,7 @@ t_mini	*ft_mini_new(int lap, t_envp **envp_list)
 	mini->outfile = STDOUT_FILENO;
 	mini->id = lap;
 	mini->envp = envp_list;
+	mini->broken = broken;
 	mini->next = NULL;
 	return (mini);
 }
@@ -84,7 +85,7 @@ t_mini	**ft_to_mini_lst(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 		}
 		if ((aux->type == CMND || aux->type == GREATER) && b == 0)
 		{
-			mini_add_new(mini, ft_mini_new(lap, envp_list));
+			mini_add_new(mini, ft_mini_new(lap, envp_list, aux->broken));
 			b = 1;
 		}
 		aux = aux->next;

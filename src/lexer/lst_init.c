@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 15:44:19 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:12:11 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_lexer	*create_new(char *input, int x)
 	node->next = NULL;
 	node->type = 0;
 	node->id = x;
+	node->broken = 0;
 	return (node);
 }
 
