@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 17:09:49 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:39:14 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_lexer
 	char *word;           //palavra
 	int type;             //Defines arriba
 	int id;               //pos en la lista
+	int broken;
 	struct s_lexer *next; //puntero al siguiente nodo
 }			t_lexer;
 
