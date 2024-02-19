@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 17:42:06 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:57:46 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_lexer(&m.lexer, m.input);
 		//ft_print_list(&m.lexer);
 		if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == -1)
-			last_status = ft_executer(&m.mini);
+			ft_executer(&m.mini);
 		//ft_print_mini_lst(&m.mini);
 		ft_free_lsts(&m.lexer, &m.mini);
 		free(m.log);
