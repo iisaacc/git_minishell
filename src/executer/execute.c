@@ -33,9 +33,9 @@ void	ft_set_next_pipe(t_exec *exec)
 	if (exec->total_cmnds > 1)
 	{
 		pipe(exec->fdpipe);
-		if (exec->aux->next && (exec->aux->next)->infile == 0)
+		if (exec->aux->next && (exec->aux->next)->infile == STDIN_FILENO)
 			(exec->aux->next)->infile = exec->fdpipe[0];
-		if (exec->aux->outfile == 1)
+		if (exec->aux->outfile == STDOUT_FILENO)
 			exec->aux->outfile = exec->fdpipe[1];
 	}
 }
@@ -86,7 +86,6 @@ int	ft_executer(t_mini **mini)
 	t_exec	*exec;
 	int		i;
 
-	last_status = IN_CMD;
 	exec = malloc(sizeof(t_exec));
 	if (!exec)
 		return (1);
@@ -109,7 +108,7 @@ int	ft_executer(t_mini **mini)
 				last_status = ft_close_wait(exec, i);
 		}
 		else if (exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) != 0)
-			last_status = ft_bt_parent(exec->aux, exec->aux->envp);
+			ft_bt_parent(exec->aux, exec->aux->envp);
 		i++;
 		exec->aux = exec->aux->next;
 	}

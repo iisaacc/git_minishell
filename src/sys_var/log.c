@@ -21,6 +21,5 @@ char	*ft_refresh_log(char *log)
 	aux = ft_strjoin(aux, getcwd(buffer, sizeof(buffer)));
 	aux = ft_strjoin(aux, "> ");
 	log = aux;
-	free(aux);
 	return (log);
 }

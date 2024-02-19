@@ -82,6 +82,7 @@ typedef struct s_mini
 
 typedef struct main
 {
+	char	*log;
 	char	*input;
 	t_lexer	*lexer;
 	t_mini	*mini;

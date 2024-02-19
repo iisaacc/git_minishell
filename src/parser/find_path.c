@@ -95,6 +95,8 @@ int	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp)
 				ft_cmnd_error(aux_lexer->word, aux_mini->full_path);
 			aux_mini = aux_mini->next;
 		}
+		else if (aux_lexer->type == CMND)
+			aux_mini = aux_mini->next;
 		aux_lexer = aux_lexer->next;
 	}
 	return (0);
