@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:28:59 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 17:24:41 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:17:37 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@ void	ft_here_doc(t_mini *mini, char *eof)
 	while (1 && last_status != EXIT_CMD)
 	{
 		line = readline("> ");
-		if (ft_strncmp(line, eof, ft_strlen(line)) == 0)
+		if (line[0] != '\0' && line[0] != '\n')
 		{
+			printf("line = %s\n", line);
+			printf("limiter = %s\n", eof);
+			printf("devolveu %i\n",ft_strncmp(line, eof, ft_strlen(eof)));
+			if (ft_strncmp(line, eof, ft_strlen(eof)) == 0 && line[0] != '\n' && line)
+			{
+				free(line);
+				break ;
+			}
+			write(fd[1], line, ft_strlen(line));
+			write(fd[1], "\n", 1);
 			free(line);
-			break ;
 		}
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
-		free(line);
 	}
 	close(fd[1]);
 	mini->infile = fd[0];

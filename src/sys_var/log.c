@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:36:48 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 17:27:47 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:29:53 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ char	*ft_refresh_log(char *log)
 	aux = ft_strjoin(aux, getcwd(buffer, sizeof(buffer)));
 	aux = ft_strjoin(aux, "> ");
 	log = aux;
+	free(aux);
 	return (log);
 }

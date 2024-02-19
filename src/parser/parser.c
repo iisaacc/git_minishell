@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 17:17:31 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:48:05 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
 	ft_check_bad_input(lexer);
-	ft_print_list(lexer);
+	//ft_print_list(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);
