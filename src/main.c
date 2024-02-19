@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/09 12:46:56 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:42:06 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	last_status;//tiene que empezar con g (g_status)
 
 void	ft_print_mini_lst(t_mini **mini)
 {
@@ -35,6 +37,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
@@ -44,53 +47,32 @@ void	ft_print_list(t_lexer **lexer)
 	}
 }
 
-void	final_free(char *input, char *log, t_envp **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	ft_free_envp_list(envp);//hay que quedar fuera del bucle
-	free(log);
-	free(input);
+	t_main	m;
+
+	m.envp_list = NULL;
+	m.lexer = NULL;
+	m.mini = NULL;
+	m.log = NULL;
+	if (argc > 1 && argv)
+		return (printf("Wrong number of arguments\n"), 1);
+	ft_init_var(envp, &m.envp_list);
+	while ((1))
+	{
+		m.input = readline(ft_refresh_log(m.log));
+		if (!m.input)
+			break;
+		ft_quotes_input(&m.input);
+		if (ft_strncmp(m.input, "\0", 1) != 0)
+			add_history(m.input);
+		ft_lexer(&m.lexer, m.input);
+		//ft_print_list(&m.lexer);
+		if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == -1)
+			last_status = ft_executer(&m.mini);
+		//ft_print_mini_lst(&m.mini);
+		ft_free_lsts(&m.lexer, &m.mini);
+		free(m.log);
+	}
+	final_free(m.input, &m.envp_list);
 }
-
-int last_status;
-
- int	main(int argc, char **argv, char **envp)
- {
- 	char	*input;
- 	t_lexer	*lexer;
- 	t_mini	*mini;
- 	t_envp	*envp_list;
- 	char	*log;
-
- 	envp_list = NULL;
- 	lexer = NULL;
- 	mini = NULL;
- 	last_status = 0;
- 	if (argc > 1 && argv)
- 	{
- 		printf("Wrong number of arguments\n");
- 		return (1);
- 	}
- 	ft_init_var(envp, &envp_list);
- 	log = ft_refresh_log();
- 	singal_init();
- 	while ((input = readline(log)))//lee la línea
- 	{
- 		ft_quotes_input(&input);//devuelve el control al usuario si hay comillas sin cerrar
- 		if (ft_strncmp(input, "\0", 1) != 0)//si esta vacio no adiciona al historial
- 			add_history(input);
- 		if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
- 		{
- 			last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
- 			if (last_status == -1)
- 				last_status = ft_executer(&mini);
- 		}
- 		//printf("last status: %d\n", last_status);
- 		//ft_print_list(&lexer);
- 		//ft_print_mini_lst(&mini);
- 		ft_free_lsts(&lexer, &mini, log);
- 		log = ft_refresh_log();
- 	}
- 	final_free(input, log, &envp_list);
- 	clear_history();
- }
-

@@ -3,27 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:55:30 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/08 15:35:27 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:30:06 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_sigint(int sig)
+void	signal_helper(void)
 {
-	sig = 0;
-	if (sig == 0)
-		rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	ft_putchar_fd('\n', 1);
-	rl_on_new_line();//indica al terminal que una nueva linea esta se inicializando
-	rl_redisplay();//fuerza atualizacion de la linea
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	last_status = CTRL_C;
 }
 
-int singal_init()
+void	ft_sigint(int sig)
 {
+	(void)sig;
+	if (last_status == HEREDOC || last_status == IN_CMD)
+	{
+		if (last_status == HEREDOC)
+			ioctl(0, TIOCSTI, "\n");
+		else
+			ft_putchar_fd('\n', 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		last_status = EXIT_CMD;
+	}
+	else
+		signal_helper();
+}
+
+int	singal_init(void)
+{
+	last_status = INIT;
 	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	return (0);
 }

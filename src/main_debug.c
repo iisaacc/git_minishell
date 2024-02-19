@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_debug.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:46:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 14:10:07 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:44 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_print_list(t_lexer **lexer)
 	t_lexer	*tmp;
 
 	tmp = *lexer;
+	printf("LISTA:\n");
 	while (tmp)
 	{
 		printf("word: %s\n", tmp->word);
@@ -42,13 +43,6 @@ void	ft_print_list(t_lexer **lexer)
 		printf("type: %d\n\n", tmp->type);
 		tmp = tmp->next;
 	}
-}
-
-void	final_free(char *input, char *log, t_envp **envp)
-{
-	ft_free_envp_list(envp);//hay que quedar fuera del bucle
-	free(log);
-	free(input);
 }
 
 int last_status;
@@ -65,19 +59,17 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("echo \"$\"");
+ 	char	*input = ft_strdup("cat <minishell.h|ls");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
  	ft_quotes_input(&input);
- 	if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
- 	{
- 		//ft_print_list(&lexer);
- 		last_status = ft_parser(&lexer, &mini, envp, &envp_list);//los builtins se ejecutan en el parser
-		//ft_print_mini_lst(&mini);
- 		if (last_status == -1)
- 			last_status = ft_executer(&mini);
- 	}
+	ft_lexer(&lexer, input);
+	//ft_print_list(&lexer);
+	if (ft_parser(&lexer, &mini, &envp_list) == -1)
+		last_status = ft_executer(&mini);
+	//ft_print_mini_lst(&mini);
+	ft_free_lsts(&lexer, &mini);
  	//ft_print_mini_lst(&mini);
  	//ft_free_lsts(&lexer, &mini);
  	return (0);

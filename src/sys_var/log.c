@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   log.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:36:48 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/05 12:36:48 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:27:47 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*ft_refresh_log()
+char	*ft_refresh_log(char *log)
 {
-	char	*log;
 	char	buffer[1024];
+	char	*aux;
 
-	log = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
-	log = ft_strjoin(log, getcwd(buffer, sizeof(buffer)));
-	log = ft_strjoin(log, "> ");
+	aux = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
+	aux = ft_strjoin(aux, getcwd(buffer, sizeof(buffer)));
+	aux = ft_strjoin(aux, "> ");
+	log = aux;
 	return (log);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:35:16 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/01/30 12:17:50 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:44:19 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_lexer	*last_list(t_lexer *lst)//va hasta el final de la lista
+t_lexer	*last_list(t_lexer *lst)
 {
 	if (!lst)
 		return (0);
@@ -21,7 +21,7 @@ t_lexer	*last_list(t_lexer *lst)//va hasta el final de la lista
 	return (lst);
 }
 
-void	add_new(t_lexer **lst, t_lexer *new)//añande un nodo a la lista
+void	add_new(t_lexer **lst, t_lexer *new)
 {
 	t_lexer	*aux;
 
@@ -36,33 +36,32 @@ void	add_new(t_lexer **lst, t_lexer *new)//añande un nodo a la lista
 	aux->next = new;
 }
 
-t_lexer *create_new(char *input, int x)
+t_lexer	*create_new(char *input, int x)
 {
-	t_lexer *node;
+	t_lexer	*node;
 
 	node = NULL;
 	node = malloc(sizeof(t_lexer));
 	if (!node)
 		return (NULL);
 	node->word = ft_strdup(input);
-	free(input);
 	node->next = NULL;
 	node->type = 0;
 	node->id = x;
 	return (node);
 }
 
-void create_nodes(t_lexer **lexer, char **input)//crea todos los nudos
+void	create_nodes(t_lexer **lexer, char **input)
 {
-	int x;
+	int	x;
 
 	x = 0;
-	if(*lexer)
+	if (*lexer)
 		ft_free_lexer_lst(lexer);
 	while (input && input[x])
 	{
-		add_new(lexer, create_new(input[x], x));
+		if (input[x][0] != '\0')
+			add_new(lexer, create_new(input[x], x));
 		x++;
 	}
-	free(input);
 }

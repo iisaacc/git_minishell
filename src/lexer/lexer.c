@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:51:49 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 14:08:26 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:26:43 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char *ft_status_var(char *lexer, char *tmp, int j)
+{
+	char *value;
+	
+	value = ft_itoa(last_status);
+	tmp = ft_strdup("");
+	tmp = ft_strjoin(tmp, ft_substr(lexer, 0, j));
+	tmp = ft_strjoin(tmp, value);
+	tmp = ft_strjoin(tmp, ft_substr(lexer, j + 2, ft_strlen(lexer)));
+	free(value);
+	return (tmp);
+}
 
 void	ft_put_var(char **lexer, int *i, int *j)
 {
@@ -20,23 +33,26 @@ void	ft_put_var(char **lexer, int *i, int *j)
 	int		len;
 
 	len = 0;
-	while (lexer[*i][*j + 1 + len] && lexer[*i][*j + 1 + len] != ' ' && lexer[*i][*j + 1 + len] != '\"')
-		len++;
-	var = ft_substr(lexer[*i], *j + 1, len);
+	tmp = NULL;
 	if (ft_strncmp(&lexer[*i][*j], "$?", 2) == 0)
-		value = ft_itoa(last_status);
-	else
+		tmp = ft_status_var(lexer[*i], tmp, *j);
+	else 
+	{
+		while (lexer[*i][*j + 1 + len] && lexer[*i][*j + 1 + len] != ' ' && lexer[*i][*j + 1 + len] != '\"')
+			len++;
+		var = ft_substr(lexer[*i], *j + 1, len);
 		value = getenv(var);
-	tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
-	ft_strlcpy(tmp, lexer[*i], *j + 1);
-	if (value)
-		tmp = ft_strjoin(tmp, value);
-	else
-		tmp = ft_strjoin(tmp, ft_strdup(""));
-	tmp = ft_strjoin(tmp, &lexer[*i][*j + ft_strlen(var) + 1]);
+		tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
+		ft_strlcpy(tmp, lexer[*i], *j + 1);
+		if (value)
+			tmp = ft_strjoin(tmp, value);
+		else
+			tmp = ft_strjoin(tmp, ft_strdup(""));
+		tmp = ft_strjoin(tmp, &lexer[*i][*j + ft_strlen(var) + 1]);
+		free(var);
+	}
 	free(lexer[*i]);
 	lexer[*i] = tmp;
-	free(var);
 }
 
 //Extiende la variable global $ siempre que no esté entre comillas simples
@@ -66,17 +82,20 @@ void	ft_extend_var(char **lexer)
 	}
 }
 
-char	**ft_lexer(t_lexer **lst_lexer, char *input)
+void	ft_lexer(t_lexer **lst_lexer, char *input)
 {
 	char	**str_lexer;
+	
 	if (!input)
-		return (NULL);
+		return ;
+	ft_check_end_pipe(&input);
 	str_lexer = ft_split_lexer(input, ' ');
 	ft_extend_var(str_lexer);
 	str_lexer = ft_get_tokens(str_lexer);
-	ft_remove_quotes(str_lexer);
-	str_lexer = ft_check_syntax(str_lexer); //Chequea errores sintacticos como un < o > o << o >> al final de la línea
+	str_lexer = ft_check_syntax(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
-	free(input);//free del input
-	return (str_lexer);
+	ft_types(lst_lexer);
+	ft_remove_quotes(lst_lexer);
+	//ft_free_2d(str_lexer);
+	free(input);
 }

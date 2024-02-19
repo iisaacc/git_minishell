@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/09 13:34:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:17:03 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_close_wait(t_exec *exec, int i)
 		return (WEXITSTATUS(status));
 	else
 		return (1);//Si no terminó normalmente, devolvemos 1
+	return (0);
 }
 
 void	ft_set_next_pipe(t_exec *exec)
@@ -32,8 +33,10 @@ void	ft_set_next_pipe(t_exec *exec)
 	if (exec->total_cmnds > 1)
 	{
 		pipe(exec->fdpipe);
-		(exec->aux->next)->infile = exec->fdpipe[0];
-		exec->aux->outfile = exec->fdpipe[1];
+		if (exec->aux->next && (exec->aux->next)->infile == STDIN_FILENO)
+			(exec->aux->next)->infile = exec->fdpipe[0];
+		if (exec->aux->outfile == STDOUT_FILENO)
+			exec->aux->outfile = exec->fdpipe[1];
 	}
 }
 
@@ -45,9 +48,16 @@ void	ft_child_process(t_mini *aux)
 	dup2(aux->outfile, STDOUT_FILENO);
 	if (aux->next != NULL) //Cerramos el fd de entrada del siguiente nodo
 		close ((aux->next)->infile);
-	execve(aux->full_path, aux->full_cmd, NULL);
-	ft_perror(aux->full_path);
-	exit(EXIT_FAILURE);
+	if (ft_is_builtin(aux->full_cmd[0]) == 1)
+	{
+		ft_builtins(aux->envp, aux);
+		exit(last_status);
+	}
+	else if (execve(aux->full_path, aux->full_cmd, NULL) == -1)
+	{
+		ft_perror(aux->full_path);
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	ft_init_data_exec(t_mini **mini, t_exec **exec)
@@ -74,27 +84,31 @@ void	ft_close_restore(t_exec *exec)
 int	ft_executer(t_mini **mini)
 {
 	t_exec	*exec;
-	int		last_status;
 	int		i;
 
-	last_status = 0;
 	exec = malloc(sizeof(t_exec));
 	if (!exec)
 		return (1);
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
 		return (last_status); //error
 	i = 0;
-	while (i < exec->total_cmnds)
+	while (exec->aux && i < exec->total_cmnds)
 	{
 		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
 			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		exec->pid = fork();
-		if (exec->pid == 0)
-			ft_child_process(exec->aux);
-		else if (exec->pid < 0)
-			ft_perror("fork");
-		else
-			last_status = ft_close_wait(exec, i);
+		if ((exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) == 0 && ft_is_builtin(exec->aux->full_cmd[0]) == 1)//cd se ejecuta en el proceso padre
+			|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
+		{
+			exec->pid = fork();
+			if (exec->pid == 0)
+				ft_child_process(exec->aux);
+			else if (exec->pid < 0)
+				ft_perror("fork");
+			else
+				last_status = ft_close_wait(exec, i);
+		}
+		else if (exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) != 0)
+			ft_bt_parent(exec->aux, exec->aux->envp);
 		i++;
 		exec->aux = exec->aux->next;
 	}
