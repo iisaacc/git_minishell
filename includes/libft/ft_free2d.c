@@ -19,7 +19,7 @@ void	ft_free_2d(char **str)
 	if (str)
 	{
 		i = 0;
-		while (str[i] != NULL)
+		while (str[i])
 		{
 			free(str[i]);
 			i++;

@@ -51,12 +51,12 @@ int	ft_cmnd_error(char *error, char *boole)
 	return (0);
 }
 
-int	ft_file_error(int infd, char *infile)
+int	ft_file_error(int infd, char *file)
 {
 	if (infd == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(infile, 2);
+		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);

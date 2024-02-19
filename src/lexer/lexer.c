@@ -96,6 +96,6 @@ void	ft_lexer(t_lexer **lst_lexer, char *input)
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
 	ft_remove_quotes(lst_lexer);
+	//ft_free_2d(str_lexer);
 	free(input);
-	ft_free_2d(str_lexer);
 }

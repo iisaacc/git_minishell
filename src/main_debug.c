@@ -45,13 +45,6 @@ void	ft_print_list(t_lexer **lexer)
 	}
 }
 
-void	final_free(char *input, char *log, t_envp **envp)
-{
-	ft_free_envp_list(envp);//hay que quedar fuera del bucle
-	free(log);
-	free(input);
-}
-
 int last_status;
 
 //MAIN DEBUG
@@ -66,22 +59,18 @@ int last_status;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("< inputt echo hi | echo bye");
+ 	char	*input = ft_strdup("cat <minishell.h|ls");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
  	ft_quotes_input(&input);
- 	if (ft_lexer(&lexer, input) != NULL)//crea la lista de tokens
- 	{
- 		ft_print_list(&lexer);
- 		if (ft_parser(&lexer, &mini, envp, &envp_list) == -1)
-		{
-			ft_print_mini_lst(&mini);
-			last_status = ft_executer(&mini);
-		}
- 	}
+	ft_lexer(&lexer, input);
+	//ft_print_list(&lexer);
+	if (ft_parser(&lexer, &mini, &envp_list) == -1)
+		last_status = ft_executer(&mini);
+	//ft_print_mini_lst(&mini);
+	ft_free_lsts(&lexer, &mini);
  	//ft_print_mini_lst(&mini);
-	printf("last status: %d\n", last_status);
  	//ft_free_lsts(&lexer, &mini);
  	return (0);
  }

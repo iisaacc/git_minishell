@@ -101,6 +101,7 @@ char	**ft_full_cmnd(t_lexer *lexer)
 int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 {
 	ft_check_bad_input(lexer);
+	ft_print_list(lexer);
 	mini = ft_to_mini_lst(lexer, mini, envp_list);
 	if (ft_set_io(mini, lexer) > 0)
 		return (1);

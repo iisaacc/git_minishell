@@ -28,20 +28,20 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 	{
 		if (x == y && j == 0)
 		{
-			dst[x++] = token;
+			dst[x++] = ft_strdup(token);
 			dst[x++] = ft_substr(src[i], d, ft_strlen(&src[i][d]));
 			i++;
 		}
 		else if (x == y && j == ft_strlen(src[i]) - d)
 		{
 			dst[x++] = ft_substr(src[i], 0, ft_strlen(src[i]) - d);
-			dst[x++] = token;
+			dst[x++] = ft_strdup(token);
 			i++;
 		}
 		else if (x == y)
 		{
 			dst[x++] = ft_substr(src[i], 0, j);
-			dst[x++] = token;
+			dst[x++] = ft_strdup(token);
 			dst[x++] = ft_substr(src[i], j + d, ft_strlen(&src[i][j + d]));
 			i++;
 		}
@@ -52,7 +52,7 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 	return (dst);
 }
 
-char	**ft_case_single_double(char	**lexer, char *token, int *i, int *j)
+char	**ft_case_single_double(char **lexer, char *token, int *i, int *j)
 {
 	char	**tmp;
 
@@ -69,7 +69,7 @@ char	**ft_case_single_double(char	**lexer, char *token, int *i, int *j)
 		token = ft_substr(lexer[*i], *j, 1);
 		tmp = ft_add_token(lexer, *i, token, 1, *j);
 	}
-	//ft_free_2d(lexer);
+	ft_free_2d(lexer);
 	return (tmp);
 }
 

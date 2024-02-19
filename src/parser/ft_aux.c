@@ -89,35 +89,35 @@ void	ft_check_bad_input(t_lexer **lexer)
 	}
 }
 
-t_lexer	*ft_delete_pipe(t_lexer **lexer, int pipe)
-{
-	t_lexer	*aux;
-	int		lap;
-	int		i;
-	int		p;
+// t_lexer	*ft_delete_pipe(t_lexer **lexer, int pipe)
+// {
+// 	t_lexer	*aux;
+// 	int		lap;
+// 	int		i;
+// 	int		p;
 
-	lap = 0;
-	aux = *lexer;
-	i = 0;
-	p = 0;
-	while (aux)
-	{
-		if (aux->type == PIPE)
-			lap++;
-		if (lap == pipe)
-		{
-			if (aux->type == PIPE)
-				p = 1;
-			aux = ft_delete_node(lexer, i);
-			while (aux && aux->type != PIPE)
-				aux = ft_delete_node(lexer, i);
-			if (aux && aux->type == PIPE && p == 0)
-				aux = ft_delete_node(lexer, i);
-			return (aux);
-		}
-		if (aux)
-			aux = aux->next;
-		i++;
-	}
-	return (NULL);
-}
+// 	lap = 0;
+// 	aux = *lexer;
+// 	i = 0;
+// 	p = 0;
+// 	while (aux)
+// 	{
+// 		if (aux->type == PIPE)
+// 			lap++;
+// 		if (lap == pipe)
+// 		{
+// 			if (aux->type == PIPE)
+// 				p = 1;
+// 			aux = ft_delete_node(lexer, i);
+// 			while (aux && aux->type != PIPE)
+// 				aux = ft_delete_node(lexer, i);
+// 			if (aux && aux->type == PIPE && p == 0)
+// 				aux = ft_delete_node(lexer, i);
+// 			return (aux);
+// 		}
+// 		if (aux)
+// 			aux = aux->next;
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
