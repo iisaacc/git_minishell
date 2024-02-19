@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 16:37:53 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:13:03 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	ft_builtins(t_envp **envp_list, t_mini *mini)
 		return (1);
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", 5))
 		return (ft_echo(mini->full_cmd, mini->outfile), 1);
-	else if (!ft_strncmp(mini->full_cmd[0], "cd", 3))
-		return (ft_cd(mini, envp_list));
 	else if (!ft_strncmp(mini->full_cmd[0], "pwd", 4))
 		return (ft_pwd(mini->outfile), 1);
-	else if (!ft_strncmp(mini->full_cmd[0], "export", 7))
-		return (ft_export(envp_list, &mini->full_cmd[1]), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "env", 4))
 		return (ft_env(mini->outfile, envp_list, &mini->full_cmd[1]));
+	else if (!ft_strncmp(mini->full_cmd[0], "cd", 3))
+		return (ft_cd(mini, envp_list));
+	else if (!ft_strncmp(mini->full_cmd[0], "export", 7))
+		return (ft_export(envp_list, &mini->full_cmd[1]), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6))
 		return (ft_unset(envp_list, &mini->full_cmd[1]), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "exit", 4))

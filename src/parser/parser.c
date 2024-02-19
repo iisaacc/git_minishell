@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 16:00:23 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:08:24 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 	ft_set_full_cmnd(mini, lexer);
 	if (ft_set_path_cmnd(mini, lexer, envp_list) == 1)
 		return (1);
+	//ft_print_list(lexer);
 	return (-1);
 }
