@@ -6,7 +6,7 @@
 /*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 15:57:46 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:59:13 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_init_var(envp, &m.envp_list);
 	while ((1))
 	{
+		//last_status = IN_CMD;
 		m.input = readline(ft_refresh_log(m.log));
 		if (!m.input)
 			break;
