@@ -6,13 +6,18 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 15:57:26 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:17:04 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int	last_status;//tiene que empezar con g (g_status)
+
+void ft_leaks()
+{
+	system("leaks -q minishell");
+}
 
 void	ft_print_mini_lst(t_mini **mini)
 {
@@ -57,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	m.log = NULL;
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
+	//atexit(ft_leaks);
 	ft_init_var(envp, &m.envp_list);
 	while ((1))
 	{

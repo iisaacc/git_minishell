@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:32:01 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 15:49:47 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:18:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_exit(char **cmd)
 			ft_putstr_fd(cmd[0], 2);
 			ft_putchar_fd(':', 2);
 			ft_putstr_fd(" numeric argument required", 2);
+			last_status = 255;
 			exit(255);
 		}
 	}

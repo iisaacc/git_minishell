@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 15:39:06 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:27:46 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_bt_parent(t_mini *mini, t_envp **envp)
 	return (0);
 }
 
-int	ft_is_builtin(char *cmd)
+int	 ft_is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (0);

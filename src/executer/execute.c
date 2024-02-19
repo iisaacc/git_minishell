@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:42:14 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 15:20:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:24:37 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,30 @@ int	ft_executer(t_mini **mini)
 	if (ft_init_data_exec(mini, &exec) == 1) //Inicializamos los datos necesarios para la función en una estructura
 		return (last_status); //error
 	i = 0;
-	while (exec->aux && i < exec->total_cmnds)
-	{
-		if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
-			ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
-		if ((exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) == 0 && ft_is_builtin(exec->aux->full_cmd[0]) == 1)//cd se ejecuta en el proceso padre
-			|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
+	if (exec->total_cmnds == 1 && ft_is_builtin(exec->aux->full_cmd[0]))
+		ft_builtins(exec->aux->envp, exec->aux);
+	else 
+	{	
+		while (exec->aux && i < exec->total_cmnds)
 		{
-			exec->pid = fork();
-			if (exec->pid == 0)
-				ft_child_process(exec->aux);
-			else if (exec->pid < 0)
-				ft_perror("fork");
-			else
-				last_status = ft_close_wait(exec, i);
+			if (exec->total_cmnds > 1 && i < exec->total_cmnds - 1)
+				ft_set_next_pipe(exec);//Si hay más de un comando, establecemos el siguiente pipe
+			if ((exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) == 0 && ft_is_builtin(exec->aux->full_cmd[0]) == 1)//cd se ejecuta en el proceso padre
+				|| (exec->aux->full_path && ft_is_builtin(exec->aux->full_cmd[0]) == 0))
+			{
+				exec->pid = fork();
+				if (exec->pid == 0)
+					ft_child_process(exec->aux);
+				else if (exec->pid < 0)
+					ft_perror("fork");
+				else
+					last_status = ft_close_wait(exec, i);
+			}
+			else if (exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) != 0)
+				ft_bt_parent(exec->aux, exec->aux->envp);
+			i++;
+			exec->aux = exec->aux->next;
 		}
-		else if (exec->aux->full_cmd && ft_is_parent(exec->aux->full_cmd[0]) != 0)
-			ft_bt_parent(exec->aux, exec->aux->envp);
-		i++;
-		exec->aux = exec->aux->next;
 	}
 	ft_close_restore(exec);
 	free(exec);
