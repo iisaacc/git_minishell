@@ -68,7 +68,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_init_var(envp, &m.envp_list);
 	while ((1))
 	{
-		//last_status = IN_CMD;
 		m.input = readline(ft_refresh_log(m.log));
 		if (!m.input)
 			break;

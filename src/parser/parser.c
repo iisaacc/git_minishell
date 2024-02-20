@@ -108,6 +108,5 @@ int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
 	ft_set_full_cmnd(mini, lexer);
 	if (ft_set_path_cmnd(mini, lexer, envp_list) == 1)
 		return (1);
-	//ft_print_list(lexer);
 	return (-1);
 }

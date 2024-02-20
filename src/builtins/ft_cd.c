@@ -78,6 +78,8 @@ int	ft_cd(t_mini *mini, t_envp **envp)
 	dst = ft_strdup(find_env(envp, "HOME"));
 	if (!ft_strncmp(mini->full_cmd[1], "-", ft_strlen(mini->full_cmd[1])))
 		dst = ft_strdup(find_env(envp, "OLDPWD"));
+	else if (ft_count_lines2d(mini->full_cmd) > 2)
+		return (ft_perror_mod("cd", "too many arguments", 1), 1);
 	else
 		dst = ft_strdup(mini->full_cmd[1]);
 	oldpwd = ft_strdup(getcwd(buffer, sizeof(buffer)));

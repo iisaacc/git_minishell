@@ -54,13 +54,12 @@ int last_status;
  	t_lexer	*lexer;
  	t_mini	*mini;
  	t_envp	*envp_list;
- 	int		last_status;
 
  	envp_list = NULL;
  	lexer = NULL;
  	mini = NULL;
  	last_status = 0;
- 	char	*input = ft_strdup("ls |<infileeee cat|cat");
+ 	char	*input = ft_strdup("echo <\"minishell_tester/test_files/infile\" <mis <\"minishell_tester/test_files/infile\"");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
@@ -75,6 +74,7 @@ int last_status;
 	ft_free_lsts(&lexer, &mini);
  	//ft_print_mini_lst(&mini);
  	//ft_free_lsts(&lexer, &mini);
+	printf("last status end: %d\n", last_status);
  	return (0);
  }
 //cat ./test_files/infile_big | grep oi
