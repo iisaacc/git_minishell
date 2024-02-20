@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:36:48 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 17:10:44 by carmarqu         ###   ########.fr       */
+/*   Created: 2024/02/20 13:32:05 by isporras          #+#    #+#             */
+/*   Updated: 2024/02/20 13:32:05 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*ft_refresh_log(char *log)
+void	final_free(char *input, t_envp **envp)
 {
-	char	buffer[1024];
-	char	*aux;
+	ft_free_envp_list(envp);
+	free(input);
+	clear_history();
+}
 
-	if (log)
-		free(log);
-	aux = ft_strjoin_nofree(getenv("USER"), "@minishell ~");
-	aux = ft_strjoin(aux, getcwd(buffer, sizeof(buffer)));
-	aux = ft_strjoin(aux, "> ");
-	log = aux;
-	return (log);
+void	ft_clean_log(char *log, char *input, char **split_input)
+{
+	free(log);
+	free(input);
+	ft_free_2d(split_input);
 }

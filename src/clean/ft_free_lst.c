@@ -63,11 +63,6 @@ void	ft_free_lsts(t_lexer **lexer, t_mini **mini)
 {
 	ft_free_lexer_lst(lexer);
 	ft_free_mini_lst(mini);
-}
-
-void	final_free(char *input, t_envp **envp)
-{
-	ft_free_envp_list(envp);
-	free(input);
-	clear_history();
+	lexer = NULL;
+	mini = NULL;
 }

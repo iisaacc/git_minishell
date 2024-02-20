@@ -53,18 +53,22 @@ void	ft_print_list(t_lexer **lexer)
 	}
 }
 
+void	ft_init_main_var(t_main *m)
+{
+	m->envp_list = NULL;
+	m->lexer = NULL;
+	m->mini = NULL;
+	m->log = NULL;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	m;
 
-	m.envp_list = NULL;
-	m.lexer = NULL;
-	m.mini = NULL;
-	m.log = NULL;
+	ft_init_main_var(&m);
 	last_status = 0;
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
-	//atexit(ft_leaks);
 	ft_init_var(envp, &m.envp_list);
 	while ((1))
 	{
@@ -74,13 +78,17 @@ int	main(int argc, char **argv, char **envp)
 		ft_quotes_input(&m.input);
 		if (ft_strncmp(m.input, "\0", 1) != 0)
 			add_history(m.input);
-		ft_lexer(&m.lexer, m.input);
-		if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == -1)
-			last_status = ft_executer(&m.mini);
-		//ft_print_list(&m.lexer);
-		//ft_print_mini_lst(&m.mini);
-		ft_free_lsts(&m.lexer, &m.mini);
-		free(m.log);
+		m.split_input = ft_split(m.input, '\n');
+		m.i = 0;
+		while (m.split_input[m.i])//Maneja que haya saltos de línea en el input
+		{
+			ft_lexer(&m.lexer, m.split_input[m.i], &m.envp_list);
+			if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == 0)
+				last_status = ft_executer(&m.mini);
+			ft_free_lsts(&m.lexer, &m.mini);
+			m.i++;
+		}
+		ft_clean_log(m.log, m.input, m.split_input);
 	}
 	final_free(m.input, &m.envp_list);
 }

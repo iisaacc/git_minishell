@@ -24,10 +24,8 @@ void	ft_here_doc(t_mini *mini, char *eof)
 		line = readline("> ");
 		if (line[0] != '\0' && line[0] != '\n')
 		{
-			//printf("line = %s\n", line);
-			//printf("limiter = %s\n", eof);
-			//printf("devolveu %i\n",ft_strncmp(line, eof, ft_strlen(eof)));
-			if (ft_strncmp(line, eof, ft_strlen(eof)) == 0 && line[0] != '\n' && line)
+			if (ft_strncmp(line, eof, ft_strlen(eof)) == 0
+				&& line[0] != '\n' && line)
 			{
 				free(line);
 				break ;

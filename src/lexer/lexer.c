@@ -25,7 +25,7 @@ char *ft_status_var(char *lexer, char *tmp, int j)
 	return (tmp);
 }
 
-void	ft_put_var(char **lexer, int *i, int *j)
+void	ft_put_var(char **lexer, int *i, int *j, t_envp **envp)
 {
 	char	*var;
 	char	*value;
@@ -41,7 +41,7 @@ void	ft_put_var(char **lexer, int *i, int *j)
 		while (lexer[*i][*j + 1 + len] && lexer[*i][*j + 1 + len] != ' ' && lexer[*i][*j + 1 + len] != '\"')
 			len++;
 		var = ft_substr(lexer[*i], *j + 1, len);
-		value = getenv(var);
+		value = find_env(envp, var);
 		tmp = ft_calloc(ft_strlen(lexer[*i]) - ft_strlen(var) + 2 + ft_strlen(value), 1);
 		ft_strlcpy(tmp, lexer[*i], *j + 1);
 		if (value)
@@ -56,7 +56,7 @@ void	ft_put_var(char **lexer, int *i, int *j)
 }
 
 //Extiende la variable global $ siempre que no esté entre comillas simples
-void	ft_extend_var(char **lexer)
+void	ft_extend_var(char **lexer, t_envp **envp_list)
 {
 	int	i;
 	int	j;
@@ -75,14 +75,14 @@ void	ft_extend_var(char **lexer)
 				q = 0;
 			if (lexer[i][j] == '$' && q == 0 && lexer[i][j + 1] != ' ' && lexer[i][j + 1] != '\0'
 				&& ft_strncmp(lexer[i], "\"$\"", 3) != 0)
-				ft_put_var(lexer, &i, &j);
+				ft_put_var(lexer, &i, &j, envp_list);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	ft_lexer(t_lexer **lst_lexer, char *input)
+void	ft_lexer(t_lexer **lst_lexer, char *input, t_envp **envp_list)
 {
 	char	**str_lexer;
 	
@@ -90,11 +90,10 @@ void	ft_lexer(t_lexer **lst_lexer, char *input)
 		return ;
 	ft_check_end_pipe(&input);
 	str_lexer = ft_split_lexer(input, ' ');
-	ft_extend_var(str_lexer);
+	ft_extend_var(str_lexer, envp_list);
 	str_lexer = ft_get_tokens(str_lexer);
 	str_lexer = ft_check_syntax(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
 	ft_remove_quotes(lst_lexer);
-	free(input);
 }

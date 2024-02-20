@@ -12,6 +12,30 @@
 
 #include "../../minishell.h"
 
+int	ft_check_is_dir(char *path)
+{
+	struct stat	s;
+
+	if (stat(path, &s) == 0)
+	{
+		if (S_ISDIR(s.st_mode))
+			return (ft_perror_mod(path, "Is a directory", 126), 1);
+		return (0);
+	}
+	else
+	{
+		ft_perror(path);
+		last_status = 127;
+		return (1);
+	}
+}
+
+void	ft_check_permission(char *path)
+{
+	if (access(path, X_OK) != 0)
+		last_status = 126;
+}
+
 void	ft_broken_pipe(t_lexer **lexer, int pipe)
 {
 	t_lexer	*aux;
@@ -29,115 +53,50 @@ void	ft_broken_pipe(t_lexer **lexer, int pipe)
 	}
 }
 
-void	ft_refresh_id(t_lexer **lexer)
-{
-	t_lexer	*aux;
-	int		lap;
-
-	lap = 0;
-	aux = *lexer;
-	while (aux)
-	{
-		aux->id = lap;
-		lap++;
-		aux = aux->next;
-	}
-}
-
-t_lexer	*ft_delete_node(t_lexer **lexer, int x)
-{
-	t_lexer	*aux;
-	t_lexer	*prev;
-	int		i;
-
-	i = 0;
-	aux = *lexer;
-	prev = NULL;
-	while (aux)
-	{
-		if (x == aux->id)
-		{
-			if (prev)
-				prev->next = aux->next;
-			else if (aux->next)
-				*lexer = aux->next;
-			else
-				*lexer = NULL;
-			free(aux->word);
-			free(aux);
-			if (prev && prev->next)
-				return (ft_refresh_id(lexer), prev->next);
-			else
-				return (ft_refresh_id(lexer), *lexer);
-		}
-		else
-		{
-			prev = aux;
-			aux = aux->next;
-			i++;
-		}
-	}
-	return (NULL);
-}
-
 void	ft_check_bad_input(t_lexer **lexer)
 {
-	t_lexer	*aux;
+	t_lexer	*x;
 	int		pipe;
 
 	pipe = 0;
-	aux = *lexer;
-	while (aux)
+	x = *lexer;
+	while (x)
 	{
-		if (aux->type == PIPE)
+		if (x->type == PIPE)
 			pipe++;
-		if (aux->type == LESS || aux->type == GREATER || aux->type == D_GREATER)
+		if (x->type == LESS || x->type == GREATER || x->type == D_GREATER)
 		{
-			if (aux->broken == 0 
-				&& ((aux->type == LESS && open((aux->next)->word, O_RDONLY) == -1)
-				|| (aux->type == GREATER && open((aux->next)->word, O_WRONLY | O_CREAT | O_TRUNC, 0644) == -1)
-				|| (aux->type == D_GREATER && open((aux->next)->word, O_WRONLY | O_CREAT | O_APPEND, 0644) == -1)))
+			if (x->broken == 0
+				&& ((x->type == LESS && open((x->next)->word, 0) == -1)
+					|| (x->type == GREATER
+						&& open((x->next)->word, 1 | O_CREAT | O_TRUNC, 0644) == -1)
+					|| (x->type == D_GREATER
+						&& open((x->next)->word, 1 | O_CREAT | O_APPEND, 0644) == -1)))
 			{
-				ft_perror_mod((aux->next)->word, strerror(errno), 1);
+				ft_perror_mod((x->next)->word, strerror(errno), 1);
 				ft_broken_pipe(lexer, pipe);
 			}
 		}
-		if (aux)
-			aux = aux->next;
+		if (x)
+			x = x->next;
 	}
 }
 
-
-
-t_lexer	*ft_delete_pipe(t_lexer **lexer, int pipe)
+int	ft_set_full_cmnd(t_mini **mini, t_lexer **lexer)
 {
-	t_lexer	*aux;
-	int		lap;
-	int		i;
-	int		p;
+	t_mini	*aux_mini;
+	t_lexer	*aux_lexer;
 
-	lap = 0;
-	aux = *lexer;
-	i = 0;
-	p = 0;
-	while (aux)
+	aux_mini = *mini;
+	aux_lexer = *lexer;
+	while (aux_lexer)
 	{
-		if (aux->type == PIPE)
-			lap++;
-		if (lap == pipe)
+		if (aux_lexer->type == CMND)
 		{
-			if (aux->type == PIPE)
-				p = 1;
-			aux = ft_delete_node(lexer, i);
-			while (aux && aux->type != PIPE)
-				aux = ft_delete_node(lexer, i);
-			if (aux && aux->type == PIPE && p == 0)
-				aux = ft_delete_node(lexer, i);
-			return (aux);
+			aux_mini->full_cmd = ft_full_cmnd(aux_lexer);
+			aux_mini = aux_mini->next;
 		}
-		if (aux)
-			aux = aux->next;
-		i++;
+		aux_lexer = aux_lexer->next;
 	}
-	return (NULL);
+	return (0);
 }

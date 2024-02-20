@@ -53,6 +53,14 @@ typedef enum e_status
 
 //int	g_status; variavel global
 
+typedef struct s_token
+{
+	char	**lexer;
+	int		i;
+	int		j;
+	char	*token;
+}	t_token;
+
 typedef struct s_envp //lista para las variables del ambiente
 {
 	char *id;    //PATH=
@@ -89,6 +97,8 @@ typedef struct main
 	t_lexer	*lexer;
 	t_mini	*mini;
 	t_envp	*envp_list;
+	char	**split_input;
+	int		i;
 }			t_main;
 
 typedef struct s_exec
@@ -99,6 +109,7 @@ typedef struct s_exec
 	int		tmpin;
 	int		tmpout;
 	int		fdpipe[2];
+	int		i;
 }			t_exec;
 
 extern int	last_status;
@@ -108,12 +119,12 @@ void		ft_init_var(char **envp, t_envp **envp_list);
 char		*ft_refresh_log(char *log);
 
 //-----------------------LEXER---------------------------
-void		ft_lexer(t_lexer **lexer, char *input);
-void		ft_extend_var(char **lexer);
+void		ft_lexer(t_lexer **lexer, char *input, t_envp **envp_list);
+void		ft_extend_var(char **lexer, t_envp **envp_list);
 char		**ft_split_lexer(char const *s, char c);
 void		create_nodes(t_lexer **lexer, char **input);
 t_lexer		*ft_delete_node(t_lexer **lexer, int x);
-void	ft_print_list(t_lexer **lexer); //borrar
+void		ft_print_list(t_lexer **lexer); //borrar
 char		**ft_get_tokens(char **lexer);
 int			ft_check_quotes(char const *s);
 void		ft_quotes_input(char **input);
@@ -126,7 +137,7 @@ void		ft_types(t_lexer **lexer);
 //-----------------------PARSER---------------------------
 int			ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list);
 char		*ft_find_cmnd_path(t_envp **envp, char *cmnd);
-int			ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp);
+void		ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp);
 char		**ft_full_cmnd(t_lexer *lexer);
 int			ft_set_full_cmnd(t_mini **mini, t_lexer **lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini,
@@ -140,6 +151,7 @@ void		ft_syntax_error(char *error);
 t_lexer		*ft_delete_pipe(t_lexer **lexer, int pipe);
 void		ft_check_bad_input(t_lexer **lexer);
 void		ft_check_permission(char *path);
+int			ft_check_is_dir(char *path);
 
 //----------------------EXECUTER---------------------------
 void		ft_pipes(t_mini **mini);
@@ -147,6 +159,8 @@ int			ft_executer(t_mini **mini);
 void		ft_here_doc(t_mini *mini, char *eof);
 int			ft_bt_parent(t_mini *mini, t_envp **envp);
 int			ft_is_parent(char *cmd);
+void		ft_close_restore(t_exec *exec);
+int			ft_init_data_exec(t_mini **mini, t_exec **exec);
 
 //------------------------BUILTINS---------------------------
 int			ft_builtins(t_envp **envp_list, t_mini *mini);
@@ -175,6 +189,7 @@ void		ft_free_lexer_lst(t_lexer **node);
 void		ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void		ft_print_mini_lst(t_mini **mini); //borrar
 void		final_free(char *input, t_envp **envp);
+void		ft_clean_log(char *log, char *input, char **split_input);
 
 //------------------------SIGNALS---------------------------
 int			singal_init(void);

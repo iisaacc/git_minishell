@@ -49,7 +49,7 @@ char	*find_env(t_envp **envp, char *find)
 	aux = *envp;
 	while (aux)
 	{
-		if (!ft_strncmp(aux->id, find, ft_strlen(find)))
+		if (!ft_strncmp(aux->id, find, ft_strlen(aux->id) - 1))
 			return (aux->value);
 		aux = aux->next;
 	}
