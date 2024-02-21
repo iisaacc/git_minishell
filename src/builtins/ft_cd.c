@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 14:53:07 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:04:49 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ int	ft_cd(t_mini *mini, t_envp **envp)
 	char	*dst;
 
 	dst = ft_strdup(find_env(envp, "HOME"));
-	if (!ft_strncmp(mini->full_cmd[1], "-", ft_strlen(mini->full_cmd[1])))
+	if (mini->full_cmd[0][0] == '-' && ft_strlen(mini->full_cmd[0]) == 1)
 		dst = ft_strdup(find_env(envp, "OLDPWD"));
-	else if (ft_count_lines2d(mini->full_cmd) > 2)
-		return (ft_perror_mod("cd", "too many arguments", 1), 1);
-	else
+	else if (mini->full_cmd[1] != NULL)
 		dst = ft_strdup(mini->full_cmd[1]);
 	oldpwd = ft_strdup(getcwd(buffer, sizeof(buffer)));
 	if (chdir(dst))

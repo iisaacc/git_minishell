@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 17:40:26 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:27:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_mini
 	struct s_mini *next; //puntero al siguiente nodo
 }			t_mini;
 
-typedef struct main
+typedef struct s_main
 {
 	char	*log;
 	char	*input;
@@ -116,7 +116,7 @@ extern int	g_status;
 
 //-----------------------SYSTEM--------------------------
 void		ft_init_var(char **envp, t_envp **envp_list);
-char		*ft_refresh_log(char *log);
+char		*ft_refresh_log(t_main *main);
 
 //-----------------------LEXER---------------------------
 void		ft_lexer(t_lexer **lexer, char *input, t_envp **envp_list);
@@ -188,8 +188,8 @@ void		free_node(t_lexer **node);
 void		ft_free_lexer_lst(t_lexer **node);
 void		ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void		ft_print_mini_lst(t_mini **mini); //borrar
-void		final_free(char *input, t_envp **envp);
-void		ft_clean_log(t_main *m);
+void		final_free(char *log, char *input, t_envp **envp);
+void		ft_clean_log(char *log, char *input, char **split_input);
 
 //------------------------SIGNALS---------------------------
 int			singal_init(void);
