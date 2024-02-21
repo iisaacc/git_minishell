@@ -96,6 +96,6 @@ int	ft_builtins(t_envp **envp_list, t_mini *mini)
 	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6))
 		return (ft_unset(envp_list, &mini->full_cmd[1]), 1);
 	else if (!ft_strncmp(mini->full_cmd[0], "exit", 4))
-		return (ft_exit(&mini->full_cmd[1]), 1);
+		return (ft_exit(mini->full_cmd), 1);
 	return (1);
 }

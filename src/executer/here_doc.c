@@ -17,9 +17,9 @@ void	ft_here_doc(t_mini *mini, char *eof)
 	char	*line;
 	int		fd[2];
 
-	last_status = HEREDOC;
+	g_status = HEREDOC;
 	pipe(fd);
-	while (1 && last_status != EXIT_CMD)
+	while (1 && g_status != EXIT_CMD)
 	{
 		line = readline("> ");
 		if (line[0] != '\0' && line[0] != '\n')
@@ -37,5 +37,5 @@ void	ft_here_doc(t_mini *mini, char *eof)
 	}
 	close(fd[1]);
 	mini->infile = fd[0];
-	last_status = HEREDOC_END;
+	g_status = HEREDOC_END;
 }

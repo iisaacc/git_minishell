@@ -64,7 +64,7 @@ int	cd_error(char *not_find)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putchar_fd('\n', 2);
-	last_status = 1;
+	g_status = 1;
 	return (1);
 }
 

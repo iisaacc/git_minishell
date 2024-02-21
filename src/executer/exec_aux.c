@@ -16,10 +16,10 @@ int	ft_init_data_exec(t_mini **mini, t_exec **exec)
 {
 	*exec = malloc(sizeof(t_exec));
 	if (!*exec)
-		return (ft_perror_mod("malloc error", "exec", 1), last_status);
+		return (ft_perror_mod("malloc error", "exec", 1), g_status);
 	(*exec)->aux = *mini;
 	if (!(*exec)->aux)
-		return (last_status);
+		return (g_status);
 	(*exec)->total_cmnds = (*exec)->aux->total_cmnds;
 	(*exec)->tmpin = dup(STDIN_FILENO);
 	(*exec)->tmpout = dup(STDOUT_FILENO);

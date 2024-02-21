@@ -14,25 +14,25 @@
 
 void	ft_exit(char **cmd)
 {
-	if (ft_atoi(cmd[0]) && cmd[1])
+	if (cmd[1] && cmd[2])
 	{
 		ft_putstr_fd("bash: exit: too many arguments", 2);
-		last_status = 1;
+		g_status = 1;
 		return ;
 	}
-	if (cmd[0])
+	if (cmd[1])
 	{
-		if (ft_atoi(cmd[0]) != 0)
+		if (ft_atoi(cmd[1]) != 0)
 		{
-			last_status = ft_atoi(cmd[0]);
-			exit(last_status);
+			g_status = ft_atoi(cmd[1]);
+			exit(g_status);
 		}
 		else
 		{
 			ft_perror_mod("exit", "numeric argument required", 2);
-			exit(last_status);
+			exit(g_status);
 		}
 	}
 	else
-		exit(last_status);
+		exit(g_status);
 }

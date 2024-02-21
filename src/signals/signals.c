@@ -20,21 +20,21 @@ void	signal_helper(void)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	last_status = CTRL_C;
+	g_status = CTRL_C;
 }
 
 void	ft_sigint(int sig)
 {
 	(void)sig;
-	if (last_status == HEREDOC || last_status == IN_CMD)
+	if (g_status == HEREDOC || g_status == IN_CMD)
 	{
-		if (last_status == HEREDOC)
+		if (g_status == HEREDOC)
 			ioctl(0, TIOCSTI, "\n");
 		else
 			ft_putchar_fd('\n', 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		last_status = EXIT_CMD;
+		g_status = EXIT_CMD;
 	}
 	else
 		signal_helper();
@@ -42,7 +42,7 @@ void	ft_sigint(int sig)
 
 int	singal_init(void)
 {
-	last_status = INIT;
+	g_status = INIT;
 	signal(SIGINT, ft_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);

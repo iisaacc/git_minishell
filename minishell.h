@@ -112,7 +112,7 @@ typedef struct s_exec
 	int		i;
 }			t_exec;
 
-extern int	last_status;
+extern int	g_status;
 
 //-----------------------SYSTEM--------------------------
 void		ft_init_var(char **envp, t_envp **envp_list);

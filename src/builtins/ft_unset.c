@@ -71,7 +71,7 @@ void	ft_unset(t_envp **envp, char **args)
 			{
 				aux = *envp;
 				ft_unset_helper(aux, id);
-				last_status = 0;
+				g_status = 0;
 			}
 			free(id);
 		}

@@ -59,5 +59,5 @@ void	ft_echo(char **cmd, int fd)
 	}
 	if (!flag)
 		write(fd, "\n", 1);
-	last_status = 0;
+	g_status = 0;
 }

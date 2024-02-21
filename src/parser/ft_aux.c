@@ -25,7 +25,7 @@ int	ft_check_is_dir(char *path)
 	else
 	{
 		ft_perror(path);
-		last_status = 127;
+		g_status = 127;
 		return (1);
 	}
 }
@@ -33,7 +33,7 @@ int	ft_check_is_dir(char *path)
 void	ft_check_permission(char *path)
 {
 	if (access(path, X_OK) != 0)
-		last_status = 126;
+		g_status = 126;
 }
 
 void	ft_broken_pipe(t_lexer **lexer, int pipe)

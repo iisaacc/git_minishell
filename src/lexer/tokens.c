@@ -21,7 +21,7 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 	i = 0;
 	while (src[i])
 		i++;
-	dst = malloc(sizeof(char *) * (i + 2));
+	dst = malloc(sizeof(char *) * (i + 3));
 	i = 0;
 	x = 0;
 	while (src[i] && src[i][0] != '\0')
@@ -97,9 +97,11 @@ char	**ft_get_tokens(char **lexer)
 				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
 				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
 					lexer = ft_case_single_double(lexer, token, &i, &j);
-			j++;
+			if (lexer[i][j])
+				j++;
 		}
-		i++;
+		if (lexer[i])
+			i++;
 	}
 	return (lexer);
 }

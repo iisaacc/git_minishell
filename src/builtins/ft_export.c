@@ -21,7 +21,7 @@ int	export_error(char *str)
 	ft_putchar_fd('\'', 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("not a valid identifier\n", 2);
-	last_status = 1;
+	g_status = 1;
 	return (0);
 }
 
