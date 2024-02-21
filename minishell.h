@@ -189,7 +189,7 @@ void		ft_free_lexer_lst(t_lexer **node);
 void		ft_free_lsts(t_lexer **lexer, t_mini **mini);
 void		ft_print_mini_lst(t_mini **mini); //borrar
 void		final_free(char *log, char *input, t_envp **envp);
-void		ft_clean_log(char *log, char *input, char **split_input);
+void		ft_clean_log(t_main *m);
 
 //------------------------SIGNALS---------------------------
 int			singal_init(void);

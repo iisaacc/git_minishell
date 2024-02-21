@@ -22,10 +22,13 @@ void	final_free(char *log, char *input, t_envp **envp)
 
 void	ft_clean_log(t_main *m)
 {
-	free(m->log);
+	if (m->log)
+		free(m->log);
 	m->log = NULL;
-	free(m->input);
+	if (m->input)
+		free(m->input);
 	m->input = NULL;
-	ft_free_2d(m->split_input);
+	if (m->split_input)
+		ft_free_2d(m->split_input);
 	m->split_input = NULL;
 }
