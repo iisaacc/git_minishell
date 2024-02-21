@@ -85,12 +85,12 @@ int	main(int argc, char **argv, char **envp)
 			ft_lexer(&m.lexer, m.split_input[m.i], &m.envp_list);
 			if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == 0)
 				g_status = ft_executer(&m.mini);
-			// ft_print_list(&m.lexer);
-			// ft_print_mini_lst(&m.mini);
+			//ft_print_list(&m.lexer);
+			//ft_print_mini_lst(&m.mini);
 			ft_free_lsts(&m.lexer, &m.mini);
 			m.i++;
 		}
-		ft_clean_log(m.log, m.input, m.split_input);
+		ft_clean_log(&m);
 	}
 	final_free(m.input, &m.envp_list);
 }

@@ -1,5 +1,9 @@
 signal handling (ctrl+C, ctrl+D, ctrl+\)
 cat <"./test_files/infile_big" 
-doesntexist | $EMPTY //CASO muy cabron porque shell devuelve exit code 0 
 
-ejemplo: echo hola | cat -e | ls -l
+PUNTOS FLACOS XD
+
+	doesntexist | $EMPTY //CASO muy cabron porque shell devuelve exit code 0 
+
+	cat -e < "mini
+	shell.h"		//Saltos de línea entre comillados (putadísima)

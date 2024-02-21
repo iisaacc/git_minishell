@@ -15,13 +15,17 @@
 void	final_free(char *input, t_envp **envp)
 {
 	ft_free_envp_list(envp);
-	free(input);
+	if (input)
+		free(input);
 	clear_history();
 }
 
-void	ft_clean_log(char *log, char *input, char **split_input)
+void	ft_clean_log(t_main *m)
 {
-	free(log);
-	free(input);
-	ft_free_2d(split_input);
+	free(m->log);
+	m->log = NULL;
+	free(m->input);
+	m->input = NULL;
+	ft_free_2d(m->split_input);
+	m->split_input = NULL;
 }

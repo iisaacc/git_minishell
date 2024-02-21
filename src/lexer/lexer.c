@@ -104,6 +104,8 @@ void	ft_lexer(t_lexer **lst_lexer, char *input, t_envp **envp_list)
 	str_lexer = ft_check_syntax(str_lexer);
 	create_nodes(lst_lexer, str_lexer);
 	ft_types(lst_lexer);
+	//ft_print_list(lst_lexer);
 	ft_remove_quotes(lst_lexer);
+	//ft_print_list(lst_lexer);
 	ft_free_2d(str_lexer);
 }
