@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:43:29 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/21 15:21:43 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:42:53 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_is_parent(char *cmd)//cd, export y unset tienen que ser en el padre
 		return (0);
 }
 
-int	ft_bt_parent(t_mini *mini, t_envp **envp)
+int	 ft_bt_parent(t_mini *mini, t_envp **envp)
 {
-	if (!ft_strncmp(mini->full_cmd[0], "cd", 3))
+	if (!ft_strncmp(mini->full_cmd[0], "cd", 3) && !mini->next)
 		return (ft_cd(mini, envp));
-	else if (!ft_strncmp(mini->full_cmd[0], "export", 7))
+	else if (!ft_strncmp(mini->full_cmd[0], "export", 7) && !mini->next)
 		return (ft_export(envp, &mini->full_cmd[1]), 1);
-	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6))
+	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6) && !mini->next)
 		return (ft_unset(envp, &mini->full_cmd[1]), 1);
 	return (0);
 }
@@ -91,11 +91,11 @@ int	ft_builtins(t_envp **envp_list, t_mini *mini)
 		return (ft_env(mini->outfile, envp_list, &mini->full_cmd[1]));
 	else if (!ft_strncmp(mini->full_cmd[0], "cd", 3))
 		return (ft_cd(mini, envp_list));
-	else if (!ft_strncmp(mini->full_cmd[0], "export", 7))
+	else if (!ft_strncmp(mini->full_cmd[0], "export", 7) && !mini->next)
 		return (ft_export(envp_list, &mini->full_cmd[1]), 1);
-	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6))
+	else if (!ft_strncmp(mini->full_cmd[0], "unset", 6) && !mini->next)
 		return (ft_unset(envp_list, &mini->full_cmd[1]), 1);
-	else if (!ft_strncmp(mini->full_cmd[0], "exit", 4))
-		return (ft_exit(mini->full_cmd), 1);//He hecho que se pase full_cmd entero en vez de la posición full_cmd[0] por que en algunos casos estaba dando segmenation fault
+	else if (!ft_strncmp(mini->full_cmd[0], "exit", 4) && !mini->next)
+		return (ft_exit(mini->full_cmd), 1);
 	return (1);
 }
