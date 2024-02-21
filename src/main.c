@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/19 18:43:48 by isporras         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:27:44 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
 	ft_init_var(envp, &m.envp_list);
+	atexit(ft_leaks);
 	while ((1))
 	{
-		m.input = readline(ft_refresh_log(m.log));
+		m.input = readline(ft_refresh_log(&m));
 		if (!m.input)
 			break ;
 		ft_quotes_input(&m.input);
@@ -84,13 +85,13 @@ int	main(int argc, char **argv, char **envp)
 		{
 			ft_lexer(&m.lexer, m.split_input[m.i], &m.envp_list);
 			if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == 0)
-				g_status = ft_executer(&m.mini);
-			// ft_print_list(&m.lexer);
-			// ft_print_mini_lst(&m.mini);
+				g_status = ft_executer(&m.mini);	
+			//ft_print_list(&m.lexer);
+			//ft_print_mini_lst(&m.mini);
 			ft_free_lsts(&m.lexer, &m.mini);
 			m.i++;
 		}
 		ft_clean_log(m.log, m.input, m.split_input);
 	}
-	final_free(m.input, &m.envp_list);
+	final_free(m.log, m.input, &m.envp_list);
 }
