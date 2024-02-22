@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 		m.i = 0;
 		while (m.split_input[m.i])//Maneja que haya saltos de línea en el input
 		{
-			ft_lexer(&m.lexer, m.split_input[m.i], &m.envp_list);
+			ft_lexer(&m.lexer, &m.split_input[m.i], &m.envp_list);
 			if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == 0)
 				g_status = ft_executer(&m.mini);
 			//ft_print_list(&m.lexer);

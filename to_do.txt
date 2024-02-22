@@ -1,7 +1,7 @@
 signal handling (ctrl+C, ctrl+D, ctrl+\)
 cat <"./test_files/infile_big" 
 
--double free caso end pipe "holaaa |"
+Cuando estas en un readline por un pipe al final del input, no va ctrl+d ni ctr+c
 
 PUNTOS FLACOS XD
 

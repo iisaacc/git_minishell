@@ -59,7 +59,7 @@ int g_status;
  	lexer = NULL;
  	mini = NULL;
  	g_status = 0;
- 	char	*input = ft_strdup("ls\n");
+ 	char	*input = ft_strdup("ls -l |  ");
  	if (!argv && !argc)
  		return (1);
  	ft_init_var(envp, &envp_list);
