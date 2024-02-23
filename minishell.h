@@ -49,7 +49,7 @@ typedef enum e_status
 	EXIT_CMD,
 	IN_CMD,
 	CTRL_C,
-}			t_status;
+}	t_status;
 
 typedef struct s_token
 {
@@ -61,32 +61,32 @@ typedef struct s_token
 
 typedef struct s_envp
 {
-	char *id;
-	char *value;
-	struct s_envp *next;
-}			t_envp;
+	char			*id;
+	char			*value;
+	struct s_envp	*next;
+}	t_envp;
 
 typedef struct s_lexer
 {
-	char *word;
-	int type;
-	int id;
-	int broken;
-	struct s_lexer *next;
-}			t_lexer;
+	char			*word;
+	int				type;
+	int				id;
+	int				broken;
+	struct s_lexer	*next;
+}	t_lexer;
 
 typedef struct s_mini
 {
-	char **full_cmd;
-	char *full_path;
-	int total_cmnds;
-	int id;
-	int infile;
-	int outfile;
-	int broken;
-	t_envp	**envp;
-	struct s_mini *next;
-}			t_mini;
+	char			**full_cmd;
+	char			*full_path;
+	int				total_cmnds;
+	int				id;
+	int				infile;
+	int				outfile;
+	int				broken;
+	t_envp			**envp;
+	struct s_mini	*next;
+}	t_mini;
 
 typedef struct s_main
 {
@@ -97,7 +97,7 @@ typedef struct s_main
 	t_envp	*envp_list;
 	char	**split_input;
 	int		i;
-}			t_main;
+}	t_main;
 
 typedef struct s_exec
 {
@@ -108,7 +108,7 @@ typedef struct s_exec
 	int		tmpout;
 	int		fdpipe[2];
 	int		i;
-}			t_exec;
+}	t_exec;
 
 extern int	g_status;
 
