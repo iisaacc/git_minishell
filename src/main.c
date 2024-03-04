@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/21 16:31:56 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:54:22 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	main(int argc, char **argv, char **envp)
 	t_main	m;
 
 	ft_init_main_var(&m);
-	g_status = 0;
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
 	ft_init_var(envp, &m.envp_list);
@@ -83,11 +82,9 @@ int	main(int argc, char **argv, char **envp)
 		m.i = 0;
 		while (m.split_input[m.i])//Maneja que haya saltos de línea en el input
 		{
-			ft_lexer(&m.lexer, &m.split_input[m.i], &m.envp_list);
-			if (ft_parser(&m.lexer, &m.mini, &m.envp_list) == 0)
-				g_status = ft_executer(&m.mini);
-			//ft_print_list(&m.lexer);
-			//ft_print_mini_lst(&m.mini);
+			ft_lexer(&m);
+			if (ft_parser(&m) == 0)
+				m.exit_status = ft_executer(&m.mini, m.exit_status);
 			ft_free_lsts(&m.lexer, &m.mini);
 			m.i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:14:54 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/17 17:35:25 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:52:07 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**ft_add_token(char **src, int y, char *token, int d, int j)
 	while (src[i])
 		i++;
 	dst = malloc(sizeof(char *) * (i + 3));
+	if (!dst)
+		return (0);
 	i = 0;
 	x = 0;
 	while (src[i] && src[i][0] != '\0')

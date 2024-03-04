@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:52:20 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/19 18:45:05 by isporras         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:54:07 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**ft_full_cmnd(t_lexer *lexer)
 			pipe++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (pipe + 1));
+	if (!full_cmnd)
+		return (0);
 	pipe = 0;
 	aux = lexer;
 	full_cmnd[pipe++] = ft_strdup(aux->word);
@@ -79,14 +81,14 @@ char	**ft_full_cmnd(t_lexer *lexer)
 	return (full_cmnd);
 }
 
-int	ft_parser(t_lexer **lexer, t_mini **mini, t_envp **envp_list)
+int	ft_parser(t_main *m)
 {
-	if (!*lexer)
+	if (!m->lexer)
 		return (1);
-	ft_check_bad_input(lexer);
-	mini = ft_to_mini_lst(lexer, mini, envp_list);
-	ft_set_io(mini, lexer);
-	ft_set_full_cmnd(mini, lexer);
-	ft_set_path_cmnd(mini, lexer, envp_list);
+	ft_check_bad_input(&m->lexer, m);
+	ft_to_mini_lst(&m->lexer, &m->mini, &m->envp_list);
+	ft_set_io(&m->mini, &m->lexer);
+	ft_set_full_cmnd(&m->mini, &m->lexer);
+	ft_set_path_cmnd(&m->mini, &m->lexer, &m->envp_list, m);
 	return (0);
 }

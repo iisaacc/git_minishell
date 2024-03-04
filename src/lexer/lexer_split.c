@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:00:49 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/17 16:04:42 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:53:06 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_malloc_quotes(char const *s, int *i, int *j, char **str)
 	if (s[*i + len] == '\'' || s[*i + len] == '\"')
 		len++;
 	str[*j] = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str[*j])
+		return (0);
 	ft_strlcpy(str[*j], s + *i, len + 1);
 	*i += len;
 }
