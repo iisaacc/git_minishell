@@ -15,7 +15,7 @@
 char	*ft_refresh_log(t_main *main)
 {
 	char	buffer[1024];
-	
+
 	main->log = ft_strdup(find_env(&main->envp_list, "USER"));
 	main->log = ft_strjoin(main->log, "@minishell ~");
 	main->log = ft_strjoin(main->log, getcwd(buffer, sizeof(buffer)));

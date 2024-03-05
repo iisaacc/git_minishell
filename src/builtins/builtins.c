@@ -81,7 +81,6 @@ int	is_a_bltin(t_mini *mini)
 
 int	ft_builtins(t_envp **envp_list, t_mini *mini, t_exec *x)
 {
-	
 	if (!mini || !mini->full_cmd)
 		return (1);
 	else if (!ft_strncmp(mini->full_cmd[0], "echo", 5))

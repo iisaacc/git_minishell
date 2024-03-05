@@ -12,19 +12,6 @@
 
 #include "../../minishell.h"
 
-void	ft_print_envp_list(t_envp *envp)//borrar despues
-{
-	t_envp	*tmp;
-
-	tmp = envp;
-	while (tmp != NULL)
-	{
-		printf("%s", tmp->id);
-		printf("%s\n", tmp->value);
-		tmp = tmp->next;
-	}
-}
-
 void	change_env(t_envp **envp, char *find, char *new_value)
 {
 	t_envp	*aux;
@@ -53,7 +40,7 @@ char	*find_env(t_envp **envp, char *find)
 			return (aux->value);
 		aux = aux->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	cd_error(char *not_find)

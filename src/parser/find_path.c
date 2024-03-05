@@ -22,7 +22,7 @@ char	*ft_find_cmnd_path(t_envp **envp, char *cmnd)
 	if (!cmnd || !cmnd[0])
 		return (NULL);
 	path_split = ft_split(find_env(envp, "PATH="), ':');
-	while (path_split[j])
+	while (path_split && path_split[j])
 	{
 		fullpath = ft_strdup(path_split[j]);
 		fullpath = ft_strjoin(fullpath, "/");
@@ -32,7 +32,8 @@ char	*ft_find_cmnd_path(t_envp **envp, char *cmnd)
 		free(fullpath);
 		j++;
 	}
-	ft_free_2d(path_split);
+	if (path_split)
+		ft_free_2d(path_split);
 	return (NULL);
 }
 
@@ -42,7 +43,7 @@ void	ft_set_path_cmnd2(t_lexer *aux_lexer, t_mini *aux_mini, t_envp **envp, t_ma
 	{
 		aux_mini->full_path = ft_strdup(aux_lexer->word);
 		m->exit_status = ft_check_is_dir(aux_mini->full_path);
-		if (m->exit_status != 0)//
+		if (m->exit_status != 0)
 			aux_mini->full_path = NULL;
 		return ;
 	}

@@ -42,13 +42,12 @@ void	ft_set_next_pipe(t_exec *exec)
 	}
 }
 
-int	ft_child_process(t_mini *aux, t_exec *x)
+void	ft_child_process(t_mini *aux, t_exec *x)
 {
 	dup2(aux->infile, STDIN_FILENO);
 	if (aux->infile != 0)
 		close(aux->infile);
 	dup2(aux->outfile, STDOUT_FILENO);
-	printf("aqui\n");
 	if (aux->next != NULL)
 		close ((aux->next)->infile);
 	if (ft_is_builtin(aux->full_cmd[0]) == 1)
@@ -59,7 +58,7 @@ int	ft_child_process(t_mini *aux, t_exec *x)
 		ft_check_permission(aux->full_path);
 		x->exit_status = 1;
 	}
-	return (x->exit_status);
+	exit(x->exit_status);
 }
 
 int	ft_exec_cases(t_exec *x)
@@ -74,7 +73,7 @@ int	ft_exec_cases(t_exec *x)
 	{
 		x->pid = fork();
 		if (x->pid == 0)
-			x->exit_status = ft_child_process(x->aux, x);
+			ft_child_process(x->aux, x);
 		else if (x->pid < 0)
 			ft_perror("fork");
 		else
@@ -91,6 +90,7 @@ int	ft_exec_cases(t_exec *x)
 int	ft_executer(t_mini **mini, int e_sts)
 {
 	t_exec	*exec;
+	int		exit_status;
 
 	if (ft_init_data_exec(mini, &exec) > 0)
 		return (1);
@@ -107,9 +107,9 @@ int	ft_executer(t_mini **mini, int e_sts)
 			exec->i++;
 			exec->aux = exec->aux->next;
 		}
-		
 	}
 	ft_close_restore(exec);
+	exit_status = exec->exit_status;
 	free(exec);
-	return (exec->exit_status);
+	return (exit_status);
 }

@@ -93,13 +93,13 @@ char	**ft_get_tokens(char **lexer)
 				&& (ft_strlen(lexer[i]) != 2) && (ft_between_quotes(lexer[i], j) == 0)
 				&& ((ft_strncmp(&lexer[i][j], "<<", 2) == 0) || (ft_strncmp(&lexer[i][j], ">>", 2) == 0)
 				|| (ft_strncmp(&lexer[i][j], "||", 2) == 0)))
-					lexer = ft_case_single_double(lexer, token, &i, &j);
+				lexer = ft_case_single_double(lexer, token, &i, &j);
 			else if ((lexer[i][j] == '>' || lexer[i][j] == '<' || lexer[i][j] == '|')
 				&& (ft_strlen(lexer[i]) != 1) && (ft_between_quotes(lexer[i], j) == 0)
 				&& (ft_strncmp(&lexer[i][j], "<<", 2) != 0) && (ft_strncmp(&lexer[i][j], ">>", 2) != 0)
 				&& (ft_strncmp(&lexer[i][j], "||", 2) != 0) && (ft_strncmp(lexer[i], "<<", 3) != 0)
 				&& (ft_strncmp(lexer[i], ">>", 3) != 0) && (ft_strncmp(lexer[i], "||", 3) != 0))
-					lexer = ft_case_single_double(lexer, token, &i, &j);
+				lexer = ft_case_single_double(lexer, token, &i, &j);
 			if (lexer[i][j])
 				j++;
 		}
