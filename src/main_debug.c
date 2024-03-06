@@ -78,7 +78,7 @@ int g_status;
 
 	ft_init_main_var(&m);
  	ft_init_var(envp, &m.envp_list);
- 	m.input = ft_strdup("ls");
+ 	m.input = ft_strdup("echo hola>outfile");
  	if (!argv && !argc)
  		return (1);
  	ft_quotes_input(&m.input);

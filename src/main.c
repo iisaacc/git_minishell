@@ -98,6 +98,7 @@ void	ft_main_loop(t_main *m)
 		ft_clean_log(m);
 	}
 }
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	m;

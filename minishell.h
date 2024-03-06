@@ -53,10 +53,11 @@ typedef enum e_status
 
 typedef struct s_token
 {
-	char	**lexer;
+	char	**lx;
+	char	*tk;
 	int		i;
 	int		j;
-	char	*token;
+	int		d;
 }	t_token;
 
 typedef struct s_envp
@@ -122,6 +123,7 @@ char		**ft_split_lexer(char const *s, char c);
 void		create_nodes(t_lexer **lexer, char **input);
 t_lexer		*ft_delete_node(t_lexer **lexer, int x);
 char		**ft_get_tokens(char **lexer);
+char		**ft_add_token(t_token *t);
 int			ft_check_quotes(char const *s);
 void		ft_quotes_input(char **input);
 void		ft_remove_quotes(t_lexer **lexer);
@@ -131,7 +133,7 @@ char		*ft_check_end_pipe(char *input);
 void		ft_types(t_lexer **lexer);
 int			ft_parser(t_main *m);
 char		*ft_find_cmnd_path(t_envp **envp, char *cmnd);
-void		ft_set_path_cmnd(t_mini **mi, t_lexer **lx, t_envp **en, t_main *m);
+void		ft_set_path(t_mini **mi, t_lexer **lx, t_envp **en, t_main *m);
 char		**ft_full_cmnd(t_lexer *lexer);
 int			ft_set_full_cmnd(t_mini **mini, t_lexer **lexer);
 t_mini		**ft_to_mini_lst(t_lexer **lexer, t_mini **mini,

@@ -16,7 +16,7 @@ int	ft_init_data_exec(t_mini **mini, t_exec **exec)
 {
 	*exec = malloc(sizeof(t_exec));
 	if (!*exec)
-		return (ft_perror_mod("malloc error", "exec", 1), 1);// no sé si es 1
+		return (ft_perror_mod("malloc error", "exec", 1), 1);
 	(*exec)->aux = *mini;
 	if (!(*exec)->aux)
 		return (1);
