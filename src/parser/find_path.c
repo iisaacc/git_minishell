@@ -22,7 +22,7 @@ char	*ft_find_cmnd_path(t_envp **envp, char *cmnd)
 	if (!cmnd || !cmnd[0])
 		return (NULL);
 	path_split = ft_split(find_env(envp, "PATH="), ':');
-	while (path_split[j])
+	while (path_split && path_split[j])
 	{
 		fullpath = ft_strdup(path_split[j]);
 		fullpath = ft_strjoin(fullpath, "/");
@@ -32,17 +32,18 @@ char	*ft_find_cmnd_path(t_envp **envp, char *cmnd)
 		free(fullpath);
 		j++;
 	}
-	ft_free_2d(path_split);
+	if (path_split)
+		ft_free_2d(path_split);
 	return (NULL);
 }
 
-void	ft_set_path_cmnd2(t_lexer *aux_lexer, t_mini *aux_mini, t_envp **envp, t_main *m)
+void	set_aux(t_lexer *aux_lexer, t_mini *aux_mini, t_envp **envp, t_main *m)
 {
 	if (ft_strchr(aux_lexer->word, '/') != NULL)
 	{
 		aux_mini->full_path = ft_strdup(aux_lexer->word);
 		m->exit_status = ft_check_is_dir(aux_mini->full_path);
-		if (m->exit_status != 0)//
+		if (m->exit_status != 0)
 			aux_mini->full_path = NULL;
 		return ;
 	}
@@ -52,7 +53,7 @@ void	ft_set_path_cmnd2(t_lexer *aux_lexer, t_mini *aux_mini, t_envp **envp, t_ma
 		m->exit_status = ft_cmnd_error(aux_lexer->word, aux_mini->full_path);
 }
 
-void	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp, t_main *m)
+void	ft_set_path(t_mini **mini, t_lexer **lexer, t_envp **envp, t_main *m)
 {
 	t_mini	*aux_mini;
 	t_lexer	*aux_lexer;
@@ -63,7 +64,7 @@ void	ft_set_path_cmnd(t_mini **mini, t_lexer **lexer, t_envp **envp, t_main *m)
 	{
 		if (aux_lexer->type == CMND && ft_is_builtin(aux_lexer->word) == 0)
 		{
-			ft_set_path_cmnd2(aux_lexer, aux_mini, envp, m);
+			set_aux(aux_lexer, aux_mini, envp, m);
 			aux_mini = aux_mini->next;
 		}
 		else if (aux_lexer->type == CMND)

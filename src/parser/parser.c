@@ -66,8 +66,6 @@ char	**ft_full_cmnd(t_lexer *lexer)
 			pipe++;
 	}
 	full_cmnd = malloc(sizeof(char *) * (pipe + 1));
-	if (!full_cmnd)
-		return (0);
 	pipe = 0;
 	aux = lexer;
 	full_cmnd[pipe++] = ft_strdup(aux->word);
@@ -89,6 +87,6 @@ int	ft_parser(t_main *m)
 	ft_to_mini_lst(&m->lexer, &m->mini, &m->envp_list);
 	ft_set_io(&m->mini, &m->lexer);
 	ft_set_full_cmnd(&m->mini, &m->lexer);
-	ft_set_path_cmnd(&m->mini, &m->lexer, &m->envp_list, m);
+	ft_set_path(&m->mini, &m->lexer, &m->envp_list, m);
 	return (0);
 }
