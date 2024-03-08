@@ -5,7 +5,6 @@ Cuando estas en un readline por un pipe al final del input, no va ctrl+d ni ctr+
 
 DUDA GRANDE: No sé si tenemos que implementar los ";" (En la hoja de evaluación no piden nada relacionado)
 
-unset $PATH no funciona (Revisar funcón de unset)//ARREGLADO
 
 APARTADO SEÑALES DE LA HOJA DE EVALUACIÓNca
 

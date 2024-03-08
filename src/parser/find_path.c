@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:38:32 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/26 16:25:29 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:10:02 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	set_aux(t_lexer *aux_lexer, t_mini *aux_mini, t_envp **envp, t_main *m)
 		return ;
 	}
 	else
-		aux_mini->full_path = ft_find_cmnd_path(envp, aux_lexer->word);
+	{
+		if (find_env(envp, "PATH="))
+			aux_mini->full_path = ft_find_cmnd_path(envp, aux_lexer->word);
+	}
 	if (!aux_mini->full_path)
 		m->exit_status = ft_cmnd_error(aux_lexer->word, aux_mini->full_path);
 }

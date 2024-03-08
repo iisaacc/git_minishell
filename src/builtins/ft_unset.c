@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:39:10 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/26 17:32:50 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:50:45 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void	unset_node(t_envp *aux)
 	}
 }
 
+void	unset_first(t_envp *aux)
+{
+	t_envp	*tmp;
+	
+	tmp = aux->next;
+	free(aux->id);
+	free(aux->value);
+	free(aux);
+	aux = tmp;
+}
+
 void	unset_error(char *str)
 {
 	ft_putstr_fd("bash: ", 2);
@@ -46,6 +57,8 @@ void	unset_error(char *str)
 
 void	ft_unset_helper(t_envp *aux, char *id)
 {
+	if (!ft_strncmp(aux->id, id, ft_strlen(id)))
+		unset_first(aux);
 	while (aux)
 	{
 		if (aux->next && !ft_strncmp(aux->next->id, id, ft_strlen(id)))

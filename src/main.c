@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/04 15:54:22 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:40:32 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-void	ft_print_envp_list(t_envp *envp)
+void	ft_print_envp_list(t_envp **envp)
 {
 	t_envp	*tmp;
 
-	tmp = envp;
+	tmp = *envp;
 	while (tmp != NULL)
 	{
 		printf("%s", tmp->id);
@@ -92,8 +92,8 @@ void	ft_main_loop(t_main *m)
 			ft_lexer(m);
 			if (ft_parser(m) == 0)
 				m->exit_status = ft_executer(&m->mini, m->exit_status);
-			ft_free_lsts(&m->lexer, &m->mini);
 			m->i++;
+			ft_free_lsts(&m->lexer, &m->mini);
 		}
 		ft_clean_log(m);
 	}

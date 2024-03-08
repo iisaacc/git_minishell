@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/26 16:59:46 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:14:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*find_env(t_envp **envp, char *find)
 	t_envp	*aux;
 
 	aux = *envp;
+	
 	while (aux)
 	{
 		if (!ft_strncmp(aux->id, find, ft_strlen(aux->id) - 1))

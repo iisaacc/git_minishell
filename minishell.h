@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/02/26 18:14:58 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:41:23 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,6 @@ int			singal_init(void);
 void		ft_init_main_var(t_main *m);
 void		ft_print_mini_lst(t_mini **mini); //borrar
 void		ft_print_list(t_lexer **lexer);//borrar
-void		ft_print_envp_list(t_envp *envp);
+void		ft_print_envp_list(t_envp **envp);
 
 #endif
