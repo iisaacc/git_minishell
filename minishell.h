@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/12 16:58:59 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:18:44 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,5 @@ int			singal_init(void);
 void		ft_init_main_var(t_main *m);
 void		ft_print_mini_lst(t_mini **mini); //borrar
 void		ft_print_list(t_lexer **lexer);//borrar
-void		ft_print_envp_list(t_envp **envp);
 
 #endif
