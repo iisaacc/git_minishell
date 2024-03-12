@@ -1,6 +1,9 @@
 
 - Cuando estas en un readline por un pipe al final del input, no va ctrl+d ni ctr+c //Caso raro pero lo miraria
 - norminette
-- tester 4 casos
+- tester 3 casos
+- Test  58: ❌ grep hi "<infile" <         ./test_files/infile
+mini exit code = 1
+bash exit code = 2
 - echo '"$USER"' debería imprimir "$USER" pero esta imprimiendo $USER
 
