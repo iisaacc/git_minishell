@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:59:45 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/08 17:14:23 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:54:38 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	ft_cd(t_mini *mini, t_envp **envp)
 		free(dst);
 		dst = ft_strdup(find_env(envp, "OLDPWD"));
 	}
-	else if (ft_count_lines2d(mini->full_cmd) > 2)
-		return (ft_perror_mod("cd", "too many arguments", 1), 1);
+	//else if (ft_count_lines2d(mini->full_cmd) > 2)
+	//	return (ft_perror_mod("cd", "too many arguments", 1), 1);
 	else if (mini->full_cmd[1] != NULL)
 	{
 		free(dst);

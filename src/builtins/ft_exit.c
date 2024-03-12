@@ -6,13 +6,13 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:32:01 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/04 16:47:10 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:04:58 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_exit(char **cmd, int exit_sts)
+void	ft_exit(char **cmd, int *exit_sts)
 {
 	if (cmd[1] && cmd[2])
 	{
@@ -28,9 +28,10 @@ void	ft_exit(char **cmd, int exit_sts)
 		else
 		{
 			ft_perror_mod("exit", "numeric argument required", 2);
-			exit(2);//255
+			*exit_sts = 8;
+			exit(255);//255
 		}
 	}
 	else
-		exit(exit_sts);
+		exit(*exit_sts);
 }
