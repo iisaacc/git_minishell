@@ -6,11 +6,13 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/11 16:55:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:53:31 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	g_status;
 
 void	ft_leaks(void)
 {
@@ -73,8 +75,6 @@ void	ft_init_main_var(t_main *m)
 	m->exit_status = 0;
 }
 
-int	g_status;
-
 void	ft_main_loop(t_main *m)
 {
 	while ((1))
@@ -87,7 +87,7 @@ void	ft_main_loop(t_main *m)
 			add_history(m->input);
 		m->split_input = ft_split(m->input, '\n');
 		m->i = 0;
-		while (m->split_input[m->i]) //Maneja que haya saltos de línea en el input
+		while (m->split_input[m->i])
 		{
 			ft_lexer(m);
 			if (ft_parser(m) == 0)
@@ -105,7 +105,6 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
-	//atexit(ft_leaks);
 	ft_init_main_var(&m);
 	ft_init_var(envp, &m.envp_list);
 	ft_main_loop(&m);

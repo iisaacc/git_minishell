@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 07:26:35 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/12 17:18:44 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:19:59 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void		ft_echo(char **cmd, int fd);
 void		ft_pwd(int fd);
 void		ft_unset(t_envp **envp, char **id);
 int			ft_env(int fd, t_envp **envp_list, char **cmd);
-void		ft_exit(char **cmd, int *exit_sts);
+void		ft_exit(char **cmd, int exit_sts);
 char		*find_env(t_envp **envp, char *find);
 void		create_envp(t_envp **envp_list, char **envp);
 int			ft_export(t_envp **envp_list, char **new_var, t_exec *exec);

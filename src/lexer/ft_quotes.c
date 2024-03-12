@@ -6,7 +6,7 @@
 /*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:14:52 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/12 17:17:19 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:36:06 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_remove_quotes(t_lexer **lexer)
 		}
 		if (c && which_quotes(aux->word) == c)
 			ft_remove_quotes(lexer);
-		//printf("aqui\n");
 		aux = aux->next;
 	}
 }
