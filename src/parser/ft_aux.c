@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:05 by isporras          #+#    #+#             */
-/*   Updated: 2024/02/26 17:44:47 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:57:50 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_check_permission(char *path)
 {
 	if (access(path, X_OK) != 0)
 		return (126);
-	return (0);
+	return (1);
 }
 
 void	ft_broken_pipe(t_lexer **lexer, int pipe)
