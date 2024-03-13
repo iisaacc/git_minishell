@@ -3,68 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/12 17:53:31 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:29:19 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int	g_status;
-
-void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
-
-void	ft_print_envp_list(t_envp **envp)
-{
-	t_envp	*tmp;
-
-	tmp = *envp;
-	while (tmp != NULL)
-	{
-		printf("%s", tmp->id);
-		printf("%s\n", tmp->value);
-		tmp = tmp->next;
-	}
-}
-
-void	ft_print_mini_lst(t_mini **mini)
-{
-	t_mini	*tmp;
-
-	tmp = *mini;
-	while (tmp != NULL)
-	{
-		printf("cmd:\n");
-		ft_print_split(tmp->full_cmd);
-		printf("total cmds: %d\n", tmp->total_cmnds);
-		printf("id: %d\n", tmp->id);
-		printf("path: %s\n", tmp->full_path);
-		printf("infile fd: %d\n", tmp->infile);
-		printf("outfile fd: %d\n\n", tmp->outfile);
-		tmp = tmp->next;
-	}
-}
-
-void	ft_print_list(t_lexer **lexer)
-{
-	t_lexer	*tmp;
-
-	tmp = *lexer;
-	printf("LISTA:\n");
-	while (tmp)
-	{
-		printf("word: %s\n", tmp->word);
-		printf("id: %d\n", tmp->id);
-		printf("type: %d\n", tmp->type);
-		printf("broken: %d\n\n", tmp->broken);
-		tmp = tmp->next;
-	}
-}
 
 void	ft_init_main_var(t_main *m)
 {
