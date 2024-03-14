@@ -21,7 +21,10 @@ char	*ft_refresh_log(t_main *main)
 	else
 		main->log = ft_strdup("notfound");
 	main->log = ft_strjoin(main->log, "@minishell ~");
-	main->log = ft_strjoin(main->log, getcwd(buffer, sizeof(buffer)));
+	if (getcwd(buffer, sizeof(buffer)))
+		main->log = ft_strjoin(main->log, getcwd(buffer, sizeof(buffer)));
+	else
+		main->log = ft_strjoin(main->log, "notfound");
 	main->log = ft_strjoin(main->log, "> ");
 	g_status = INIT;
 	return (main->log);
