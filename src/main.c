@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/13 11:29:19 by isporras         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:48:27 by carmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int	g_status;
+
+void	ft_leaks(void)
+{
+	system("leaks -q minishell");
+}
 
 void	ft_init_main_var(t_main *m)
 {
@@ -53,8 +58,10 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
-	ft_init_main_var(&m);
+	ft_init_main_var(&m);//preciso passar char **envp para mini list
+	atexit(ft_leaks);
 	ft_init_var(envp, &m.envp_list);
 	ft_main_loop(&m);
 	final_free(m.log, m.input, &m.envp_list);
 }
+   
