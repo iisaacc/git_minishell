@@ -61,7 +61,6 @@ int	main(int argc, char **argv, char **envp)
 		return (printf("Wrong number of arguments\n"), 1);
 	//ft_print_split(envp);
 	ft_init_main_var(&m);//preciso passar char **envp para mini list
-	atexit(ft_leaks);
 	ft_init_var(envp, &m.envp_list);
 	new = find_env(&m.envp_list, "SHLVL");
 	new = ft_itoa(ft_atoi(new) + 1);

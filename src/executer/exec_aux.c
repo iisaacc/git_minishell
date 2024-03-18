@@ -54,7 +54,7 @@ char	**envp_to_str(t_envp **envp_list)
 {
 	t_envp	*aux;
 	char	**envp;
-	int x;
+	int		x;
 
 	x = 0;
 	envp = malloc((size_envp(envp_list) * sizeof(char *)) + 1);

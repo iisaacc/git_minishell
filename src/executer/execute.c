@@ -44,7 +44,7 @@ void	ft_set_next_pipe(t_exec *exec)
 
 void	ft_child_process(t_mini *aux, t_exec *x)
 {
-	char **str_env;
+	char	**str_env;
 
 	str_env = envp_to_str(aux->envp);
 	dup2(aux->infile, STDIN_FILENO);

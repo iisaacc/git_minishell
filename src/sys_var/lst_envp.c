@@ -61,7 +61,6 @@ void	create_envp(t_envp **envp_list, char **envp)
 	int	x;
 
 	x = 0;
-	
 	while (envp[x])
 	{
 		add_new_envp(envp_list, envp_new(envp[x]));
