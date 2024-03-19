@@ -1,4 +1,4 @@
-# Minishell
+# 📟 Minishell
 
 Minishell es un proyecto que simula una shell de Bash, permitiendo al usuario ejecutar comandos.
 
