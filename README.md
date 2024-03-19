@@ -20,5 +20,6 @@ git clone https://github.com/iisaacc/git_minishell.git
 cd git_minishell
 make
 ./minishell
+```
 
 Ya puedes empezar a trastear comandos!
