@@ -15,6 +15,7 @@ Minishell es un proyecto que simula una shell de Bash, permitiendo al usuario ej
 
 Para compilar el programa, clona el repositorio y ejecuta `make`:
 
+```bash
 git clone https://github.com/iisaacc/git_minishell.git
 cd git_minishell
 make
