@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carmarqu <carmarqu@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: isporras <isporras@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:19:24 by carmarqu          #+#    #+#             */
-/*   Updated: 2024/03/16 17:17:18 by carmarqu         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:16:09 by isporras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_main_loop(t_main *m)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	m;
+	char	*new;
 
-	char *new;
+	//atexit(ft_leaks);
 	if (argc > 1 && argv)
 		return (printf("Wrong number of arguments\n"), 1);
-	//ft_print_split(envp);
-	ft_init_main_var(&m);//preciso passar char **envp para mini list
+	ft_init_main_var(&m);
 	ft_init_var(envp, &m.envp_list);
 	new = find_env(&m.envp_list, "SHLVL");
 	new = ft_itoa(ft_atoi(new) + 1);
@@ -69,4 +69,3 @@ int	main(int argc, char **argv, char **envp)
 	ft_main_loop(&m);
 	final_free(m.log, m.input, &m.envp_list);
 }
-   
